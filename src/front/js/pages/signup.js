@@ -1,13 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 
 export const Signup = () => {
   const { store, actions } = useContext(Context);
+  const [inputValue, setInputValue] = useState("");
 
   return (
     <div>
       <h2 className="mx-auto w-50 mt-5">Sign Up</h2>
+
+      {/* 
+                                TABS TO CHANGE THE VIEWS BETWEEN CLIENT AND NUTRITIONIST 
+        */}
 
       <div className="row">
         <div className="d-flex justify-content-center bg-ligth pt-1">
@@ -44,6 +49,10 @@ export const Signup = () => {
         </div>
       </div>
       <div className="tab-content" id="myTabContent">
+        {/*
+                                         CLIENT VIEW OF SIGN UP 
+        */}
+
         <div
           className="tab-pane fade show active"
           id="client"
@@ -95,18 +104,18 @@ export const Signup = () => {
             <div className="form-group mb-2">
               <label for="exampleFormControlTextarea1">Description</label>
               <textarea
-                class="form-control"
+                className="form-control"
                 id="exampleFormControlTextarea1"
                 rows="5"
               ></textarea>
             </div>
-            <div class="form-group d-flex flex-column my-2">
+            <div className="form-group d-flex flex-column my-2">
               <label for="exampleFormControlFile1">
                 Upload a profile picture
               </label>
               <input
                 type="file"
-                class="form-control-file"
+                className="form-control-file"
                 id="exampleFormControlFile1"
               />
             </div>
@@ -114,9 +123,13 @@ export const Signup = () => {
               Submit
             </button>
           </form>
+
+          {/*
+                                                 NUTRITIONIST VIEW OF SIGN UP 
+            */}
         </div>
         <div
-          class="tab-pane fade"
+          className="tab-pane fade"
           id="nutritionist"
           role="tabpanel"
           aria-labelledby="nutritionist-tab"
@@ -166,18 +179,18 @@ export const Signup = () => {
             <div className="form-group mb-2">
               <label for="exampleFormControlTextarea1">Description</label>
               <textarea
-                class="form-control"
+                className="form-control"
                 id="exampleFormControlTextarea1"
                 rows="5"
               ></textarea>
             </div>
-            <div class="form-group d-flex flex-column my-2">
+            <div className="form-group d-flex flex-column my-2">
               <label for="exampleFormControlFile1">
                 Upload a profile picture
               </label>
               <input
                 type="file"
-                class="form-control-file"
+                className="form-control-file"
                 id="exampleFormControlFile1"
               />
             </div>
