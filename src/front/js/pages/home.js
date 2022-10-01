@@ -7,20 +7,16 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!!</h1>
-			<p>
-				<img src={rigoImageUrl} />
-			</p>
-			<div className="alert alert-info">
-				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
+		<div className="text-center container">
+			<div id="jumb" className="jumbotron">
+				<h1 class="display-4">I'm the Jumbo's Homepage</h1>
+				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+				<div class="d-flex justify-content-center align-items-end">	
+				<hr class="my-4"></hr>
+					<a href="#" className="btn btn-primary btn-lg active" role="button" aria-pressed="true">Nutritionist</a>
+					<a href="#" className="btn btn-primary btn-lg active" role="button" aria-pressed="true">Patient</a>
+				</div>
 			</div>
-			<p>
-				This boilerplate comes with lots of documentation:{" "}
-				<a href="https://github.com/4GeeksAcademy/react-flask-hello/tree/95e0540bd1422249c3004f149825285118594325/docs">
-					Read documentation
-				</a>
-			</p>
 		</div>
 	);
 };
