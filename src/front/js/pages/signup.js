@@ -4,7 +4,46 @@ import "../../styles/home.css";
 
 export const Signup = () => {
   const { store, actions } = useContext(Context);
-  const [inputValue, setInputValue] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [description, setDescription] = useState("");
+
+  const handleSignUp = async () => {
+    if ((name != "", email != "", password != "", description != "")) {
+      fetch(
+        `https://3001-4geeksacade-reactflaskh-h9ynin3nyz0.ws-eu67.gitpod.io/signup`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            password: password,
+            description: description,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((resp) => {
+          console.log(resp.ok); // will be true if the response is successfull
+          console.log(resp.status); // the status code = 200 or code = 400 etc.
+          console.log(resp.text()); // will try return the exact result as string
+          return resp; // (returns promise) will try to parse the result as json as return a promise that you can .then for results
+        })
+        .catch((error) => {
+          //error handling
+          console.log(error);
+        });
+      setName("");
+      setEmail("");
+      setPassword("");
+      setDescription("");
+    }
+  };
+
+  console.log("name: " + name);
 
   return (
     <div>
@@ -65,8 +104,10 @@ export const Signup = () => {
               <input
                 type="text"
                 className="form-control"
-                id="exampleInputName"
+                id="clientInputName"
                 placeholder="Enter your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div className="form-group">
@@ -74,11 +115,13 @@ export const Signup = () => {
               <input
                 type="email"
                 className="form-control"
-                id="exampleInputEmail1"
+                id="clientInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
-              <small id="emailHelp" className="form-text text-muted">
+              <small id="clientEmailHelp" className="form-text text-muted">
                 We'll never share your email with anyone else.
               </small>
             </div>
@@ -87,15 +130,17 @@ export const Signup = () => {
               <input
                 type="password"
                 className="form-control"
-                id="exampleInputPassword1"
+                id="clientInputPassword1"
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className="form-group form-check">
               <input
                 type="checkbox"
                 className="form-check-input"
-                id="exampleCheck1"
+                id="clientCheck"
               />
               <label className="form-check-label" for="exampleCheck1">
                 Check me out
@@ -105,8 +150,10 @@ export const Signup = () => {
               <label for="exampleFormControlTextarea1">Description</label>
               <textarea
                 className="form-control"
-                id="exampleFormControlTextarea1"
+                id="clientFormControlTextarea1"
                 rows="5"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>
             <div className="form-group d-flex flex-column my-2">
@@ -116,10 +163,14 @@ export const Signup = () => {
               <input
                 type="file"
                 className="form-control-file"
-                id="exampleFormControlFile1"
+                id="clientFormControlFile"
               />
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={handleSignUp}
+            >
               Submit
             </button>
           </form>
@@ -140,8 +191,10 @@ export const Signup = () => {
               <input
                 type="text"
                 className="form-control"
-                id="exampleInputName"
+                id="nutritionistInputName"
                 placeholder="Enter your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div className="form-group">
@@ -149,11 +202,16 @@ export const Signup = () => {
               <input
                 type="email"
                 className="form-control"
-                id="exampleInputEmail1"
+                id="nutritionistInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
-              <small id="emailHelp" className="form-text text-muted">
+              <small
+                id="nutritionistEmailHelp"
+                className="form-text text-muted"
+              >
                 We'll never share your email with anyone else.
               </small>
             </div>
@@ -162,15 +220,17 @@ export const Signup = () => {
               <input
                 type="password"
                 className="form-control"
-                id="exampleInputPassword1"
+                id="nutritionistInputPassword1"
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className="form-group form-check">
               <input
                 type="checkbox"
                 className="form-check-input"
-                id="exampleCheck1"
+                id="nutritionistCheck1"
               />
               <label className="form-check-label" for="exampleCheck1">
                 Check me out
@@ -180,8 +240,10 @@ export const Signup = () => {
               <label for="exampleFormControlTextarea1">Description</label>
               <textarea
                 className="form-control"
-                id="exampleFormControlTextarea1"
+                id="nutritionistFormControlTextarea1"
                 rows="5"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>
             <div className="form-group d-flex flex-column my-2">
@@ -191,10 +253,14 @@ export const Signup = () => {
               <input
                 type="file"
                 className="form-control-file"
-                id="exampleFormControlFile1"
+                id="nutritionistFormControlFile1"
               />
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={handleSignUp}
+            >
               Submit
             </button>
           </form>
