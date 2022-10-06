@@ -6,7 +6,7 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, Client, Nutritionist
 from api.utils import generate_sitemap, APIException
 
 #create the flask app
@@ -30,3 +30,22 @@ def create_token():
     }
 
     return jsonify(response_body), 200
+
+@api.route("/client", methods=["POST"])
+def signUp_client():
+    name_request = request.json.get("name", None)
+    email_request = request.json.get("email", None)
+    password_request = request.json.get("password", None)
+    description_request = request.json.get("description", None)
+
+    new_client = Client(
+        name= name_request,
+        email= email_request,
+        password= password_request,
+        description= description_request
+    )
+
+    db.session.add(new_client)
+    db.session.commit()
+
+    return 'client added', 200

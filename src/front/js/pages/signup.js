@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 
@@ -8,8 +9,12 @@ export const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [description, setDescription] = useState("");
+  const token = sessionStorage.getItem("token");
+  const navigate = useNavigate();
 
-  const handleSignUp = async () => {
+  if (token !== "" && token !== undefined && token !== null) navigate("/");
+
+  const handleSignUp = () => {
     if ((name != "", email != "", password != "", description != "")) {
       fetch(
         `https://3001-4geeksacade-reactflaskh-h9ynin3nyz0.ws-eu67.gitpod.io/signup`,
@@ -36,11 +41,11 @@ export const Signup = () => {
           //error handling
           console.log(error);
         });
-      setName("");
-      setEmail("");
-      setPassword("");
-      setDescription("");
     }
+    setName("");
+    setEmail("");
+    setPassword("");
+    setDescription("");
   };
 
   console.log("name: " + name);
@@ -48,7 +53,6 @@ export const Signup = () => {
   return (
     <div>
       <h2 className="mx-auto w-50 mt-5">Sign Up</h2>
-
       {/* 
                                 TABS TO CHANGE THE VIEWS BETWEEN CLIENT AND NUTRITIONIST 
         */}

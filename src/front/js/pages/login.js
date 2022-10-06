@@ -1,9 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 
 export const Login = () => {
   const { store, actions } = useContext(Context);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const token = sessionStorage.getItem("token");
+  const navigate = useNavigate();
+
+  const handleClickLogin = () => {
+    actions.login(email, password).then(() => {
+      navigate("/");
+    });
+  };
+  if (token !== "" && token !== undefined && token !== null) navigate("/");
 
   return (
     <div>
@@ -14,9 +26,11 @@ export const Login = () => {
           <input
             type="email"
             className="form-control"
-            id="exampleInputEmail1"
+            id="loginInputEmail1"
             aria-describedby="emailHelp"
             placeholder="Enter email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <small id="emailHelp" className="form-text text-muted">
             We'll never share your email with anyone else.
@@ -27,8 +41,10 @@ export const Login = () => {
           <input
             type="password"
             className="form-control"
-            id="exampleInputPassword1"
+            id="loginInputPassword1"
             placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="form-group form-check">
@@ -41,7 +57,11 @@ export const Login = () => {
             Check me out
           </label>
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button
+          type="submit"
+          className="btn btn-primary"
+          onClick={handleClickLogin}
+        >
           Submit
         </button>
       </form>
