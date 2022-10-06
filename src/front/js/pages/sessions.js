@@ -6,10 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Context } from "../store/appContext";
 
 export const Sessions = () => {
-	const [date, setDate] = useState(new Date());
-	const handleChange = (date) => {
-		setDate(date);
-	  };
+	const [startDate, setStartDate] = useState(new Date());
 	const nutritionists = [
     {
       name: "Tomas",
@@ -49,7 +46,7 @@ export const Sessions = () => {
       {nutritionists.map((singleNutri, i) => {
         return (
           <div className="d-flex flex-row">
-            <div className="card" style={{ width: "20rem" }}>
+            <div className="card m-2" style={{ width: "20rem" }}>
               <img
                 className="card-img-top"
                 src={singleNutri.image}
@@ -102,34 +99,20 @@ export const Sessions = () => {
                         </div>
                         <div className="modal-body">
                           The available times are:
-						  <br />
-						  <br />
-                          <div>
-							
-						</div>
-						  <section className="container">
-                            <form className="row">
-                              <label
-                                for="date"
-                                className="col-2 col-form-label"
-                              >
-                                Date
-                              </label>
-							  <span className="input-group-append">
-                                    <span className="input-group-text d-block">
-									<DatePicker
-										className="form-control form-control-sm"
-										type="text"
-										size="sm"
-										placeholder=""
-										selected={date}
-										onChange={handleChange}
-									/>
-                                      <i className="fa fa-calendar"></i>
-                                	</span>
-								</span>		
-                            </form>
-                          </section>
+                          <br />
+                          <br />
+                          <div className="d-inline-flex p-2">
+                            <DatePicker
+                              selected={startDate}
+                              onChange={(date) => setStartDate(date)}
+                              showTimeSelect
+                              timeFormat="HH:mm"
+                              timeIntervals={15}
+                              timeCaption="time"
+                              dateFormat="MMMM d, yyyy h:mm aa"
+                            />
+                            <i className="fa fa-calendar align-self-center m-2"></i>
+                          </div>
                         </div>
                         <div className="modal-footer">
                           <button
