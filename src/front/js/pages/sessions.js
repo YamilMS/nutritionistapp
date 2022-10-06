@@ -36,6 +36,20 @@ export const Sessions = () => {
       description:
         "Some quick example text to build on the card title and make up the bulk of the cards content.",
     },
+    {
+      name: "Fernando",
+      image:
+        "https://images.unsplash.com/photo-1568316674077-d72ee56de61c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80",
+      description:
+        "Some quick example text to build on the card title and make up the bulk of the cards content.",
+    },
+    {
+      name: "María",
+      image:
+        "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=922&q=80",
+      description:
+        "Some quick example text to build on the card title and make up the bulk of the cards content.",
+    },
   ];
 
   return (
@@ -45,12 +59,13 @@ export const Sessions = () => {
        */}
       {nutritionists.map((singleNutri, i) => {
         return (
-          <div className="d-flex flex-row">
+          <div className="d-inline-flex p-5">
             <div className="card m-2" style={{ width: "20rem" }}>
               <img
                 className="card-img-top"
                 src={singleNutri.image}
                 alt="Card image cap"
+                width="50" height="350"
               ></img>
               <div className="card-body">
                 <h5 className="card-title">{singleNutri.name}</h5>
