@@ -6,7 +6,7 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, Client, Nutritionist
+from api.models import db, Client, Nutritionist, Session
 from api.utils import generate_sitemap, APIException
 
 #create the flask app
@@ -33,14 +33,16 @@ def create_token():
 
 @api.route("/client", methods=["POST"])
 def signUp_client():
-    name_request = request.json.get("name", None)
-    email_request = request.json.get("email", None)
+    first_name_request = request.json.get("first_name", None)
+    last_name_request = request.json.get("last_name", None)
+    client_email_request = request.json.get("client_email", None)
     password_request = request.json.get("password", None)
     description_request = request.json.get("description", None)
 
     new_client = Client(
-        name= name_request,
-        email= email_request,
+        fisrt_name= first_name_request,
+        last_name= last_name_request,
+        client_email= client_email_request,
         password= password_request,
         description= description_request
     )
@@ -49,3 +51,47 @@ def signUp_client():
     db.session.commit()
 
     return 'client added', 200
+
+
+@api.route("/nutritionist", methods=["POST"])
+def signUp_nutritionist():
+    first_name_request = request.json.get("first_name", None)
+    last_name_request = request.json.get("last_name", None)
+    nutritionist_email_request = request.json.get("nutritionist_email", None)
+    password_request = request.json.get("password", None)
+    description_request = request.json.get("description", None)
+
+    new_nutritionist = Nutritionist(
+        first_name= first_name_request,
+        last_name= last_name_request,
+        nutritionist_email= nutritionist_email_request,
+        password= password_request,
+        description= description_request
+    )
+
+    db.session.add(new_nutritionist)
+    db.session.commit()
+
+    return 'nutritionist added', 200
+
+@api.route("/session", methods=["POST"])
+def make_an_appointmen():
+
+    id_request = request.json.get("id", None)
+    id_client_request = request.json.get("id_client", None)
+    id_nutritionist_request = request.json.get("id_nutritionist", None)
+    date_request = request.json.get("date", None)
+    recomendation_request = request.json.get("recomendation", None)
+
+    new_session = Session(
+        id= id_request,
+        id_client= id_client_request,
+        id_nutritionist= id_nutritionist_request,
+        date= date_request,
+        recomendation= recomendation_request
+    )
+
+    db.session.add(new_session)
+    db.session.commit()
+
+    return 'session added', 200

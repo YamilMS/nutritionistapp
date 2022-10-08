@@ -1,6 +1,6 @@
 
 import click
-from api.models import db, Client, Nutritionist
+from api.models import db, Client, Nutritionist, Session
 
 """
 In this file, you can add as many commands as you want using the @app.cli.command decorator
