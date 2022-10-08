@@ -25,19 +25,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       login: async (email, password) => {
         try {
-          const response = await fetch(
-            "https://3001-4geeksfinal-nutritition-ln47ffv88ox.ws-eu70.gitpod.io/api/token",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                email: email,
-                password: password,
-              }),
-            }
-          );
+          const response = await fetch(process.env.BACKEND_URL + "/api/token", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: email,
+              password: password,
+            }),
+          });
           if (response.status !== 200) {
             alert("There has been an error on the response.status");
             return false;
