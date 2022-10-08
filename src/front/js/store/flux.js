@@ -16,6 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         },
       ],
     },
+
     actions: {
       // Use getActions to call a function within a fuction
       exampleFunction: () => {
@@ -25,7 +26,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       login: async (email, password) => {
         try {
           const response = await fetch(
-            "https://3001-4geeksfinal-nutritition-jy54yhmh02l.ws-eu70.gitpod.io/api/token",
+            "https://3001-4geeksfinal-nutritition-ln47ffv88ox.ws-eu70.gitpod.io/api/token",
             {
               method: "POST",
               headers: {
@@ -49,6 +50,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.error("There has been an error login in ", error);
         }
+      },
+
+      logout: () => {
+        sessionStorage.removeItem("token");
+        setStore({ token: null });
       },
 
       getTokenFromSession: () => {

@@ -2,5 +2,13 @@
     General Styles used on every website (Don't Repeat Yourself)
 */
 .input-group-append {
-    cursor: pointer;
-  }
+  cursor: pointer;
+}
+
+#buttonProfile {
+  background: red;
+}
+
+#buttonLogOut {
+  background: rgb(60, 255, 0);
+}

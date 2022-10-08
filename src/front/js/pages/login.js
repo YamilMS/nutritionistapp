@@ -11,9 +11,7 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const handleClickLogin = () => {
-    actions.login(email, password).then(() => {
-      navigate("/");
-    });
+    actions.login(email, password);
   };
   if (token !== "" && token !== undefined && token !== null) navigate("/");
 
