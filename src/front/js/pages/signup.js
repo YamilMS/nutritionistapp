@@ -5,32 +5,38 @@ import "../../styles/home.css";
 
 export const Signup = () => {
   const { store, actions } = useContext(Context);
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [description, setDescription] = useState("");
+  const [user, setUser] = useState("client");
   const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
 
   if (token !== "" && token !== undefined && token !== null) navigate("/");
 
   const handleSignUp = () => {
-    if ((name != "", email != "", password != "", description != "")) {
-      fetch(
-        `https://3001-4geeksacade-reactflaskh-h9ynin3nyz0.ws-eu67.gitpod.io/signup`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            name: name,
-            email: email,
-            password: password,
-            description: description,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
+    if (
+      (firstName != "",
+      lastName != "",
+      email != "",
+      password != "",
+      description != "")
+    ) {
+      fetch(process.env.BACKEND_URL + "/api/" + user, {
+        method: "POST",
+        body: JSON.stringify({
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          password: password,
+          description: description,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
         .then((resp) => {
           console.log(resp.ok); // will be true if the response is successfull
           console.log(resp.status); // the status code = 200 or code = 400 etc.
@@ -42,13 +48,12 @@ export const Signup = () => {
           console.log(error);
         });
     }
-    setName("");
+    setFirstName("");
+    setLastName("");
     setEmail("");
     setPassword("");
     setDescription("");
   };
-
-  console.log("name: " + name);
 
   return (
     <div>
@@ -70,6 +75,7 @@ export const Signup = () => {
                 role="tab"
                 aria-controls="client"
                 aria-selected="true"
+                onClick={() => setUser("client")}
               >
                 Client
               </button>
@@ -84,6 +90,7 @@ export const Signup = () => {
                 role="tab"
                 aria-controls="nutritionist"
                 aria-selected="false"
+                onClick={() => setUser("nutritionist")}
               >
                 Nutritionist
               </button>
@@ -104,14 +111,25 @@ export const Signup = () => {
         >
           <form className="mx-auto w-50">
             <div className="form-group mb-2">
-              <label for="exampleInputEmail1">Name</label>
+              <label for="exampleInputEmail1">First Name</label>
               <input
                 type="text"
                 className="form-control"
-                id="clientInputName"
-                placeholder="Enter your name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                id="clientInputFirstName"
+                placeholder="Enter your first name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </div>
+            <div className="form-group mb-2">
+              <label for="exampleInputEmail1">Last Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="clientInputLastName"
+                placeholder="Enter your last name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
               />
             </div>
             <div className="form-group">
@@ -191,14 +209,25 @@ export const Signup = () => {
         >
           <form className="mx-auto w-50">
             <div className="form-group mb-2">
-              <label for="exampleInputEmail1">Name</label>
+              <label for="exampleInputEmail1">First Name</label>
               <input
                 type="text"
                 className="form-control"
-                id="nutritionistInputName"
-                placeholder="Enter your name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                id="nutritionistInputFirstName"
+                placeholder="Enter your first name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </div>
+            <div className="form-group mb-2">
+              <label for="exampleInputEmail1">Last Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="nutritionistInputLastName"
+                placeholder="Enter your last name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
               />
             </div>
             <div className="form-group">
