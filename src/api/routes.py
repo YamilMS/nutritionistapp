@@ -35,14 +35,14 @@ def create_token():
 def signUp_client():
     first_name_request = request.json.get("first_name", None)
     last_name_request = request.json.get("last_name", None)
-    client_email_request = request.json.get("client_email", None)
+    email_request = request.json.get("email", None)
     password_request = request.json.get("password", None)
     description_request = request.json.get("description", None)
 
     new_client = Client(
-        fisrt_name= first_name_request,
+        first_name= first_name_request,
         last_name= last_name_request,
-        client_email= client_email_request,
+        client_email= email_request,
         password= password_request,
         description= description_request
     )
@@ -52,19 +52,55 @@ def signUp_client():
 
     return 'client added', 200
 
+@api.route("/client/<int:client_id>", methods=["PUT"])
+def update_client(client_id):
+    
+    request_body_client = request.get_json()
+    client1 = Client.query.get(client_id)
+    if client1 is None:
+        return 'Client not found', 404
+
+    if "first_name" in request_body_client:
+        client1.first_name =  request_body_client["first_name"]
+    if "last_name" in request_body_client:
+        client1.last_name =  request_body_client["last_name"]
+    if "client_email" in request_body_client:
+        client1.first_name =  request_body_client["client_email"]
+    if "password" in request_body_client:
+        client1.password =  request_body_client["password"]
+    if "description" in request_body_client:
+        client1.description =  request_body_client["description"]
+    db.session.commit()
+
+    return 'client updated', 200
+
+
+@api.route("/client/<int:client_id>", methods=["DELETE"])
+def delete_a_client(client_id):
+    
+    client_to_delete= Client.query.get(client_id)
+
+    if client_to_delete is None:
+        return 'client not found', 404
+
+    db.session.delete(client_to_delete)
+    db.session.commit()
+    
+    return 'client deleted', 200
+
 
 @api.route("/nutritionist", methods=["POST"])
 def signUp_nutritionist():
     first_name_request = request.json.get("first_name", None)
     last_name_request = request.json.get("last_name", None)
-    nutritionist_email_request = request.json.get("nutritionist_email", None)
+    email_request = request.json.get("email", None)
     password_request = request.json.get("password", None)
     description_request = request.json.get("description", None)
 
     new_nutritionist = Nutritionist(
         first_name= first_name_request,
         last_name= last_name_request,
-        nutritionist_email= nutritionist_email_request,
+        nutritionist_email= email_request,
         password= password_request,
         description= description_request
     )
@@ -73,6 +109,43 @@ def signUp_nutritionist():
     db.session.commit()
 
     return 'nutritionist added', 200
+
+@api.route("/nutritionist/<int:nutritionist_id>", methods=["PUT"])
+def modify_nutritionist(nutritionist_id):
+    
+    request_body_nutritionist= request.get_json()
+
+    nutritionist_mod= Nutritionist.query.get(nutritionist_id)
+    if nutritionist_mod is None:
+        return 'Nutritionist not found', 404
+    
+    if "first_name" in request_body_nutritionist:
+        nutritionist_mod.first_name= request_body_nutritionist["first_name"]
+    if "last_name" in request_body_nutritionist:
+        nutritionist_mod.last_name= request_body_nutritionist["last_name"]
+    if "nutritionist_email" in request_body_nutritionist:
+        nutritionist_mod.nutritionist_email= request_body_nutritionist["nutritionist_email"]
+    if "password" in request_body_nutritionist:
+        nutritionist_mod.password= request_body_nutritionist["password"]
+    if "description" in request_body_nutritionist:
+        nutritionist_mod.description= request_body_nutritionist["description"]
+
+    db.session.commit()
+
+    return 'nutritionist added', 200
+
+@api.route("/nutritionist/<int:nutritionist_id>", methods=["DELETE"])
+def delete_a_nutritionist(nutritionist_id):
+
+    nutritionist_to_delete= Nutritionist.query.get(nutritionist_id)
+
+    if nutritionist_to_delete is None:
+        return 'nutritionist not found', 404
+    db.session.delete(nutritionist_to_delete)
+    db.session.commit()
+    
+    return 'nutritionist deleted', 200
+    
 
 @api.route("/session", methods=["POST"])
 def make_an_appointmen():
@@ -95,3 +168,41 @@ def make_an_appointmen():
     db.session.commit()
 
     return 'session added', 200
+
+
+@api.route("/session/<int:session_id>", methods=["PUT"])
+def update_an_appointmen(session_id):
+
+    request_body_session = request.get_json()
+    session = Session.query.get(session_id)
+
+    if session is None:
+        raise APIExeption('session not found', status_code=404)  
+
+    if "id" in request_body_session:
+        session.id = request_body_session["id"]
+    if "id_client" in request_body_session:
+        session.id_client = request_body_session["id_client"]
+    if "id_nutritionist" in request_body_session:
+        session.id_nutritionist = request_body_session["id_nutritionist"]
+    if "date" in request_body_session:
+        session.date = request_body_session["date"]
+    if "recomendation" in request_body_session:
+        session.recomendation = request_body_session["recomendation"]
+    db.session.commit()
+
+    return 'session updated', 200
+
+
+@api.route("/session/<int:session_id>", methods=["DELETE"])
+def delete_an_appointmen(session_id):
+
+    session_to_delete= Session.query.get(session_id)
+
+    if session_to_delete is None:
+        return 'session not found', 404
+
+    db.session.delete(session_to_delete)
+    db.session.commit()
+    
+    return 'session deleted', 200
