@@ -1,7 +1,12 @@
 #jumb {
-    background: grey;
-    margin: auto;
-    width: flex;
-    height: flex;
+  background: grey;
+  margin: auto;
+  width: flex;
+  height: flex;
+}
 
+.footer {
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }

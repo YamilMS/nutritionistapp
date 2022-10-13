@@ -134,6 +134,17 @@ def modify_nutritionist(nutritionist_id):
 
     return 'nutritionist added', 200
 
+
+@api.route("/nutritionist/<int:nutritionist_id>", methods=["GET"])
+def get_nutritionist(nutritionist_id):
+
+    get_body_nutritionist= Nutritionist.query.get(nutritionist_id)
+
+
+    return jsonify({'test': get_body_nutritionist.serialize()}), 200
+
+
+
 @api.route("/nutritionist/<int:nutritionist_id>", methods=["DELETE"])
 def delete_a_nutritionist(nutritionist_id):
 
