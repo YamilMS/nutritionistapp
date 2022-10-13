@@ -134,6 +134,18 @@ def modify_nutritionist(nutritionist_id):
 
     return 'nutritionist added', 200
 
+@api.route("/nutritionist/", methods=["GET"])
+def get_nutri():
+    get_body_nutri= Nutritionist.query.all()
+
+    response_body = {
+        'get_body_nutri': []
+    }
+    for nutri in get_body_nutri:
+        response_body['get_body_nutri'].append(nutri.serialize())
+
+    return jsonify(response_body), 200
+
 
 @api.route("/nutritionist/<int:nutritionist_id>", methods=["GET"])
 def get_nutritionist(nutritionist_id):
