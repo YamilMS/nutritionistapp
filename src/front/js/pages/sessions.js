@@ -6,8 +6,27 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Context } from "../store/appContext";
 
 export const Sessions = () => {
-	const [startDate, setStartDate] = useState(new Date());
-	const nutritionists = [
+  const [startDate, setStartDate] = useState(new Date());
+  const api = process.env.BACKEND_URL+'api/nutritionist';
+
+  const [nutritionists, setNutritionists] = useState([]);
+
+  useEffect(() => {
+    getNutritionists();
+  }, []);
+
+  function getNutritionists() {
+    fetch(api)
+      .then((res) => res.json())
+      .then((data) => {
+        setNutritionists(data.results);
+      });
+  }
+  {
+    /**
+       * 
+       
+  const nutritionists = [
     {
       name: "Tomas",
       image:
@@ -51,6 +70,8 @@ export const Sessions = () => {
         "Some quick example text to build on the card title and make up the bulk of the cards content.",
     },
   ];
+  */
+  }
 
   return (
     <div className="container">
@@ -61,15 +82,18 @@ export const Sessions = () => {
         return (
           <div className="d-inline-flex p-5">
             <div className="card m-2" style={{ width: "20rem" }}>
+              {/**
+       * This map renders the nutritionists data into cards
               <img
-                className="card-img-top"
+               className="card-img-top"
                 src={singleNutri.image}
                 alt="Card image cap"
                 width="50" height="350"
               ></img>
+              */}
               <div className="card-body">
                 <h5 className="card-title">{singleNutri.name}</h5>
-                <p className="card-text">{singleNutri.description}</p>
+                <p className="card-text">{singleNutri.height}</p>
                 <div className="d-flex flex-row">
                   {/**
 						This Button must redirect the user to the nutritionist profile page
@@ -83,8 +107,8 @@ export const Sessions = () => {
                   <button
                     type="button"
                     className="btn btn-primary"
-                    data-toggle="modal"
-                    data-target="#exampleModal"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
                   >
                     Schedule a Session
                   </button>
@@ -93,24 +117,24 @@ export const Sessions = () => {
                     className="modal fade"
                     id="exampleModal"
                     tabindex="-1"
-                    role="dialog"
                     aria-labelledby="exampleModalLabel"
                     aria-hidden="true"
                   >
-                    <div className="modal-dialog" role="document">
+                    <div className="modal-dialog">
                       <div className="modal-content">
                         <div className="modal-header">
-                          <h5 className="modal-title" id="exampleModalLabel">
+                          <h1
+                            className="modal-title fs-5"
+                            id="exampleModalLabel"
+                          >
                             Schedule a Session with {singleNutri.name}
-                          </h5>
+                          </h1>
                           <button
                             type="button"
-                            className="close"
-                            data-dismiss="modal"
+                            className="btn-close"
+                            data-bs-dismiss="modal"
                             aria-label="Close"
-                          >
-                            <span aria-hidden="true">&times;</span>
-                          </button>
+                          ></button>
                         </div>
                         <div className="modal-body">
                           The available times are:
@@ -133,7 +157,7 @@ export const Sessions = () => {
                           <button
                             type="button"
                             className="btn btn-secondary"
-                            data-dismiss="modal"
+                            data-bs-dismiss="modal"
                           >
                             Close
                           </button>
