@@ -29,12 +29,16 @@ class Nutritionist(db.Model):
     description= db.Column(db.String(500), unique=False, nullable=False)
 
     def __repr__(self):
-        return f'<Nutritionist {self.email}>'
+        return f'<Nutritionist {self.nutritionist_email}>'
 
     def serialize(self):
         return {
             "id": self.id,
-            "email": self.email,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "nutritionist_email": self.nutritionist_email,
+            "description": self.description
+
             # do not serialize the password, its a security breach
         }
 
