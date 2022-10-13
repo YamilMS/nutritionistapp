@@ -7,7 +7,7 @@ import { Context } from "../store/appContext";
 
 export const Sessions = () => {
   const [startDate, setStartDate] = useState(new Date());
-  const api = process.env.BACKEND_URL+'api/nutritionist';
+  const api = process.env.BACKEND_URL + "/api/nutritionist";
 
   const [nutritionists, setNutritionists] = useState([]);
 
@@ -19,7 +19,7 @@ export const Sessions = () => {
     fetch(api)
       .then((res) => res.json())
       .then((data) => {
-        setNutritionists(data.results);
+        setNutritionists(data.get_body_nutri);
       });
   }
   {
@@ -81,19 +81,16 @@ export const Sessions = () => {
       {nutritionists.map((singleNutri, i) => {
         return (
           <div className="d-inline-flex p-5">
-            <div className="card m-2" style={{ width: "20rem" }}>
-              {/**
-       * This map renders the nutritionists data into cards
+            <div className="card m-2" key={singleNutri.id} style={{ width: "20rem" }}>
               <img
                className="card-img-top"
-                src={singleNutri.image}
+                src="https://images.unsplash.com/photo-1568316674077-d72ee56de61c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
                 alt="Card image cap"
                 width="50" height="350"
               ></img>
-              */}
-              <div className="card-body">
-                <h5 className="card-title">{singleNutri.name}</h5>
-                <p className="card-text">{singleNutri.height}</p>
+              <div className="card-body" id={singleNutri.id}>
+                <h5 className="card-title">{singleNutri.first_name}</h5>
+                <p className="card-text">{singleNutri.description}</p>
                 <div className="d-flex flex-row">
                   {/**
 						This Button must redirect the user to the nutritionist profile page
@@ -127,7 +124,7 @@ export const Sessions = () => {
                             className="modal-title fs-5"
                             id="exampleModalLabel"
                           >
-                            Schedule a Session with {singleNutri.name}
+                            Schedule a Session with {singleNutri.first_name}
                           </h1>
                           <button
                             type="button"
