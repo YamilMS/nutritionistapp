@@ -15,11 +15,31 @@ export const Nutritionistprofile = () => {
   const [edit, setEdit] = useState(false);
   const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
-  const apiURL = process.env.BACKEND_URL + "/api/nutritionist/2";
+  const apiURL = process.env.BACKEND_URL + "/api/nutritionist/8";
 
   useEffect(() => {
     getNutriProfile();
   }, []);
+
+  const deleteNutri = async () => {
+    try {
+      const response = await fetch(apiURL, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.status !== 200) {
+        alert("There has been an error on the response.status");
+        return false;
+      }
+      const data = await response.json();
+      console.log("data from the backend ", data);
+      return true;
+    } catch (error) {
+      console.error("There has been an error login in ", error);
+    }
+  };
 
   const getNutriProfile = async () => {
     try {
@@ -33,7 +53,12 @@ export const Nutritionistprofile = () => {
       setNutri(data.test);
       return true;
     } catch (error) {
-      console.error("There has been an error login in ", error);
+      console.error(
+        "There has been an error getting the information through fetch ",
+        error
+      );
+      alert("Profile doesn't exist you'll be redirected to Home");
+      navigate("/");
     }
   };
 
@@ -266,7 +291,6 @@ export const Nutritionistprofile = () => {
                   </div>
                 </div>
                 <div>
-                  <button className="m-2">ADD</button>
                   <button
                     className="m-2"
                     onClick={() => {
@@ -275,7 +299,9 @@ export const Nutritionistprofile = () => {
                   >
                     EDIT
                   </button>
-                  <button className="m-2">DELETE</button>
+                  <button className="m-2" onClick={deleteNutri}>
+                    DELETE
+                  </button>
                 </div>
               </div>
             );
