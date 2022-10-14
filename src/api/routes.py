@@ -74,6 +74,14 @@ def update_client(client_id):
 
     return 'client updated', 200
 
+@api.route("/client/<int:client_id>", methods=["GET"])
+def get_a_client(client_id):
+
+   get_body_client= Client.query.get(client_id)
+
+   return jsonify({'test': get_body_client.serialize()}), 200
+
+
 
 @api.route("/client/<int:client_id>", methods=["DELETE"])
 def delete_a_client(client_id):
