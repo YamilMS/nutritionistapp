@@ -14,7 +14,7 @@ export const Clientprofile = () => {
   const [edit, setEdit] = useState("");
   const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
-  const apiURL = process.env.BACKEND_URL + "/api/client/2";
+  const apiURL = process.env.BACKEND_URL + "/api/client/1";
 
   useEffect(() => {
     getClientProfile();
