@@ -81,12 +81,17 @@ export const Sessions = () => {
       {nutritionists.map((singleNutri, i) => {
         return (
           <div className="d-inline-flex p-5">
-            <div className="card m-2" key={singleNutri.id} style={{ width: "20rem" }}>
+            <div
+              className="card m-2"
+              key={singleNutri.id}
+              style={{ width: "20rem" }}
+            >
               <img
-               className="card-img-top"
+                className="card-img-top"
                 src="https://images.unsplash.com/photo-1568316674077-d72ee56de61c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
                 alt="Card image cap"
-                width="50" height="350"
+                width="50"
+                height="350"
               ></img>
               <div className="card-body" id={singleNutri.id}>
                 <h5 className="card-title">{singleNutri.first_name}</h5>
