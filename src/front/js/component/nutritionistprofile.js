@@ -15,7 +15,7 @@ export const Nutritionistprofile = () => {
   const [edit, setEdit] = useState(false);
   const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
-  const apiURL = process.env.BACKEND_URL + "/api/nutritionist/8";
+  const apiURL = process.env.BACKEND_URL + "/api/nutritionist/2";
 
   useEffect(() => {
     getNutriProfile();
@@ -41,6 +41,38 @@ export const Nutritionistprofile = () => {
     }
   };
 
+  const modifyNutriProfile = async () => {
+    try {
+      const response = await fetch(apiURL, {
+        method: "PUT",
+        body: JSON.stringify({
+          first_name: firstName,
+          last_name: lastName,
+          nutritionist_email: email,
+          password: password,
+          description: description,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.status !== 200) {
+        alert("There has been an error on the response.status");
+        return false;
+      }
+      const data = await response.json();
+      console.log("data from the backend ", data);
+      return true;
+    } catch (error) {
+      console.error("There has been an error editing profile ", error);
+    }
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPassword("");
+    setDescription("");
+  };
+
   const getNutriProfile = async () => {
     try {
       const response = await fetch(apiURL);
@@ -62,7 +94,6 @@ export const Nutritionistprofile = () => {
     }
   };
 
-  console.log(edit);
   return (
     <div id="profileForm" className="mx-auto text-center">
       <div className="my-2">
@@ -179,7 +210,9 @@ export const Nutritionistprofile = () => {
               >
                 GO BACK
               </button>
-              <button className="m-2">SAVE CHANGES</button>
+              <button className="m-2" onClick={modifyNutriProfile}>
+                SAVE CHANGES
+              </button>
             </div>
           </div>
         </div>
