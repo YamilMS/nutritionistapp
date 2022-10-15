@@ -10,77 +10,335 @@ export const Clientprofile = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [description, setDescription] = useState("");
+  const [client, setClient] = useState([]);
+  const [edit, setEdit] = useState("");
   const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
+  const apiURL = process.env.BACKEND_URL + "/api/client/2";
 
-  const addClientInformation = () => {
-    actions.changeData(firstName, lastName, email, password, description);
+  useEffect(() => {
+    getClientProfile();
+  }, []);
+
+  const getClientProfile = async () => {
+    try {
+      const response = await fetch(apiURL);
+      if (response.status !== 200) {
+        alert("There has been an error on the response.status");
+        return false;
+      }
+      const data = await response.json();
+      console.log("data from the backend ", data);
+      setClient(data.test);
+      return true;
+    } catch (error) {
+      console.error(
+        "There has been an error getting the information through fetch ",
+        error
+      );
+      alert("Profile doesn't exist you'll be redirected to Home");
+    }
+  };
+
+  const deleteClientProfile = async () => {
+    try {
+      const response = await fetch(apiURL, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.staus !== 200) {
+        alert("There has been an error on the response.status");
+        return false;
+      }
+      const data = await response.json();
+      console.log("data from the backend ", data);
+      return true;
+    } catch (error) {
+      console.error("There has been an error login in ", error);
+    }
+  };
+
+  const editClientPorfile = async () => {
+    try {
+      const response = await fetch(apiURL, {
+        method: "PUT",
+        body: JSON.stringify({
+          first_name: firstName,
+          last_name: lastName,
+          nutritionist_email: email,
+          password: password,
+          description: description,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.status !== 200) {
+        alert("There has been an error on the response.status");
+        return false;
+      }
+      const data = await response.json();
+      console.log("data from the backend ", data);
+      return true;
+    } catch (error) {
+      console.error("There has been an error editing profile ", error);
+    }
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPassword("");
+    setDescription("");
   };
 
   return (
-    <div className="text-center container">
-      <div className="card">
-        <img
-          className="card-img-top"
-          src="I'll be an image"
-          alt="Profile Image Card"
-        />
-        <div className="card-body">
-          <input
-            className="form-control"
-            type="text"
-            value={firstName}
-            aria-label="Disabled input example"
-            disabled
-            readonly
-          />
-          <input
-            className="form-control"
-            type="text"
-            value={lastName}
-            aria-label="Disabled input example"
-            disabled
-            readonly
-          />
-          <input
-            className="form-control"
-            type="text"
-            value={email}
-            aria-label="Disabled input example"
-            disabled
-            readonly
-          />
-          <input
-            className="form-control"
-            type="text"
-            value={password}
-            aria-label="Disabled input example"
-            disabled
-            readonly
-          />
-          <input
-            className="form-control"
-            type="text"
-            value={description}
-            aria-label="Disabled input example"
-            disabled
-            readonly
-          />
-          <button
-            type="button"
-            className="btn btn-success row gx-1"
-            onClick={addClientInformation}
-          >
-            ADD
-          </button>
-          <button type="button" className="btn btn-primary gx-1">
-            Edit
-          </button>
-          <button type="button" className="btn btn-danger gx-1">
-            Delete
-          </button>
-        </div>
+    <div id="profileForm" className="mx-auto text-center">
+      <div className="my-2">
+        <h2>PROFILE</h2>
       </div>
+      {edit === true ? (
+        <div>
+          <div>
+            <div className="my-5">
+              <div id="portraitProfilePicture" className="mx-auto w-50 py-4">
+                <img
+                  id="profilePic"
+                  src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                  width="225"
+                  height="151"
+                  alt="Profile img example"
+                />
+              </div>
+            </div>
+            <div className="row g-3 my-2 justify-content-center align-items-center">
+              <div className="col-2">
+                <label for="inputFirstName" className="col-form-label">
+                  First Name
+                </label>
+              </div>
+              <div className="col-4">
+                <input
+                  type="text"
+                  id="inputFirstName"
+                  className="form-control"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  aria-describedby="firstNameHelpInline"
+                />
+              </div>
+            </div>
+            <div className="row g-3 my-2 justify-content-center align-items-center">
+              <div className="col-2">
+                <label for="inputLastName" className="col-form-label">
+                  Last Name
+                </label>
+              </div>
+              <div className="col-4">
+                <input
+                  type="text"
+                  id="inputLastName"
+                  className="form-control"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  aria-describedby="lastNameHelpInline"
+                />
+              </div>
+            </div>
+            <div className="row g-3 my-2 justify-content-center align-items-center">
+              <div className="col-2">
+                <label for="inputEmail" className="col-form-label">
+                  Email
+                </label>
+              </div>
+              <div className="col-4">
+                <input
+                  type="text"
+                  id="inputEmail"
+                  className="form-control"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  aria-describedby="emailHelpInline"
+                />
+              </div>
+            </div>
+            <div className="row g-3 my-2 justify-content-center align-items-center">
+              <div className="col-2">
+                <label for="inputPassword" className="col-form-label">
+                  Password
+                </label>
+              </div>
+              <div className="col-4">
+                <input
+                  type="password"
+                  id="inputPassword"
+                  className="form-control"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  aria-describedby="passwordHelpInline"
+                />
+                <span id="passwordHelpInline" className="form-text">
+                  Must be 8-20 characters long.
+                </span>
+              </div>
+              <div className="row g-3 my-2 justify-content-center align-items-center">
+                <div className="col-2">
+                  <label for="inputdescription" className="col-form-label">
+                    Description
+                  </label>
+                </div>
+                <div className="col-4">
+                  <input
+                    type="text"
+                    id="inputDescription"
+                    className="form-control"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    aria-describedby="descriptionHelpInline"
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <button
+                className="m-2"
+                onClick={() => {
+                  setEdit(false);
+                }}
+              >
+                GO BACK
+              </button>
+              <button className="m-2" onClick={editClientPorfile}>
+                SAVE CHANGES
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div>
+          {client.map((singleClient) => {
+            return (
+              <div key={singleClient.id}>
+                <div className="my-5">
+                  <div
+                    id="portraitProfilePicture"
+                    className="mx-auto w-50 py-4"
+                  >
+                    <img
+                      id="profilePic"
+                      src="//www.html.am/images/image-codes/milford_sound_t.jpg"
+                      width="225"
+                      height="151"
+                      alt="Photo of Milford Sound in New Zealand"
+                    />
+                  </div>
+                </div>
+                <div className="row g-3 my-2 justify-content-center align-items-center">
+                  <div className="col-2">
+                    <label for="inputFirstName" className="col-form-label">
+                      First Name
+                    </label>
+                  </div>
+                  <div className="col-4">
+                    <input
+                      type="text"
+                      id="inputFirstName"
+                      className="form-control"
+                      value={singleClient.first_name}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      aria-describedby="firstNameHelpInline"
+                    />
+                  </div>
+                </div>
+                <div className="row g-3 my-2 justify-content-center align-items-center">
+                  <div className="col-2">
+                    <label for="inputLastName" className="col-form-label">
+                      Last Name
+                    </label>
+                  </div>
+                  <div className="col-4">
+                    <input
+                      type="text"
+                      id="inputLastName"
+                      className="form-control"
+                      value={singleClient.last_name}
+                      onChange={(e) => setLastName(e.target.value)}
+                      aria-describedby="lastNameHelpInline"
+                    />
+                  </div>
+                </div>
+                <div className="row g-3 my-2 justify-content-center align-items-center">
+                  <div className="col-2">
+                    <label for="inputEmail" className="col-form-label">
+                      Email
+                    </label>
+                  </div>
+                  <div className="col-4">
+                    <input
+                      type="text"
+                      id="inputEmail"
+                      className="form-control"
+                      value={singleClient.client_email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      aria-describedby="emailHelpInline"
+                    />
+                  </div>
+                </div>
+                <div className="row g-3 my-2 justify-content-center align-items-center">
+                  <div className="col-2">
+                    <label for="inputPassword" className="col-form-label">
+                      Password
+                    </label>
+                  </div>
+                  <div className="col-4">
+                    <input
+                      type="password"
+                      id="inputPassword"
+                      className="form-control"
+                      value={singleClient.password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      aria-describedby="passwordHelpInline"
+                    />
+                    <span id="passwordHelpInline" className="form-text">
+                      Must be 8-20 characters long.
+                    </span>
+                  </div>
+                  <div className="row g-3 my-2 justify-content-center align-items-center">
+                    <div className="col-2">
+                      <label for="inputdescription" className="col-form-label">
+                        Description
+                      </label>
+                    </div>
+                    <div className="col-4">
+                      <input
+                        type="text"
+                        id="inputDescription"
+                        className="form-control"
+                        value={singleClient.description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        aria-describedby="descriptionHelpInline"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <button
+                    className="m-2"
+                    onClick={() => {
+                      setEdit(true);
+                    }}
+                  >
+                    EDIT
+                  </button>
+                  <button className="m-2" onClick={deleteClientProfile}>
+                    DELETE
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
