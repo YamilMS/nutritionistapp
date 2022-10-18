@@ -1,20 +1,16 @@
 import React, { useContext } from "react";
+import { Context } from "../store/appContext";
+import { Nutritionistprofile } from "../component/nutritionistprofile";
+import { Clientprofile } from "../component/clientprofile";
 import "../../styles/home.css";
 
 export const Profile = () => {
+  const { store, actions } = useContext(Context);
+  console.log(store.rol);
 
-	return (
-		<div className="text-center container">
-			<div className="card">
-            <img className="card-img-top" src="..." alt="Profile Image Card"/>
-                <div className="card-body">
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>
-		</div>
-	);
+  return (
+    <div className="text-center container">
+      {store.rol === "true" ? <Nutritionistprofile /> : <Clientprofile />}
+    </div>
+  );
 };

@@ -24,14 +24,16 @@ def create_token():
 
     if client is None:
         professional= nutritionist.professional
+        id= nutritionist.id
     else:
         professional= client.professional
+        id= client.id
         
     if client is None and nutritionist is None:
         return jsonify({"msg": "Bad username or password"}), 401
 
     access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token, email=email, professional=professional)
+    return jsonify(access_token=access_token, professional=professional, id=id)
 
     response_body = {
         "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
@@ -46,6 +48,7 @@ def signUp_client():
     email_request = request.json.get("email", None)
     password_request = request.json.get("password", None)
     professional_request = request.json.get("professional", None)
+    days_request = request.json.get("days", None)
     description_request = request.json.get("description", None)
 
     new_client = Client(
@@ -54,6 +57,7 @@ def signUp_client():
         client_email= email_request,
         password= password_request,
         professional= professional_request,
+        days= days_request,
         description= description_request
     )
 
@@ -114,7 +118,7 @@ def signUp_nutritionist():
     email_request = request.json.get("email", None)
     password_request = request.json.get("password", None)
     professional_request= request.json.get("professional", None)
-    days_request = resquest.json.get("days", None)
+    days_request = request.json.get("days", None)
     description_request = request.json.get("description", None)
 
     new_nutritionist = Nutritionist(

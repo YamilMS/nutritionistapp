@@ -3,6 +3,8 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       message: null,
       token: null,
+      rol: null,
+      id: null,
       demo: [
         {
           title: "FIRST",
@@ -42,7 +44,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await response.json();
           console.log("data from the backend ", data);
           sessionStorage.setItem("token", data.access_token);
-          setStore({ token: data.access_token });
+          setStore({
+            token: data.access_token,
+            id: data.id,
+            rol: data.professional,
+          });
           return true;
         } catch (error) {
           console.error("There has been an error login in ", error);
@@ -51,7 +57,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       logout: () => {
         sessionStorage.removeItem("token");
-        setStore({ token: null });
+        setStore({ token: null, id: null, rol: null });
       },
 
       getTokenFromSession: () => {

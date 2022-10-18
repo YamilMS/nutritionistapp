@@ -15,7 +15,7 @@ export const Nutritionistprofile = () => {
   const [edit, setEdit] = useState(false);
   const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
-  const apiURL = process.env.BACKEND_URL + "/api/nutritionist/1";
+  const apiURL = process.env.BACKEND_URL + "/api/nutritionist/" + store.id;
 
   useEffect(() => {
     getNutriProfile();
