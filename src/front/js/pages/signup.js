@@ -12,13 +12,12 @@ export const Signup = () => {
   const [professional, setProfessional] = useState(false);
   const [description, setDescription] = useState("");
   const [user, setUser] = useState("client");
-  const [days, setDays] = useState("")
-  const [time, setTime] = useState("")
+  const [days, setDays] = useState([]);
+  const [time, setTime] = useState("");
   const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
 
   if (token !== "" && token !== undefined && token !== null) navigate("/");
-
 
   const handleSignUp = () => {
     if (
@@ -36,7 +35,7 @@ export const Signup = () => {
           email: email,
           password: password,
           professional: professional,
-          days: days,
+          days: days.join(""),
           description: description,
         }),
         headers: {
@@ -62,9 +61,9 @@ export const Signup = () => {
   };
   console.log(professional);
 
-  console.log("days", days)
+  console.log("days", days);
 
-  console.log("time", time)
+  console.log("time", time);
 
   return (
     <div>
@@ -280,11 +279,11 @@ export const Signup = () => {
                     id="nutriCheckMonday"
                     onChange={(event) => {
                       if (event.target.checked) {
-                        setDays([...days, 1])
+                        setDays([...days, 1]);
                       } else {
-                        setDays(days.filter(item => item !== 1))
+                        setDays(days.filter((item) => item !== 1));
                       }
-                    }} 
+                    }}
                   />
                   <label
                     className="form-check-label"
@@ -300,11 +299,11 @@ export const Signup = () => {
                     id="nutriCheckTuesday"
                     onChange={(event) => {
                       if (event.target.checked) {
-                        setDays([...days, 2])
+                        setDays([...days, 2]);
                       } else {
-                        setDays(days.filter(item => item !== 2))
+                        setDays(days.filter((item) => item !== 2));
                       }
-                    }} 
+                    }}
                   />
                   <label
                     className="form-check-label"
@@ -320,11 +319,11 @@ export const Signup = () => {
                     id="nutriCheckWednesday"
                     onChange={(event) => {
                       if (event.target.checked) {
-                        setDays([...days, 3])
+                        setDays([...days, 3]);
                       } else {
-                        setDays(days.filter(item => item !== 3))
+                        setDays(days.filter((item) => item !== 3));
                       }
-                    }} 
+                    }}
                   />
                   <label
                     className="form-check-label"
@@ -340,11 +339,11 @@ export const Signup = () => {
                     id="nutriCheckThursday"
                     onChange={(event) => {
                       if (event.target.checked) {
-                        setDays([...days, 4])
+                        setDays([...days, 4]);
                       } else {
-                        setDays(days.filter(item => item !== 4))
+                        setDays(days.filter((item) => item !== 4));
                       }
-                    }} 
+                    }}
                   />
                   <label
                     className="form-check-label"
@@ -360,11 +359,11 @@ export const Signup = () => {
                     id="nutriCheckFriday"
                     onChange={(event) => {
                       if (event.target.checked) {
-                        setDays([...days, 5])
+                        setDays([...days, 5]);
                       } else {
-                        setDays(days.filter(item => item !== 5))
+                        setDays(days.filter((item) => item !== 5));
                       }
-                    }} 
+                    }}
                   />
                   <label
                     className="form-check-label"
@@ -380,11 +379,11 @@ export const Signup = () => {
                     id="nutriCheckSaturday"
                     onChange={(event) => {
                       if (event.target.checked) {
-                        setDays([...days, 6])
+                        setDays([...days, 6]);
                       } else {
-                        setDays(days.filter(item => item !== 6))
+                        setDays(days.filter((item) => item !== 6));
                       }
-                    }} 
+                    }}
                   />
                   <label
                     className="form-check-label"
@@ -405,13 +404,20 @@ export const Signup = () => {
                     id="nutriCheckMorning"
                     onChange={(event) => {
                       if (event.target.checked) {
-                        setTime([...time, 8,9,10,11,12])
+                        setTime([...time, 8, 9, 10, 11, 12]);
                       } else {
-                        setTime(time.filter(item => item !== 8 && item !== 9 && item !== 10 && item !== 11 && item !== 12))
+                        setTime(
+                          time.filter(
+                            (item) =>
+                              item !== 8 &&
+                              item !== 9 &&
+                              item !== 10 &&
+                              item !== 11 &&
+                              item !== 12
+                          )
+                        );
                       }
-                    }
-                  }
-                  
+                    }}
                   />
                   <label
                     className="form-check-label"
@@ -427,12 +433,19 @@ export const Signup = () => {
                     id="nutriCheckAfternoon"
                     onChange={(event) => {
                       if (event.target.checked) {
-                        setTime([...time, 13,14,15,16])
+                        setTime([...time, 13, 14, 15, 16]);
                       } else {
-                        setTime(time.filter(item => item !== 13 && item !== 14 && item !== 15 && item !== 16))
+                        setTime(
+                          time.filter(
+                            (item) =>
+                              item !== 13 &&
+                              item !== 14 &&
+                              item !== 15 &&
+                              item !== 16
+                          )
+                        );
                       }
-                    }
-                  }
+                    }}
                   />
                   <label
                     className="form-check-label"
@@ -448,12 +461,20 @@ export const Signup = () => {
                     id="nutriCheckEvening"
                     onChange={(event) => {
                       if (event.target.checked) {
-                        setTime([...time, 17,18,19,20,21])
+                        setTime([...time, 17, 18, 19, 20, 21]);
                       } else {
-                        setTime(time.filter(item => item !== 17 && item !== 18 && item !== 19 && item !== 20 && item !== 21))
+                        setTime(
+                          time.filter(
+                            (item) =>
+                              item !== 17 &&
+                              item !== 18 &&
+                              item !== 19 &&
+                              item !== 20 &&
+                              item !== 21
+                          )
+                        );
                       }
-                    }
-                  }
+                    }}
                   />
                   <label
                     className="form-check-label"
@@ -462,8 +483,7 @@ export const Signup = () => {
                     Evening (4pm - 9pm)
                   </label>
                 </div>
-                <div className="form-group form-check mx-3">
-                </div>
+                <div className="form-group form-check mx-3"></div>
               </div>
             </div>
             <div className="form-group mb-2">

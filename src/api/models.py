@@ -9,6 +9,7 @@ class Client(db.Model):
     client_email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
     professional = db.Column(db.String(80), unique=False, nullable=False, default=False)
+    days = db.Column(db.String(120), unique=False, nullable=False)
     description= db.Column(db.String(500), unique=False, nullable=False)
 
     def __repr__(self):
@@ -21,6 +22,7 @@ class Client(db.Model):
             "last_name": self.last_name,
             "client_email": self.client_email,
             "professional": self.professional,
+            "days": self.days,
             "description": self.description
             # do not serialize the password, its a security breach
         }
