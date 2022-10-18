@@ -19,11 +19,19 @@ api = Blueprint('api', __name__)
 def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    if email != "test" or password != "test":
+    client = Client.query.filter_by(client_email=email, password=password).first()
+    nutritionist = Nutritionist.query.filter_by(nutritionist_email=email, password=password).first()
+
+    if client is None:
+        professional= nutritionist.professional
+    else:
+        professional= client.professional
+        
+    if client is None and nutritionist is None:
         return jsonify({"msg": "Bad username or password"}), 401
 
     access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token, email=email)
+    return jsonify(access_token=access_token, email=email, professional=professional)
 
     response_body = {
         "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
@@ -37,6 +45,7 @@ def signUp_client():
     last_name_request = request.json.get("last_name", None)
     email_request = request.json.get("email", None)
     password_request = request.json.get("password", None)
+    professional_request = request.json.get("professional", None)
     description_request = request.json.get("description", None)
 
     new_client = Client(
@@ -44,6 +53,7 @@ def signUp_client():
         last_name= last_name_request,
         client_email= email_request,
         password= password_request,
+        professional= professional_request,
         description= description_request
     )
 
@@ -103,6 +113,7 @@ def signUp_nutritionist():
     last_name_request = request.json.get("last_name", None)
     email_request = request.json.get("email", None)
     password_request = request.json.get("password", None)
+    professional_request= request.json.get("professional", None)
     description_request = request.json.get("description", None)
 
     new_nutritionist = Nutritionist(
@@ -110,6 +121,7 @@ def signUp_nutritionist():
         last_name= last_name_request,
         nutritionist_email= email_request,
         password= password_request,
+        professional= professional_request,
         description= description_request
     )
 

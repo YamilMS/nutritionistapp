@@ -9,6 +9,7 @@ export const Signup = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [professional, setProfessional] = useState(false);
   const [description, setDescription] = useState("");
   const [user, setUser] = useState("client");
   const token = sessionStorage.getItem("token");
@@ -31,6 +32,7 @@ export const Signup = () => {
           last_name: lastName,
           email: email,
           password: password,
+          professional: professional,
           description: description,
         }),
         headers: {
@@ -54,6 +56,7 @@ export const Signup = () => {
     setPassword("");
     setDescription("");
   };
+  console.log(professional);
 
   return (
     <div>
@@ -75,7 +78,10 @@ export const Signup = () => {
                 role="tab"
                 aria-controls="client"
                 aria-selected="true"
-                onClick={() => setUser("client")}
+                onClick={() => {
+                  setUser("client");
+                  setProfessional(false);
+                }}
               >
                 Client
               </button>
@@ -90,7 +96,10 @@ export const Signup = () => {
                 role="tab"
                 aria-controls="nutritionist"
                 aria-selected="false"
-                onClick={() => setUser("nutritionist")}
+                onClick={() => {
+                  setUser("nutritionist");
+                  setProfessional(true);
+                }}
               >
                 Nutritionist
               </button>
@@ -111,7 +120,7 @@ export const Signup = () => {
         >
           <form className="mx-auto w-50">
             <div className="form-group mb-2">
-              <label for="exampleInputEmail1">First Name</label>
+              <label htmlFor="exampleInputEmail1">First Name</label>
               <input
                 type="text"
                 className="form-control"
@@ -122,7 +131,7 @@ export const Signup = () => {
               />
             </div>
             <div className="form-group mb-2">
-              <label for="exampleInputEmail1">Last Name</label>
+              <label htmlFor="exampleInputEmail1">Last Name</label>
               <input
                 type="text"
                 className="form-control"
@@ -133,7 +142,7 @@ export const Signup = () => {
               />
             </div>
             <div className="form-group">
-              <label for="exampleInputEmail1">Client Email address</label>
+              <label htmlFor="exampleInputEmail1">Client Email address</label>
               <input
                 type="email"
                 className="form-control"
@@ -148,7 +157,7 @@ export const Signup = () => {
               </small>
             </div>
             <div className="form-group">
-              <label for="exampleInputPassword1">Client Password</label>
+              <label htmlFor="exampleInputPassword1">Client Password</label>
               <input
                 type="password"
                 className="form-control"
@@ -158,18 +167,8 @@ export const Signup = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div className="form-group form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="clientCheck"
-              />
-              <label className="form-check-label" for="exampleCheck1">
-                Check me out
-              </label>
-            </div>
             <div className="form-group mb-2">
-              <label for="exampleFormControlTextarea1">Description</label>
+              <label htmlFor="exampleFormControlTextarea1">Description</label>
               <textarea
                 className="form-control"
                 id="clientFormControlTextarea1"
@@ -179,7 +178,7 @@ export const Signup = () => {
               ></textarea>
             </div>
             <div className="form-group d-flex flex-column my-2">
-              <label for="exampleFormControlFile1">
+              <label htmlFor="exampleFormControlFile1">
                 Upload a profile picture
               </label>
               <input
@@ -209,7 +208,7 @@ export const Signup = () => {
         >
           <form className="mx-auto w-50">
             <div className="form-group mb-2">
-              <label for="exampleInputEmail1">First Name</label>
+              <label htmlFor="exampleInputEmail1">First Name</label>
               <input
                 type="text"
                 className="form-control"
@@ -220,7 +219,7 @@ export const Signup = () => {
               />
             </div>
             <div className="form-group mb-2">
-              <label for="exampleInputEmail1">Last Name</label>
+              <label htmlFor="exampleInputEmail1">Last Name</label>
               <input
                 type="text"
                 className="form-control"
@@ -231,7 +230,9 @@ export const Signup = () => {
               />
             </div>
             <div className="form-group">
-              <label for="exampleInputEmail1">Nutritionist Email address</label>
+              <label htmlFor="exampleInputEmail1">
+                Nutritionist Email address
+              </label>
               <input
                 type="email"
                 className="form-control"
@@ -249,28 +250,103 @@ export const Signup = () => {
               </small>
             </div>
             <div className="form-group">
-              <label for="exampleInputPassword1">Nutritionist Password</label>
+              <label htmlFor="exampleInputPassword1">
+                Nutritionist Password
+              </label>
               <input
                 type="password"
-                className="form-control"
+                className="form-control mb-2"
                 id="nutritionistInputPassword1"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div className="form-group form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="nutritionistCheck1"
-              />
-              <label className="form-check-label" for="exampleCheck1">
-                Check me out
-              </label>
+            <div className="mt-2">
+              <p className="mb-1">Select Time avalaible</p>
+              <div className="d-flex">
+                <div className="form-group form-check mr-3">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="nutriCheckMonday"
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor="exampleCheckMonday"
+                  >
+                    Monday
+                  </label>
+                </div>
+                <div className="form-group form-check mx-3">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="nutriCheckTuesday"
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor="exampleCheckTuesday"
+                  >
+                    Tuesday
+                  </label>
+                </div>
+                <div className="form-group form-check mx-3">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="nutriCheckWednesday"
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor="exampleCheckWednesday"
+                  >
+                    Wednesday
+                  </label>
+                </div>
+                <div className="form-group form-check mx-3">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="nutriCheckThursday"
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor="exampleCheckThursday"
+                  >
+                    Thursday
+                  </label>
+                </div>
+                <div className="form-group form-check mx-3">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="nutriCheckFriday"
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor="exampleCheckFriday"
+                  >
+                    Friday
+                  </label>
+                </div>
+                <div className="form-group form-check mx-3">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="nutriCheckSaturday"
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor="exampleCheckSaturday"
+                  >
+                    Saturday
+                  </label>
+                </div>
+              </div>
             </div>
             <div className="form-group mb-2">
-              <label for="exampleFormControlTextarea1">Description</label>
+              <label htmlFor="exampleFormControlTextarea1">Description</label>
               <textarea
                 className="form-control"
                 id="nutritionistFormControlTextarea1"
@@ -280,7 +356,7 @@ export const Signup = () => {
               ></textarea>
             </div>
             <div className="form-group d-flex flex-column my-2">
-              <label for="exampleFormControlFile1">
+              <label htmlFor="exampleFormControlFile1">
                 Upload a profile picture
               </label>
               <input
