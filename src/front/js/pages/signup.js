@@ -12,10 +12,12 @@ export const Signup = () => {
   const [professional, setProfessional] = useState(false);
   const [description, setDescription] = useState("");
   const [user, setUser] = useState("client");
+  const [days, setDays] = useState("")
   const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
 
   if (token !== "" && token !== undefined && token !== null) navigate("/");
+
 
   const handleSignUp = () => {
     if (
@@ -33,6 +35,7 @@ export const Signup = () => {
           email: email,
           password: password,
           professional: professional,
+          days: days,
           description: description,
         }),
         headers: {
@@ -57,6 +60,8 @@ export const Signup = () => {
     setDescription("");
   };
   console.log(professional);
+
+  console.log("days", days)
 
   return (
     <div>
@@ -270,6 +275,13 @@ export const Signup = () => {
                     type="checkbox"
                     className="form-check-input"
                     id="nutriCheckMonday"
+                    onChange={(event) => {
+                      if (event.target.checked) {
+                        setDays([...days, 1])
+                      } else {
+                        setDays(days.filter(item => item !== 1))
+                      }
+                    }} 
                   />
                   <label
                     className="form-check-label"
@@ -283,6 +295,13 @@ export const Signup = () => {
                     type="checkbox"
                     className="form-check-input"
                     id="nutriCheckTuesday"
+                    onChange={(event) => {
+                      if (event.target.checked) {
+                        setDays([...days, 2])
+                      } else {
+                        setDays(days.filter(item => item !== 2))
+                      }
+                    }} 
                   />
                   <label
                     className="form-check-label"
@@ -296,6 +315,13 @@ export const Signup = () => {
                     type="checkbox"
                     className="form-check-input"
                     id="nutriCheckWednesday"
+                    onChange={(event) => {
+                      if (event.target.checked) {
+                        setDays([...days, 3])
+                      } else {
+                        setDays(days.filter(item => item !== 3))
+                      }
+                    }} 
                   />
                   <label
                     className="form-check-label"
@@ -309,6 +335,13 @@ export const Signup = () => {
                     type="checkbox"
                     className="form-check-input"
                     id="nutriCheckThursday"
+                    onChange={(event) => {
+                      if (event.target.checked) {
+                        setDays([...days, 4])
+                      } else {
+                        setDays(days.filter(item => item !== 4))
+                      }
+                    }} 
                   />
                   <label
                     className="form-check-label"
@@ -322,6 +355,13 @@ export const Signup = () => {
                     type="checkbox"
                     className="form-check-input"
                     id="nutriCheckFriday"
+                    onChange={(event) => {
+                      if (event.target.checked) {
+                        setDays([...days, 5])
+                      } else {
+                        setDays(days.filter(item => item !== 5))
+                      }
+                    }} 
                   />
                   <label
                     className="form-check-label"
@@ -335,6 +375,13 @@ export const Signup = () => {
                     type="checkbox"
                     className="form-check-input"
                     id="nutriCheckSaturday"
+                    onChange={(event) => {
+                      if (event.target.checked) {
+                        setDays([...days, 6])
+                      } else {
+                        setDays(days.filter(item => item !== 6))
+                      }
+                    }} 
                   />
                   <label
                     className="form-check-label"
@@ -342,6 +389,53 @@ export const Signup = () => {
                   >
                     Saturday
                   </label>
+                </div>
+              </div>
+            </div>
+            <div className="mt-2">
+              <p className="mb-1">Select Shift avalaible</p>
+              <div className="d-flex">
+                <div className="form-group form-check mr-3">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="nutriCheckMorning"
+                  
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor="exampleCheckMorning"
+                  >
+                    Morning (8am - 12pm)
+                  </label>
+                </div>
+                <div className="form-group form-check mx-3">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="nutriCheckAfternoon"
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor="exampleCheckAfternoon"
+                  >
+                    Afternoon (12pm - 4pm)
+                  </label>
+                </div>
+                <div className="form-group form-check mx-3">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="nutriCheckEvening"
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor="exampleCheckEvening"
+                  >
+                    Evening (4pm - 9pm)
+                  </label>
+                </div>
+                <div className="form-group form-check mx-3">
                 </div>
               </div>
             </div>

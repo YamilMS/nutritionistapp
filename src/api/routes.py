@@ -114,6 +114,7 @@ def signUp_nutritionist():
     email_request = request.json.get("email", None)
     password_request = request.json.get("password", None)
     professional_request= request.json.get("professional", None)
+    days_request = resquest.json.get("days", None)
     description_request = request.json.get("description", None)
 
     new_nutritionist = Nutritionist(
@@ -122,6 +123,7 @@ def signUp_nutritionist():
         nutritionist_email= email_request,
         password= password_request,
         professional= professional_request,
+        days= days_request,
         description= description_request
     )
 
