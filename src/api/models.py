@@ -8,6 +8,7 @@ class Client(db.Model):
     last_name= db.Column(db.String(120), unique=False, nullable=False)
     client_email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
+    professional = db.Column(db.String(80), unique=False, nullable=False, default=False)
     description= db.Column(db.String(500), unique=False, nullable=False)
 
     def __repr__(self):
@@ -19,6 +20,7 @@ class Client(db.Model):
             "first_name": self.first_name,
             "last_name": self.last_name,
             "client_email": self.client_email,
+            "professional": self.professional,
             "description": self.description
             # do not serialize the password, its a security breach
         }
@@ -29,6 +31,7 @@ class Nutritionist(db.Model):
     last_name= db.Column(db.String(120), unique=False, nullable=False)
     nutritionist_email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
+    professional = db.Column(db.String(80), unique=False, nullable=False, default=False)
     description= db.Column(db.String(500), unique=False, nullable=False)
 
     def __repr__(self):
@@ -40,6 +43,7 @@ class Nutritionist(db.Model):
             "first_name": self.first_name,
             "last_name": self.last_name,
             "nutritionist_email": self.nutritionist_email,
+            "professional": self.professional,
             "description": self.description
 
             # do not serialize the password, its a security breach
