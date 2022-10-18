@@ -13,6 +13,7 @@ export const Signup = () => {
   const [description, setDescription] = useState("");
   const [user, setUser] = useState("client");
   const [days, setDays] = useState("")
+  const [time, setTime] = useState("")
   const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
 
@@ -62,6 +63,8 @@ export const Signup = () => {
   console.log(professional);
 
   console.log("days", days)
+
+  console.log("time", time)
 
   return (
     <div>
@@ -400,6 +403,14 @@ export const Signup = () => {
                     type="checkbox"
                     className="form-check-input"
                     id="nutriCheckMorning"
+                    onChange={(event) => {
+                      if (event.target.checked) {
+                        setTime([...time, 8,9,10,11,12])
+                      } else {
+                        setTime(time.filter(item => item !== 8 && item !== 9 && item !== 10 && item !== 11 && item !== 12))
+                      }
+                    }
+                  }
                   
                   />
                   <label
@@ -414,6 +425,14 @@ export const Signup = () => {
                     type="checkbox"
                     className="form-check-input"
                     id="nutriCheckAfternoon"
+                    onChange={(event) => {
+                      if (event.target.checked) {
+                        setTime([...time, 13,14,15,16])
+                      } else {
+                        setTime(time.filter(item => item !== 13 && item !== 14 && item !== 15 && item !== 16))
+                      }
+                    }
+                  }
                   />
                   <label
                     className="form-check-label"
@@ -427,6 +446,14 @@ export const Signup = () => {
                     type="checkbox"
                     className="form-check-input"
                     id="nutriCheckEvening"
+                    onChange={(event) => {
+                      if (event.target.checked) {
+                        setTime([...time, 17,18,19,20,21])
+                      } else {
+                        setTime(time.filter(item => item !== 17 && item !== 18 && item !== 19 && item !== 20 && item !== 21))
+                      }
+                    }
+                  }
                   />
                   <label
                     className="form-check-label"
