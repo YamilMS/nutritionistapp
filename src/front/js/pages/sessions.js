@@ -8,7 +8,7 @@ import { Context } from "../store/appContext";
 export const Sessions = () => {
   const [startDate, setStartDate] = useState(null);
   const [startTime, setStartTime] = useState(new Date());
- 
+
   const api = process.env.BACKEND_URL + "/api/nutritionist";
 
   const [nutritionists, setNutritionists] = useState([]);
@@ -31,16 +31,17 @@ export const Sessions = () => {
        * This map renders the nutritionists data into cards
        */}
       {nutritionists.map((singleNutri, i) => {
-
         const daysAvailable = singleNutri.days.split("");
+        [1, 3, 5];
 
         const isWeekday = (date) => {
           const day = date.getDay(date);
-          let daysA = daysAvailable.map((dayAva) => day + "!==" + dayAva )
-          let daysAv = daysA.join(" && ");
-          console.log(daysAv)
-          return daysAv;
+          const daysAvailableInNumber = daysAvailable.map(Number);
+          console.log(daysAvailable);
+          console.log(daysAvailableInNumber);
+          return daysAvailableInNumber.includes(day);
         };
+
         return (
           <div className="d-inline-flex p-5" key={singleNutri.id}>
             <div className="card m-2" style={{ width: "20rem" }}>
