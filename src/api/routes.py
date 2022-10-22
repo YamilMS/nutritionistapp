@@ -49,6 +49,7 @@ def signUp_client():
     password_request = request.json.get("password", None)
     professional_request = request.json.get("professional", None)
     days_request = request.json.get("days", None)
+    times_request = request.json.get("times", None)
     description_request = request.json.get("description", None)
 
     new_client = Client(
@@ -58,6 +59,7 @@ def signUp_client():
         password= password_request,
         professional= professional_request,
         days= days_request,
+        times= times_request,
         description= description_request
     )
 
@@ -119,6 +121,7 @@ def signUp_nutritionist():
     password_request = request.json.get("password", None)
     professional_request= request.json.get("professional", None)
     days_request = request.json.get("days", None)
+    times_request = request.json.get("times", None)
     description_request = request.json.get("description", None)
 
     new_nutritionist = Nutritionist(
@@ -128,6 +131,7 @@ def signUp_nutritionist():
         password= password_request,
         professional= professional_request,
         days= days_request,
+        times= times_request,
         description= description_request
     )
 
