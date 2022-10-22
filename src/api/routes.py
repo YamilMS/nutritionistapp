@@ -153,6 +153,8 @@ def modify_nutritionist(nutritionist_id):
         nutritionist_mod.nutritionist_email= request_body_nutritionist["nutritionist_email"]
     if "password" in request_body_nutritionist:
         nutritionist_mod.password= request_body_nutritionist["password"]
+    if "days" in request_body_nutritionist:
+        nutritionist_mod.days= request_body_nutritionist["days"]
     if "description" in request_body_nutritionist:
         nutritionist_mod.description= request_body_nutritionist["description"]
 

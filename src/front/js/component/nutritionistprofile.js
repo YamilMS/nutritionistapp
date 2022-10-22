@@ -10,12 +10,22 @@ export const Nutritionistprofile = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [days, setDays] = useState([]);
+  //const [daysAvalaible, setDaysAvalaible] = useState([]);
   const [description, setDescription] = useState("");
   const [nutri, setNutri] = useState([]);
   const [edit, setEdit] = useState(false);
-  const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
   const apiURL = process.env.BACKEND_URL + "/api/nutritionist/" + store.id;
+
+  const dayMap = {
+    1: "Monday",
+    2: "Tuesday",
+    3: "Wednesday",
+    4: "Thursday",
+    5: "Friday",
+    6: "Saturday",
+  };
 
   useEffect(() => {
     getNutriProfile();
@@ -50,6 +60,7 @@ export const Nutritionistprofile = () => {
           last_name: lastName,
           nutritionist_email: email,
           password: password,
+          days: days.join(""),
           description: description,
         }),
         headers: {
@@ -101,124 +112,269 @@ export const Nutritionistprofile = () => {
       </div>
       {edit === true ? (
         <div>
-          <div>
-            <div className="my-5">
-              <div id="portraitProfilePicture" className="mx-auto w-50 py-4">
-                <img
-                  id="profilePic"
-                  src="//www.html.am/images/image-codes/milford_sound_t.jpg"
-                  width="225"
-                  height="151"
-                  alt="Photo of Milford Sound in New Zealand"
-                />
-              </div>
-            </div>
-            <div class="row g-3 my-2 justify-content-center align-items-center">
-              <div class="col-2">
-                <label for="inputFirstName" class="col-form-label">
-                  First Name
-                </label>
-              </div>
-              <div class="col-4">
-                <input
-                  type="text"
-                  id="inputFirstName"
-                  class="form-control"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  aria-describedby="firstNameHelpInline"
-                />
-              </div>
-            </div>
-            <div class="row g-3 my-2 justify-content-center align-items-center">
-              <div class="col-2">
-                <label for="inputLastName" class="col-form-label">
-                  Last Name
-                </label>
-              </div>
-              <div class="col-4">
-                <input
-                  type="text"
-                  id="inputLastName"
-                  class="form-control"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  aria-describedby="lastNameHelpInline"
-                />
-              </div>
-            </div>
-            <div class="row g-3 my-2 justify-content-center align-items-center">
-              <div class="col-2">
-                <label for="inputEmail" class="col-form-label">
-                  Email
-                </label>
-              </div>
-              <div class="col-4">
-                <input
-                  type="text"
-                  id="inputEmail"
-                  class="form-control"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  aria-describedby="emailHelpInline"
-                />
-              </div>
-            </div>
-            <div class="row g-3 my-2 justify-content-center align-items-center">
-              <div class="col-2">
-                <label for="inputPassword" class="col-form-label">
-                  Password
-                </label>
-              </div>
-              <div class="col-4">
-                <input
-                  type="password"
-                  id="inputPassword"
-                  class="form-control"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  aria-describedby="passwordHelpInline"
-                />
-                <span id="passwordHelpInline" class="form-text">
-                  Must be 8-20 characters long.
-                </span>
-              </div>
-              <div class="row g-3 my-2 justify-content-center align-items-center">
-                <div class="col-2">
-                  <label for="inputdescription" class="col-form-label">
-                    Description
-                  </label>
+          {nutri.map((singleNutri) => {
+            return (
+              <div>
+                <div className="my-5">
+                  <div
+                    id="portraitProfilePicture"
+                    className="mx-auto w-50 py-4"
+                  >
+                    <img
+                      id="profilePic"
+                      src="//www.html.am/images/image-codes/milford_sound_t.jpg"
+                      width="225"
+                      height="151"
+                      alt="Photo of Milford Sound in New Zealand"
+                    />
+                  </div>
                 </div>
-                <div class="col-4">
-                  <input
-                    type="text"
-                    id="inputDescription"
-                    class="form-control"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    aria-describedby="descriptionHelpInline"
-                  />
+                <div className="row g-3 my-2 justify-content-center align-items-center">
+                  <div className="col-2">
+                    <label htmlFor="inputFirstName" className="col-form-label">
+                      First Name
+                    </label>
+                  </div>
+                  <div className="col-4">
+                    <input
+                      type="text"
+                      id="inputFirstName"
+                      className="form-control"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      aria-describedby="firstNameHelpInline"
+                    />
+                  </div>
+                </div>
+                <div className="row g-3 my-2 justify-content-center align-items-center">
+                  <div className="col-2">
+                    <label htmlFor="inputLastName" className="col-form-label">
+                      Last Name
+                    </label>
+                  </div>
+                  <div className="col-4">
+                    <input
+                      type="text"
+                      id="inputLastName"
+                      className="form-control"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      aria-describedby="lastNameHelpInline"
+                    />
+                  </div>
+                </div>
+                <div className="row g-3 my-2 justify-content-center align-items-center">
+                  <div className="col-2">
+                    <label htmlFor="inputEmail" className="col-form-label">
+                      Email
+                    </label>
+                  </div>
+                  <div className="col-4">
+                    <input
+                      type="text"
+                      id="inputEmail"
+                      className="form-control"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      aria-describedby="emailHelpInline"
+                    />
+                  </div>
+                </div>
+                <div className="row g-3 my-2 justify-content-center align-items-center">
+                  <div className="col-2">
+                    <label htmlFor="inputPassword" className="col-form-label">
+                      Password
+                    </label>
+                  </div>
+                  <div className="col-4">
+                    <input
+                      type="password"
+                      id="inputPassword"
+                      className="form-control"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      aria-describedby="passwordHelpInline"
+                    />
+                    <span id="passwordHelpInline" className="form-text">
+                      Must be 8-20 characters long.
+                    </span>
+                  </div>
+                  <div className="row g-3 my-2 justify-content-center align-items-center">
+                    <p className="mb-1">Select your new Times avalaible</p>
+                    <div className="col-6 d-flex justify-content-center">
+                      <div className="form-group form-check mr-3">
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          id="nutriCheckMonday"
+                          onChange={(event) => {
+                            if (event.target.checked) {
+                              setDays([...days, 1]);
+                            } else {
+                              setDays(days.filter((item) => item !== 1));
+                            }
+                          }}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="exampleCheckMonday"
+                        >
+                          Monday
+                        </label>
+                      </div>
+                      <div className="form-group form-check mx-3">
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          id="nutriCheckTuesday"
+                          onChange={(event) => {
+                            if (event.target.checked) {
+                              setDays([...days, 2]);
+                            } else {
+                              setDays(days.filter((item) => item !== 2));
+                            }
+                          }}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="exampleCheckTuesday"
+                        >
+                          Tuesday
+                        </label>
+                      </div>
+                      <div className="form-group form-check mx-3">
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          id="nutriCheckWednesday"
+                          onChange={(event) => {
+                            if (event.target.checked) {
+                              setDays([...days, 3]);
+                            } else {
+                              setDays(days.filter((item) => item !== 3));
+                            }
+                          }}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="exampleCheckWednesday"
+                        >
+                          Wednesday
+                        </label>
+                      </div>
+                      <div className="form-group form-check mx-3">
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          id="nutriCheckThursday"
+                          onChange={(event) => {
+                            if (event.target.checked) {
+                              setDays([...days, 4]);
+                            } else {
+                              setDays(days.filter((item) => item !== 4));
+                            }
+                          }}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="exampleCheckThursday"
+                        >
+                          Thursday
+                        </label>
+                      </div>
+                      <div className="form-group form-check mx-3">
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          id="nutriCheckFriday"
+                          onChange={(event) => {
+                            if (event.target.checked) {
+                              setDays([...days, 5]);
+                            } else {
+                              setDays(days.filter((item) => item !== 5));
+                            }
+                          }}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="exampleCheckFriday"
+                        >
+                          Friday
+                        </label>
+                      </div>
+                      <div className="form-group form-check mx-3">
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          id="nutriCheckSaturday"
+                          onChange={(event) => {
+                            if (event.target.checked) {
+                              setDays([...days, 6]);
+                            } else {
+                              setDays(days.filter((item) => item !== 6));
+                            }
+                          }}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="exampleCheckSaturday"
+                        >
+                          Saturday
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row g-3 my-2 justify-content-center align-items-center">
+                    <div className="col-2">
+                      <label
+                        htmlFor="inputdescription"
+                        className="col-form-label"
+                      >
+                        Description
+                      </label>
+                    </div>
+                    <div className="col-4">
+                      <input
+                        type="text"
+                        id="inputDescription"
+                        className="form-control"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        aria-describedby="descriptionHelpInline"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <button
+                    className="m-2"
+                    onClick={() => {
+                      setEdit(false);
+                    }}
+                  >
+                    GO BACK
+                  </button>
+                  <button
+                    className="m-2"
+                    onClick={() => {
+                      modifyNutriProfile();
+                      setEdit(false);
+                    }}
+                  >
+                    SAVE CHANGES
+                  </button>
                 </div>
               </div>
-            </div>
-            <div>
-              <button
-                className="m-2"
-                onClick={() => {
-                  setEdit(false);
-                }}
-              >
-                GO BACK
-              </button>
-              <button className="m-2" onClick={modifyNutriProfile}>
-                SAVE CHANGES
-              </button>
-            </div>
-          </div>
+            );
+          })}
         </div>
       ) : (
         <div>
           {nutri.map((singleNutri) => {
+            const getDays = singleNutri.days
+              .split("")
+              .map((day) => dayMap[parseInt(day)]);
+
             return (
               <div key={singleNutri.id}>
                 <div className="my-5">
@@ -235,87 +391,107 @@ export const Nutritionistprofile = () => {
                     />
                   </div>
                 </div>
-                <div class="row g-3 my-2 justify-content-center align-items-center">
-                  <div class="col-2">
-                    <label for="inputFirstName" class="col-form-label">
+                <div className="row g-3 my-2 justify-content-center align-items-center">
+                  <div className="col-2">
+                    <label htmlFor="inputFirstName" className="col-form-label">
                       First Name
                     </label>
                   </div>
-                  <div class="col-4">
+                  <div className="col-4">
                     <input
                       type="text"
                       id="inputFirstName"
-                      class="form-control"
+                      className="form-control"
                       value={singleNutri.first_name}
                       onChange={(e) => setFirstName(e.target.value)}
                       aria-describedby="firstNameHelpInline"
                     />
                   </div>
                 </div>
-                <div class="row g-3 my-2 justify-content-center align-items-center">
-                  <div class="col-2">
-                    <label for="inputLastName" class="col-form-label">
+                <div className="row g-3 my-2 justify-content-center align-items-center">
+                  <div className="col-2">
+                    <label htmlFor="inputLastName" className="col-form-label">
                       Last Name
                     </label>
                   </div>
-                  <div class="col-4">
+                  <div className="col-4">
                     <input
                       type="text"
                       id="inputLastName"
-                      class="form-control"
+                      className="form-control"
                       value={singleNutri.last_name}
                       onChange={(e) => setLastName(e.target.value)}
                       aria-describedby="lastNameHelpInline"
                     />
                   </div>
                 </div>
-                <div class="row g-3 my-2 justify-content-center align-items-center">
-                  <div class="col-2">
-                    <label for="inputEmail" class="col-form-label">
+                <div className="row g-3 my-2 justify-content-center align-items-center">
+                  <div className="col-2">
+                    <label htmlFor="inputEmailEdit" className="col-form-label">
                       Email
                     </label>
                   </div>
-                  <div class="col-4">
+                  <div className="col-4">
                     <input
                       type="text"
-                      id="inputEmail"
-                      class="form-control"
+                      id="inputEmailEdit"
+                      className="form-control"
                       value={singleNutri.nutritionist_email}
                       onChange={(e) => setEmail(e.target.value)}
                       aria-describedby="emailHelpInline"
                     />
                   </div>
                 </div>
-                <div class="row g-3 my-2 justify-content-center align-items-center">
-                  <div class="col-2">
-                    <label for="inputPassword" class="col-form-label">
+                <div className="row g-3 my-2 justify-content-center align-items-center">
+                  <div className="col-2">
+                    <label htmlFor="text" className="col-form-label">
+                      Days avalaible
+                    </label>
+                  </div>
+                  <div className="col-4">
+                    <input
+                      type="text"
+                      id="inputEmail"
+                      className="form-control"
+                      value={getDays.join(", ")}
+                      onChange={(e) => setDays(e.target.value)}
+                      aria-describedby="emailHelpInline"
+                    />
+                  </div>
+                </div>
+                <div className="row g-3 my-2 justify-content-center align-items-center">
+                  <div className="col-2">
+                    <label htmlFor="inputPassword" className="col-form-label">
                       Password
                     </label>
                   </div>
-                  <div class="col-4">
+                  <div className="col-4">
                     <input
                       type="password"
                       id="inputPassword"
-                      class="form-control"
+                      className="form-control"
                       value={singleNutri.password}
                       onChange={(e) => setPassword(e.target.value)}
                       aria-describedby="passwordHelpInline"
                     />
-                    <span id="passwordHelpInline" class="form-text">
+                    <span id="passwordHelpInline" className="form-text">
                       Must be 8-20 characters long.
                     </span>
                   </div>
-                  <div class="row g-3 my-2 justify-content-center align-items-center">
-                    <div class="col-2">
-                      <label for="inputdescription" class="col-form-label">
+                  <div className="row g-3 my-2 justify-content-center align-items-center">
+                    <div className="col-2">
+                      <label
+                        htmlFor="inputdescription"
+                        className="col-form-label"
+                      >
                         Description
                       </label>
                     </div>
-                    <div class="col-4">
+                    <div className="col-4">
                       <input
                         type="text"
                         id="inputDescription"
-                        class="form-control"
+                        className="form-control"
                         value={singleNutri.description}
                         onChange={(e) => setDescription(e.target.value)}
                         aria-describedby="descriptionHelpInline"
