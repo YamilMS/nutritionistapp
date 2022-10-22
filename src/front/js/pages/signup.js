@@ -13,7 +13,7 @@ export const Signup = () => {
   const [description, setDescription] = useState("");
   const [user, setUser] = useState("client");
   const [days, setDays] = useState([]);
-  const [time, setTime] = useState("");
+  const [time, setTime] = useState([]);
   const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
 
@@ -36,6 +36,7 @@ export const Signup = () => {
           password: password,
           professional: professional,
           days: days.join(""),
+          times: time.join(","),
           description: description,
         }),
         headers: {
