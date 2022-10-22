@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
+import setHours from 'date-fns/setHours';
+import setMinutes from 'date-fns/setMinutes';
 import "react-datepicker/dist/react-datepicker.css";
 
 import { Context } from "../store/appContext";
@@ -12,6 +14,7 @@ export const Sessions = () => {
   const api = process.env.BACKEND_URL + "/api/nutritionist";
 
   const [nutritionists, setNutritionists] = useState([]);
+  const [cutTime, setCutTime] = useState([]);
 
   useEffect(() => {
     getNutritionists();
@@ -32,13 +35,33 @@ export const Sessions = () => {
        */}
       {nutritionists.map((singleNutri, i) => {
         const daysAvailable = singleNutri.days.split("");
-        [1, 3, 5];
+        const timesAvailable = singleNutri.times.split(",");
+        const minTimeAvailable = Math.min(...timesAvailable);
+        const maxTimeAvailable = Math.max(...timesAvailable);
 
-        const isWeekday = (date) => {
+        {/**
+       * This map renders the nutritionists data into cards
+       */}
+
+        const cutTimeFunction = () => {   
+          if(timesAvailable.includes("8") && !timesAvailable.includes("13") && timesAvailable.includes("20") ) {
+           return setCutTime([
+                setHours(setMinutes(new Date(), 0), 13),
+                setHours(setMinutes(new Date(), 0), 14),
+                setHours(setMinutes(new Date(), 0), 15),
+                setHours(setMinutes(new Date(), 0), 16),
+              ])
+           } else {
+            return setCutTime ([])
+           };
+          }
+
+        const isAvailable = (date) => {
           const day = date.getDay(date);
           const daysAvailableInNumber = daysAvailable.map(Number);
-          console.log(daysAvailable);
-          console.log(daysAvailableInNumber);
+          console.log(timesAvailable)
+          console.log(minTimeAvailable)
+          console.log(maxTimeAvailable)
           return daysAvailableInNumber.includes(day);
         };
 
@@ -94,7 +117,7 @@ export const Sessions = () => {
                           <DatePicker
                             selected={startDate}
                             onChange={(date) => setStartDate(date)}
-                            filterDate={isWeekday}
+                            filterDate={isAvailable}
                             dateFormat="MMMM d, yyyy"
                             isClearable
                             placeholderText="Pick a Date"
@@ -107,7 +130,10 @@ export const Sessions = () => {
                             onChange={(date) => setStartTime(date)}
                             showTimeSelect
                             showTimeSelectOnly
-                            timeIntervals={15}
+                            timeIntervals={60}
+                            minTime={setHours(setMinutes(new Date(), 0), minTimeAvailable)}
+                            maxTime={setHours(setMinutes(new Date(), 0), maxTimeAvailable)}
+                            excludeTimes={cutTime}
                             timeCaption="Time"
                             dateFormat="h:mm aa"
                             isClearable
@@ -176,6 +202,7 @@ export const Sessions = () => {
                     data-bs-toggle="modal"
                     href={`#exampleModalToggle${i}`}
                     role="button"
+                    onClick={cutTimeFunction}
                   >
                     Schedule a session
                   </button>
