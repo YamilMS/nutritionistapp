@@ -11,7 +11,6 @@ export const Nutritionistprofile = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [days, setDays] = useState([]);
-  //const [daysAvalaible, setDaysAvalaible] = useState([]);
   const [description, setDescription] = useState("");
   const [nutri, setNutri] = useState([]);
   const [edit, setEdit] = useState(false);
@@ -60,6 +59,7 @@ export const Nutritionistprofile = () => {
           last_name: lastName,
           nutritionist_email: email,
           password: password,
+          professional: true,
           days: days.join(""),
           description: description,
         }),
@@ -93,7 +93,15 @@ export const Nutritionistprofile = () => {
       }
       const data = await response.json();
       console.log("data from the backend ", data);
+      const arr = data.test;
       setNutri(data.test);
+      arr.map((item) => {
+        setFirstName(item.first_name);
+        setLastName(item.last_name);
+        setEmail(item.nutritionist_email);
+        setPassword(item.password);
+        setDescription(item.description);
+      });
       return true;
     } catch (error) {
       console.error(
@@ -113,8 +121,9 @@ export const Nutritionistprofile = () => {
       {edit === true ? (
         <div>
           {nutri.map((singleNutri) => {
+            console.log(firstName);
             return (
-              <div>
+              <div key={`${singleNutri}Edit`}>
                 <div className="my-5">
                   <div
                     id="portraitProfilePicture"
