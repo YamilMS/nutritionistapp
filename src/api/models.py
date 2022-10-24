@@ -59,10 +59,13 @@ class Nutritionist(db.Model):
 
 class Session(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id_client = db.Column(db.Integer, unique=False, nullable=False)
-    id_nutritionist = db.Column(db.Integer, unique=False, nullable=False)
+    id_client = db.Column(db.Integer, db.ForeignKey('client.id'))
+    id_nutritionist = db.Column(db.Integer, db.ForeignKey('nutritionist.id'))
     date= db.Column(db.String(100), unique=False, nullable=False)
     recomendation= db.Column(db.String(500), unique=False, nullable=False)
+
+    client = db.relationship('Client', backref='users')
+    nutritionist = db.relationship('Nutritionist', backref='users')
 
     def __repr__(self):
         return f'<Session {self.email}>'
