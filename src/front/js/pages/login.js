@@ -7,13 +7,13 @@ export const Login = () => {
   const { store, actions } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const token = sessionStorage.getItem("token");
   const navigate = useNavigate();
 
   const handleClickLogin = () => {
     actions.login(email, password);
   };
-  if (token !== "" && token !== undefined && token !== null) navigate("/");
+  if (store.token !== "" && store.token !== undefined && store.token !== null)
+    navigate("/");
 
   return (
     <div>
