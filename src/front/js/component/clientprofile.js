@@ -113,7 +113,7 @@ export const Clientprofile = () => {
             </div>
             <div className="row g-3 my-2 justify-content-center align-items-center">
               <div className="col-2">
-                <label for="inputFirstName" className="col-form-label">
+                <label htmlFor="inputFirstName" className="col-form-label">
                   First Name
                 </label>
               </div>
@@ -130,7 +130,7 @@ export const Clientprofile = () => {
             </div>
             <div className="row g-3 my-2 justify-content-center align-items-center">
               <div className="col-2">
-                <label for="inputLastName" className="col-form-label">
+                <label htmlFor="inputLastName" className="col-form-label">
                   Last Name
                 </label>
               </div>
@@ -147,7 +147,7 @@ export const Clientprofile = () => {
             </div>
             <div className="row g-3 my-2 justify-content-center align-items-center">
               <div className="col-2">
-                <label for="inputEmail" className="col-form-label">
+                <label htmlFor="inputEmail" className="col-form-label">
                   Email
                 </label>
               </div>
@@ -164,7 +164,7 @@ export const Clientprofile = () => {
             </div>
             <div className="row g-3 my-2 justify-content-center align-items-center">
               <div className="col-2">
-                <label for="inputPassword" className="col-form-label">
+                <label htmlFor="inputPassword" className="col-form-label">
                   Password
                 </label>
               </div>
@@ -183,7 +183,7 @@ export const Clientprofile = () => {
               </div>
               <div className="row g-3 my-2 justify-content-center align-items-center">
                 <div className="col-2">
-                  <label for="inputdescription" className="col-form-label">
+                  <label htmlFor="inputdescription" className="col-form-label">
                     Description
                   </label>
                 </div>
@@ -235,7 +235,7 @@ export const Clientprofile = () => {
                 </div>
                 <div className="row g-3 my-2 justify-content-center align-items-center">
                   <div className="col-2">
-                    <label for="inputFirstName" className="col-form-label">
+                    <label htmlFor="inputFirstName" className="col-form-label">
                       First Name
                     </label>
                   </div>
@@ -252,7 +252,7 @@ export const Clientprofile = () => {
                 </div>
                 <div className="row g-3 my-2 justify-content-center align-items-center">
                   <div className="col-2">
-                    <label for="inputLastName" className="col-form-label">
+                    <label htmlFor="inputLastName" className="col-form-label">
                       Last Name
                     </label>
                   </div>
@@ -269,7 +269,7 @@ export const Clientprofile = () => {
                 </div>
                 <div className="row g-3 my-2 justify-content-center align-items-center">
                   <div className="col-2">
-                    <label for="inputEmail" className="col-form-label">
+                    <label htmlFor="inputEmail" className="col-form-label">
                       Email
                     </label>
                   </div>
@@ -286,7 +286,7 @@ export const Clientprofile = () => {
                 </div>
                 <div className="row g-3 my-2 justify-content-center align-items-center">
                   <div className="col-2">
-                    <label for="inputPassword" className="col-form-label">
+                    <label htmlFor="inputPassword" className="col-form-label">
                       Password
                     </label>
                   </div>
@@ -305,7 +305,10 @@ export const Clientprofile = () => {
                   </div>
                   <div className="row g-3 my-2 justify-content-center align-items-center">
                     <div className="col-2">
-                      <label for="inputdescription" className="col-form-label">
+                      <label
+                        htmlFor="inputdescription"
+                        className="col-form-label"
+                      >
                         Description
                       </label>
                     </div>
