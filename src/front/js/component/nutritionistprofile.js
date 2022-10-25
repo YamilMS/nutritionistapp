@@ -118,7 +118,7 @@ export const Nutritionistprofile = () => {
   return (
     <div id="profileForm" className="mx-auto text-center">
       <div className="my-2">
-        <h2>PROFILE</h2>
+        <h2>NUTRI PROFILE</h2>
       </div>
       {edit === true ? (
         <div>
