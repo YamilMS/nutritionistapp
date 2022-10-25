@@ -9,12 +9,12 @@ class Client(db.Model):
     client_email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
     professional = db.Column(db.String(80), unique=False, nullable=False, default=False)
-    days = db.Column(db.String(120), unique=False, nullable=False)
-    times = db.Column(db.String(120), unique=False, nullable=False)
+    days = db.Column(db.Date(), unique=False, nullable=False)
+    times = db.Column(db.DateTime(), unique=False, nullable=False)
     description= db.Column(db.String(500), unique=False, nullable=False)
 
     def __repr__(self):
-        return f'<Client {self.client_email}>'
+        return f'{self.id}'
 
     def serialize(self):
         return {
@@ -41,7 +41,7 @@ class Nutritionist(db.Model):
     description= db.Column(db.String(500), unique=False, nullable=False)
 
     def __repr__(self):
-        return f'<Nutritionist {self.nutritionist_email}>'
+        return f'{self.id}'
 
     def serialize(self):
         return {
@@ -62,17 +62,18 @@ class Session(db.Model):
     id_client = db.Column(db.Integer, db.ForeignKey('client.id'))
     id_nutritionist = db.Column(db.Integer, db.ForeignKey('nutritionist.id'))
     date= db.Column(db.String(100), unique=False, nullable=False)
-    recomendation= db.Column(db.String(500), unique=False, nullable=False)
+    time= db.Column(db.String(100), unique=False, nullable=False)
 
     client = db.relationship('Client', backref='users')
     nutritionist = db.relationship('Nutritionist', backref='users')
 
     def __repr__(self):
-        return f'<Session {self.email}>'
+        return f'<Session {self.id}'
 
     def serialize(self):
         return {
             "id": self.id,
             "date": self.date,
+            "time": self.time
             # do not serialize the password, its a security breach
         }

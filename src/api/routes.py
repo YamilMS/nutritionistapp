@@ -211,14 +211,14 @@ def make_an_appointmen():
     id_client_request = request.json.get("id_client", None)
     id_nutritionist_request = request.json.get("id_nutritionist", None)
     date_request = request.json.get("date", None)
-    recomendation_request = request.json.get("recomendation", None)
+    time_request = request.json.get("time", None)
 
     new_session = Session(
         id= id_request,
         id_client= id_client_request,
         id_nutritionist= id_nutritionist_request,
         date= date_request,
-        recomendation= recomendation_request
+        time= time_request
     )
 
     db.session.add(new_session)
@@ -244,8 +244,8 @@ def update_an_appointmen(session_id):
         session.id_nutritionist = request_body_session["id_nutritionist"]
     if "date" in request_body_session:
         session.date = request_body_session["date"]
-    if "recomendation" in request_body_session:
-        session.recomendation = request_body_session["recomendation"]
+    if "time" in request_body_session:
+        session.time = request_body_session["time"]
     db.session.commit()
 
     return 'session updated', 200
@@ -263,3 +263,11 @@ def delete_an_appointmen(session_id):
     db.session.commit()
     
     return 'session deleted', 200
+
+@api.route("/session/<int:session_id>", methods=["GET"])
+def get_session(session_id):
+
+    get_body_session= Session.query.get(session_id)
+
+
+    return jsonify({'session': [get_body_session.serialize()]}), 200

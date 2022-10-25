@@ -17,6 +17,8 @@ export const Nutritionistprofile = () => {
   const navigate = useNavigate();
   const apiURL = process.env.BACKEND_URL + "/api/nutritionist/" + store.id;
 
+  console.log(store.id);
+
   const dayMap = {
     1: "Monday",
     2: "Tuesday",

@@ -6,7 +6,6 @@ import "../../styles/home.css";
 
 export const Profile = () => {
   const { store, actions } = useContext(Context);
-  console.log(store.rol);
 
   return (
     <div className="text-center container">

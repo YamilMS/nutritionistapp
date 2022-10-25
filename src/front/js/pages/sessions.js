@@ -1,24 +1,54 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
-import setHours from 'date-fns/setHours';
-import setMinutes from 'date-fns/setMinutes';
+import setHours from "date-fns/setHours";
+import setMinutes from "date-fns/setMinutes";
 import "react-datepicker/dist/react-datepicker.css";
-
 import { Context } from "../store/appContext";
 
 export const Sessions = () => {
+  const { store, actions } = useContext(Context);
   const [startDate, setStartDate] = useState(null);
-  const [startTime, setStartTime] = useState(new Date());
-
-  const api = process.env.BACKEND_URL + "/api/nutritionist";
-
+  const [nutriId, setNutriId] = useState(null);
+  const [startTime, setStartTime] = useState(null);
   const [nutritionists, setNutritionists] = useState([]);
   const [cutTime, setCutTime] = useState([]);
+  const navigate = useNavigate();
+  const api = process.env.BACKEND_URL + "/api/nutritionist";
+
+  if (store.rol === "true") navigate("/");
 
   useEffect(() => {
     getNutritionists();
   }, []);
+
+  const handleSession = () => {
+    if ((startDate != null, startTime != null)) {
+      fetch(process.env.BACKEND_URL + "/api/session", {
+        method: "POST",
+        body: JSON.stringify({
+          id_client: store.id,
+          id_nutritionist: nutriId,
+          date: startDate,
+          time: startTime,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((resp) => {
+          console.log(resp.ok); // will be true if the response is successfull
+          console.log(resp.status); // the status code = 200 or code = 400 etc.
+          console.log(resp.text()); // will try return the exact result as string
+          return resp; // (returns promise) will try to parse the result as json as return a promise that you can .then for results
+        })
+        .catch((error) => {
+          //error handling
+          console.log(error);
+        });
+    }
+  };
 
   function getNutritionists() {
     fetch(api)
@@ -27,6 +57,7 @@ export const Sessions = () => {
         setNutritionists(data.get_body_nutri);
       });
   }
+  console.log(startDate);
 
   return (
     <div className="container">
@@ -39,29 +70,32 @@ export const Sessions = () => {
         const minTimeAvailable = Math.min(...timesAvailable);
         const maxTimeAvailable = Math.max(...timesAvailable);
 
-        {/**
-       * This map renders the nutritionists data into cards
-       */}
+        {
+          /**
+           * This map renders the nutritionists data into cards
+           */
+        }
 
-        const cutTimeFunction = () => {   
-          if(timesAvailable.includes("8") && !timesAvailable.includes("13") && timesAvailable.includes("20") ) {
-           return setCutTime([
-                setHours(setMinutes(new Date(), 0), 13),
-                setHours(setMinutes(new Date(), 0), 14),
-                setHours(setMinutes(new Date(), 0), 15),
-                setHours(setMinutes(new Date(), 0), 16),
-              ])
-           } else {
-            return setCutTime ([])
-           };
+        const cutTimeFunction = () => {
+          if (
+            timesAvailable.includes("8") &&
+            !timesAvailable.includes("13") &&
+            timesAvailable.includes("20")
+          ) {
+            return setCutTime([
+              setHours(setMinutes(new Date(), 0), 13),
+              setHours(setMinutes(new Date(), 0), 14),
+              setHours(setMinutes(new Date(), 0), 15),
+              setHours(setMinutes(new Date(), 0), 16),
+            ]);
+          } else {
+            return setCutTime([]);
           }
+        };
 
         const isAvailable = (date) => {
           const day = date.getDay(date);
           const daysAvailableInNumber = daysAvailable.map(Number);
-          console.log(timesAvailable)
-          console.log(minTimeAvailable)
-          console.log(maxTimeAvailable)
           return daysAvailableInNumber.includes(day);
         };
 
@@ -131,8 +165,14 @@ export const Sessions = () => {
                             showTimeSelect
                             showTimeSelectOnly
                             timeIntervals={60}
-                            minTime={setHours(setMinutes(new Date(), 0), minTimeAvailable)}
-                            maxTime={setHours(setMinutes(new Date(), 0), maxTimeAvailable)}
+                            minTime={setHours(
+                              setMinutes(new Date(), 0),
+                              minTimeAvailable
+                            )}
+                            maxTime={setHours(
+                              setMinutes(new Date(), 0),
+                              maxTimeAvailable
+                            )}
                             excludeTimes={cutTime}
                             timeCaption="Time"
                             dateFormat="h:mm aa"
@@ -152,6 +192,7 @@ export const Sessions = () => {
                             className="btn btn-primary"
                             data-bs-target={`#exampleModalToggle2${i}`}
                             data-bs-toggle="modal"
+                            onClick={handleSession}
                           >
                             Schedule
                           </button>
@@ -202,7 +243,10 @@ export const Sessions = () => {
                     data-bs-toggle="modal"
                     href={`#exampleModalToggle${i}`}
                     role="button"
-                    onClick={cutTimeFunction}
+                    onClick={() => {
+                      setNutriId(singleNutri.id);
+                      cutTimeFunction();
+                    }}
                   >
                     Schedule a session
                   </button>
