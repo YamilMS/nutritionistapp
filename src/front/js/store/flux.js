@@ -60,9 +60,30 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ token: null, id: null, rol: null });
       },
 
-      getTokenFromSession: () => {
+      getTokenFromSession: async () => {
+        const store = getStore();
         const token = sessionStorage.getItem("token");
-        if (token !== "" && token !== undefined) setStore({ token: token });
+        if (token !== "" && token !== undefined && token !== null) {
+          setStore({ token: token });
+          try {
+            // fetching data from the backend
+            const response = await fetch(
+              process.env.BACKEND_URL + "/api/token",
+              {
+                headers: {
+                  Authorization: "Bearer " + store.token,
+                },
+              }
+            );
+            const data = await response.json();
+            console.log(data);
+            setStore({ id: data.id, rol: data.professional });
+            // don't forget to return something, that is how the async resolves
+            return data;
+          } catch (error) {
+            console.log("Error loading message from backend", error);
+          }
+        }
       },
 
       getMessage: async () => {
