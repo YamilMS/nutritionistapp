@@ -11,13 +11,12 @@ export const Nutritionistprofile = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [days, setDays] = useState([]);
+  const [time, setTime] = useState([]);
   const [description, setDescription] = useState("");
   const [nutri, setNutri] = useState([]);
   const [edit, setEdit] = useState(false);
   const navigate = useNavigate();
   const apiURL = process.env.BACKEND_URL + "/api/nutritionist/" + store.id;
-
-  console.log(store.id);
 
   const dayMap = {
     1: "Monday",
@@ -45,7 +44,6 @@ export const Nutritionistprofile = () => {
         return false;
       }
       const data = await response.json();
-      console.log("data from the backend ", data);
       return true;
     } catch (error) {
       console.error("There has been an error login in ", error);
@@ -63,6 +61,7 @@ export const Nutritionistprofile = () => {
           password: password,
           professional: true,
           days: days.join(""),
+          times: time.join(","),
           description: description,
         }),
         headers: {
@@ -90,7 +89,7 @@ export const Nutritionistprofile = () => {
     try {
       const response = await fetch(apiURL);
       if (response.status !== 200) {
-        alert("There has been an error on the response.status");
+        console.log("There has been an error on the response.status");
         return false;
       }
       const data = await response.json();
@@ -114,6 +113,8 @@ export const Nutritionistprofile = () => {
       navigate("/");
     }
   };
+
+  console.log(time);
 
   return (
     <div id="profileForm" className="mx-auto text-center">
@@ -331,6 +332,97 @@ export const Nutritionistprofile = () => {
                           htmlFor="exampleCheckSaturday"
                         >
                           Saturday
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row g-3 my-2 justify-content-center align-items-center">
+                    <p className="mb-1">Select Shift avalaible</p>
+                    <div className="col-6 d-flex justify-content-center">
+                      <div className="form-group form-check mr-3">
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          id="nutriCheckMorning"
+                          onChange={(event) => {
+                            if (event.target.checked) {
+                              setTime([...time, 8, 9, 10, 11, 12]);
+                            } else {
+                              setTime(
+                                time.filter(
+                                  (item) =>
+                                    item !== 8 &&
+                                    item !== 9 &&
+                                    item !== 10 &&
+                                    item !== 11 &&
+                                    item !== 12
+                                )
+                              );
+                            }
+                          }}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="exampleCheckMorning"
+                        >
+                          Morning (8am - 12pm)
+                        </label>
+                      </div>
+                      <div className="form-group form-check mx-3">
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          id="nutriCheckAfternoon"
+                          onChange={(event) => {
+                            if (event.target.checked) {
+                              setTime([...time, 13, 14, 15, 16]);
+                            } else {
+                              setTime(
+                                time.filter(
+                                  (item) =>
+                                    item !== 13 &&
+                                    item !== 14 &&
+                                    item !== 15 &&
+                                    item !== 16
+                                )
+                              );
+                            }
+                          }}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="exampleCheckAfternoon"
+                        >
+                          Afternoon (12pm - 4pm)
+                        </label>
+                      </div>
+                      <div className="form-group form-check mx-3">
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          id="nutriCheckEvening"
+                          onChange={(event) => {
+                            if (event.target.checked) {
+                              setTime([...time, 17, 18, 19, 20, 21]);
+                            } else {
+                              setTime(
+                                time.filter(
+                                  (item) =>
+                                    item !== 17 &&
+                                    item !== 18 &&
+                                    item !== 19 &&
+                                    item !== 20 &&
+                                    item !== 21
+                                )
+                              );
+                            }
+                          }}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="exampleCheckEvening"
+                        >
+                          Evening (4pm - 9pm)
                         </label>
                       </div>
                     </div>

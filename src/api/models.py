@@ -9,8 +9,8 @@ class Client(db.Model):
     client_email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
     professional = db.Column(db.String(80), unique=False, nullable=False, default=False)
-    days = db.Column(db.Date(), unique=False, nullable=False)
-    times = db.Column(db.DateTime(), unique=False, nullable=False)
+    days = db.Column(db.String(120), unique=False, nullable=False)
+    times = db.Column(db.String(120), unique=False, nullable=False)
     description= db.Column(db.String(500), unique=False, nullable=False)
 
     def __repr__(self):

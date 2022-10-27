@@ -41,6 +41,27 @@ def create_token():
 
     return jsonify(response_body), 200
 
+
+@api.route("/token", methods=["GET"])
+@jwt_required()
+def protected():
+    current_user_email = get_jwt_identity()
+    client = Client.query.filter_by(client_email=current_user_email).first()
+    nutritionist = Nutritionist.query.filter_by(nutritionist_email=current_user_email).first()
+    
+    if client is None and nutritionist is None:
+        return jsonify({"msg": "Bad username or password"}), 401
+
+    if client is None:
+        professional= nutritionist.professional
+        id= nutritionist.id
+    else:
+        professional= client.professional
+        id= client.id
+    
+    return jsonify(logged_in_as=current_user_email, professional=professional, id=id), 200
+
+
 @api.route("/client", methods=["POST"])
 def signUp_client():
     first_name_request = request.json.get("first_name", None)
@@ -68,6 +89,7 @@ def signUp_client():
 
     return 'client added', 200
 
+
 @api.route("/client/<int:client_id>", methods=["PUT"])
 def update_client(client_id):
     
@@ -81,7 +103,7 @@ def update_client(client_id):
     if "last_name" in request_body_client:
         client1.last_name =  request_body_client["last_name"]
     if "client_email" in request_body_client:
-        client1.first_name =  request_body_client["client_email"]
+        client1.client_email =  request_body_client["client_email"]
     if "password" in request_body_client:
         client1.password =  request_body_client["password"]
     if "description" in request_body_client:
@@ -90,13 +112,13 @@ def update_client(client_id):
 
     return 'client updated', 200
 
+
 @api.route("/client/<int:client_id>", methods=["GET"])
 def get_a_client(client_id):
 
    get_body_client= Client.query.get(client_id)
 
    return jsonify({'test': [get_body_client.serialize()]}), 200
-
 
 
 @api.route("/client/<int:client_id>", methods=["DELETE"])
@@ -140,6 +162,7 @@ def signUp_nutritionist():
 
     return 'nutritionist added', 200
 
+
 @api.route("/nutritionist/<int:nutritionist_id>", methods=["PUT"])
 def modify_nutritionist(nutritionist_id):
     
@@ -161,12 +184,15 @@ def modify_nutritionist(nutritionist_id):
         nutritionist_mod.professional= request_body_nutritionist["professional"]
     if "days" in request_body_nutritionist:
         nutritionist_mod.days= request_body_nutritionist["days"]
+    if "times" in request_body_nutritionist:
+        nutritionist_mod.times= request_body_nutritionist["times"]
     if "description" in request_body_nutritionist:
         nutritionist_mod.description= request_body_nutritionist["description"]
 
     db.session.commit()
 
     return 'nutritionist added', 200
+
 
 @api.route("/nutritionist/", methods=["GET"])
 def get_nutri():
@@ -188,7 +214,6 @@ def get_nutritionist(nutritionist_id):
 
 
     return jsonify({'test': [get_body_nutritionist.serialize()]}), 200
-
 
 
 @api.route("/nutritionist/<int:nutritionist_id>", methods=["DELETE"])
@@ -263,6 +288,7 @@ def delete_an_appointmen(session_id):
     db.session.commit()
     
     return 'session deleted', 200
+
 
 @api.route("/session/<int:session_id>", methods=["GET"])
 def get_session(session_id):

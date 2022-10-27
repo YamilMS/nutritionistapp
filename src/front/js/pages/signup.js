@@ -60,11 +60,6 @@ export const Signup = () => {
     setPassword("");
     setDescription("");
   };
-  console.log(professional);
-
-  console.log("days", days);
-
-  console.log("time", time);
 
   return (
     <div>

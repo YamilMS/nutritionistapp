@@ -57,7 +57,6 @@ export const Sessions = () => {
         setNutritionists(data.get_body_nutri);
       });
   }
-  console.log(startDate);
 
   return (
     <div className="container">

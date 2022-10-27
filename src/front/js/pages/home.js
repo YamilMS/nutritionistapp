@@ -7,8 +7,6 @@ import "../../styles/home.css";
 export const Home = () => {
   const { store, actions } = useContext(Context);
 
-  console.log(store.id, store.rol);
-
   return (
     <div className="text-center container">
       <div id="jumb" className="jumbotron">

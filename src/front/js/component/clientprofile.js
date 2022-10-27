@@ -24,7 +24,7 @@ export const Clientprofile = () => {
     try {
       const response = await fetch(apiURL);
       if (response.status !== 200) {
-        alert("There has been an error on the response.status");
+        console.log("There has been an error on the response.status");
         return false;
       }
       const data = await response.json();
