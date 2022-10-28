@@ -106,11 +106,6 @@ export const Nutritionistprofile = () => {
     } catch (error) {
       console.error("There has been an error editing profile ", error);
     }
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setPassword("");
-    setDescription("");
   };
 
   return (

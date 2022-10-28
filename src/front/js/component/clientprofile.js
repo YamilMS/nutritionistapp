@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 
@@ -11,7 +12,8 @@ export const Clientprofile = () => {
   const [description, setDescription] = useState("");
   const [client, setClient] = useState([]);
   const [edit, setEdit] = useState("");
-  const apiURL = process.env.BACKEND_URL + "/api/client/" + store.id;
+  const navigate = useNavigate();
+  const apiURL = process.env.BACKEND_URL + "/api/client/" + "1";
 
   useEffect(() => {
     const getClientProfile = async () => {
@@ -23,9 +25,9 @@ export const Clientprofile = () => {
         }
         const data = await response.json();
         console.log("data from the backend ", data);
-        const clientData = data.test;
         setClient(data.test);
-        clientData.map((item) => {
+        const arr = data.test;
+        arr.map((item) => {
           setFirstName(item.first_name);
           setLastName(item.last_name);
           setEmail(item.client_email);
@@ -90,11 +92,6 @@ export const Clientprofile = () => {
     } catch (error) {
       console.error("There has been an error editing profile ", error);
     }
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setPassword("");
-    setDescription("");
   };
 
   return (
@@ -109,7 +106,7 @@ export const Clientprofile = () => {
               <div id="portraitProfilePicture" className="mx-auto w-50 py-4">
                 <img
                   id="profilePic"
-                  src="//www.html.am/images/image-codes/milford_sound_t.jpg"
+                  src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
                   width="225"
                   height="151"
                   alt="Profile img example"
