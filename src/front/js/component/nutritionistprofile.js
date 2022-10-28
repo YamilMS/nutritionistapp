@@ -5,7 +5,6 @@ import "../../styles/home.css";
 
 export const Nutritionistprofile = () => {
   const { store, actions } = useContext(Context);
-  const [id, setId] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -28,6 +27,35 @@ export const Nutritionistprofile = () => {
   };
 
   useEffect(() => {
+    const getNutriProfile = async () => {
+      try {
+        const response = await fetch(apiURL);
+        if (response.status !== 200) {
+          console.log("There has been an error on the response.status");
+          return false;
+        }
+        const data = await response.json();
+        console.log("data from the backend ", data);
+        const nutriData = data.test;
+        setNutri(data.test);
+        nutriData.map((item) => {
+          setFirstName(item.first_name);
+          setLastName(item.last_name);
+          setEmail(item.nutritionist_email);
+          setPassword(item.password);
+          setDescription(item.description);
+        });
+        return true;
+      } catch (error) {
+        console.error(
+          "There has been an error getting the information through fetch ",
+          error
+        );
+        alert("Profile doesn't exist you'll be redirected to Home");
+        navigate("/");
+      }
+    };
+
     getNutriProfile();
   }, []);
 
@@ -84,37 +112,6 @@ export const Nutritionistprofile = () => {
     setPassword("");
     setDescription("");
   };
-
-  const getNutriProfile = async () => {
-    try {
-      const response = await fetch(apiURL);
-      if (response.status !== 200) {
-        console.log("There has been an error on the response.status");
-        return false;
-      }
-      const data = await response.json();
-      console.log("data from the backend ", data);
-      const arr = data.test;
-      setNutri(data.test);
-      arr.map((item) => {
-        setFirstName(item.first_name);
-        setLastName(item.last_name);
-        setEmail(item.nutritionist_email);
-        setPassword(item.password);
-        setDescription(item.description);
-      });
-      return true;
-    } catch (error) {
-      console.error(
-        "There has been an error getting the information through fetch ",
-        error
-      );
-      alert("Profile doesn't exist you'll be redirected to Home");
-      navigate("/");
-    }
-  };
-
-  console.log(time);
 
   return (
     <div id="profileForm" className="mx-auto text-center">

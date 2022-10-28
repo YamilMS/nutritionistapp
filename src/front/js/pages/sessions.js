@@ -6,22 +6,61 @@ import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
 import "react-datepicker/dist/react-datepicker.css";
 import { Context } from "../store/appContext";
+const api = process.env.BACKEND_URL + "/api/nutritionist";
 
 export const Sessions = () => {
   const { store, actions } = useContext(Context);
   const [startDate, setStartDate] = useState(null);
   const [nutriId, setNutriId] = useState(null);
+  const [nutriName, setNutriName] = useState("");
+  const [clientName, setClientName] = useState("");
   const [startTime, setStartTime] = useState(null);
   const [nutritionists, setNutritionists] = useState([]);
   const [cutTime, setCutTime] = useState([]);
   const navigate = useNavigate();
-  const api = process.env.BACKEND_URL + "/api/nutritionist";
 
   if (store.rol === "true") navigate("/");
 
   useEffect(() => {
-    getNutritionists();
-  }, []);
+    function getNutritionists() {
+      fetch(api)
+        .then((res) => res.json())
+        .then((data) => {
+          setNutritionists(data.get_body_nutri);
+        });
+    }
+    const getClientInfo = async () => {
+      try {
+        const response = await fetch(
+          process.env.BACKEND_URL + "/api/client/" + store.id
+        );
+        if (response.status !== 200) {
+          console.log("There has been an error on the response.status");
+          return false;
+        }
+        const data = await response.json();
+        console.log("data from the backend ", data);
+        const clientData = data.test;
+        clientData.map((singleClient) => {
+          const clientName =
+            singleClient.first_name + " " + singleClient.last_name;
+          setClientName(clientName);
+        });
+        return true;
+      } catch (error) {
+        console.error(
+          "There has been an error getting the information through fetch ",
+          error
+        );
+        alert("Profile doesn't exist you'll be redirected to Home");
+      }
+    };
+
+    if (store.id) {
+      getNutritionists();
+      getClientInfo();
+    }
+  }, [store.id]);
 
   const handleSession = () => {
     if ((startDate != null, startTime != null)) {
@@ -30,6 +69,8 @@ export const Sessions = () => {
         body: JSON.stringify({
           id_client: store.id,
           id_nutritionist: nutriId,
+          name_client: clientName,
+          name_nutritionist: nutriName,
           date: startDate,
           time: startTime,
         }),
@@ -50,20 +91,15 @@ export const Sessions = () => {
     }
   };
 
-  function getNutritionists() {
-    fetch(api)
-      .then((res) => res.json())
-      .then((data) => {
-        setNutritionists(data.get_body_nutri);
-      });
-  }
-
+  console.log(store.id);
+  console.log(clientName);
   return (
     <div className="container">
       {/**
        * This map renders the nutritionists data into cards
        */}
       {nutritionists.map((singleNutri, i) => {
+        const NutriName = singleNutri.first_name + " " + singleNutri.last_name;
         const daysAvailable = singleNutri.days.split("");
         const timesAvailable = singleNutri.times.split(",");
         const minTimeAvailable = Math.min(...timesAvailable);
@@ -244,6 +280,7 @@ export const Sessions = () => {
                     role="button"
                     onClick={() => {
                       setNutriId(singleNutri.id);
+                      setNutriName(NutriName);
                       cutTimeFunction();
                     }}
                   >

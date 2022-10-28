@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 
@@ -12,33 +11,39 @@ export const Clientprofile = () => {
   const [description, setDescription] = useState("");
   const [client, setClient] = useState([]);
   const [edit, setEdit] = useState("");
-  const token = sessionStorage.getItem("token");
-  const navigate = useNavigate();
   const apiURL = process.env.BACKEND_URL + "/api/client/" + store.id;
 
   useEffect(() => {
+    const getClientProfile = async () => {
+      try {
+        const response = await fetch(apiURL);
+        if (response.status !== 200) {
+          console.log("There has been an error on the response.status");
+          return false;
+        }
+        const data = await response.json();
+        console.log("data from the backend ", data);
+        const clientData = data.test;
+        setClient(data.test);
+        clientData.map((item) => {
+          setFirstName(item.first_name);
+          setLastName(item.last_name);
+          setEmail(item.client_email);
+          setPassword(item.password);
+          setDescription(item.description);
+        });
+        return true;
+      } catch (error) {
+        console.error(
+          "There has been an error getting the information through fetch ",
+          error
+        );
+        alert("Profile doesn't exist you'll be redirected to Home");
+      }
+    };
+
     getClientProfile();
   }, []);
-
-  const getClientProfile = async () => {
-    try {
-      const response = await fetch(apiURL);
-      if (response.status !== 200) {
-        console.log("There has been an error on the response.status");
-        return false;
-      }
-      const data = await response.json();
-      console.log("data from the backend ", data);
-      setClient(data.test);
-      return true;
-    } catch (error) {
-      console.error(
-        "There has been an error getting the information through fetch ",
-        error
-      );
-      alert("Profile doesn't exist you'll be redirected to Home");
-    }
-  };
 
   const deleteClientProfile = async () => {
     try {
@@ -104,7 +109,7 @@ export const Clientprofile = () => {
               <div id="portraitProfilePicture" className="mx-auto w-50 py-4">
                 <img
                   id="profilePic"
-                  src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                  src="//www.html.am/images/image-codes/milford_sound_t.jpg"
                   width="225"
                   height="151"
                   alt="Profile img example"

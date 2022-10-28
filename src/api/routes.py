@@ -235,13 +235,20 @@ def make_an_appointmen():
     id_request = request.json.get("id", None)
     id_client_request = request.json.get("id_client", None)
     id_nutritionist_request = request.json.get("id_nutritionist", None)
+    name_client_request = request.json.get("name_client", None)
+    name_nutritionist_request = request.json.get("name_nutritionist", None)
     date_request = request.json.get("date", None)
     time_request = request.json.get("time", None)
+
+    client = Client.query.filter_by(id=id_nutritionist_request).first()
+    nutritionist = Nutritionist.query.filter_by(id=id_nutritionist_request).first()
 
     new_session = Session(
         id= id_request,
         id_client= id_client_request,
         id_nutritionist= id_nutritionist_request,
+        name_client= name_client_request,
+        name_nutritionist= name_nutritionist_request,
         date= date_request,
         time= time_request
     )
@@ -297,3 +304,33 @@ def get_session(session_id):
 
 
     return jsonify({'session': [get_body_session.serialize()]}), 200
+
+
+@api.route("/session", methods=["GET"])
+@jwt_required()
+def get_sessions():
+    current_user_email = get_jwt_identity()
+    get_body_session= Session.query.all()
+    client = Client.query.filter_by(client_email=current_user_email).first()
+    nutritionist = Nutritionist.query.filter_by(nutritionist_email=current_user_email).first()
+    
+    if client is None and nutritionist is None:
+        return jsonify({"msg": "No sessions stored"}), 401
+
+    if client is None:
+        first_name= nutritionist.first_name
+        last_name = nutritionist.last_name
+        name= first_name + " " + last_name
+    if nutritionist is None:
+        first_name= client.first_name
+        last_name = client.last_name
+        name= first_name + " " + last_name
+
+    response_body = {
+        'get_body_session': []
+    }
+
+    for session in get_body_session:
+        response_body['get_body_session'].append(session.serialize())
+
+    return jsonify(response_body=response_body, name=name), 200
