@@ -61,6 +61,8 @@ class Session(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     id_client = db.Column(db.Integer, db.ForeignKey('client.id'))
     id_nutritionist = db.Column(db.Integer, db.ForeignKey('nutritionist.id'))
+    name_client= db.Column(db.String(100))
+    name_nutritionist= db.Column(db.String(100))
     date= db.Column(db.String(100), unique=False, nullable=False)
     time= db.Column(db.String(100), unique=False, nullable=False)
 
@@ -73,7 +75,12 @@ class Session(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "id_client": self.id_client,
+            "id_nutritionist": self.id_nutritionist,
+            "name_client": self.name_client,
+            "name_nutritionist": self.name_nutritionist,
             "date": self.date,
             "time": self.time
             # do not serialize the password, its a security breach
         }
+

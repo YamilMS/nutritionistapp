@@ -8,8 +8,16 @@ export const Profile = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <div className="text-center container">
-      {store.rol === "true" ? <Nutritionistprofile /> : <Clientprofile />}
+    <div>
+      {store.id ? (
+        <div className="text-center container">
+          {store.rol === "true" ? <Nutritionistprofile /> : <Clientprofile />}
+        </div>
+      ) : (
+        <div className="text-center container">
+          <h5> Loading Profile </h5>
+        </div>
+      )}
     </div>
   );
 };

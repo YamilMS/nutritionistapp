@@ -11,6 +11,7 @@ import { Signup } from "./pages/signup";
 import { Profile } from "./pages/profile";
 import { Nutritionistprofile } from "./component/nutritionistprofile";
 import { Clientprofile } from "./component/clientprofile";
+import { Mysessions } from "./pages/mysessions";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -31,6 +32,7 @@ const Layout = () => {
             <Route element={<Home />} path="/" />
             <Route element={<Demo />} path="/demo" />
             <Route element={<Sessions />} path="/sessions" />
+            <Route element={<Mysessions />} path="/mysessions" />
             <Route element={<Login />} path="/login" />
             <Route element={<Signup />} path="/signup" />
             <Route element={<Profile />} path="/profile" />
