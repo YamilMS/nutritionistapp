@@ -310,7 +310,6 @@ def get_session(session_id):
 @jwt_required()
 def get_sessions():
     current_user_email = get_jwt_identity()
-    get_body_session= Session.query.all()
     client = Client.query.filter_by(client_email=current_user_email).first()
     nutritionist = Nutritionist.query.filter_by(nutritionist_email=current_user_email).first()
     
@@ -321,10 +320,15 @@ def get_sessions():
         first_name= nutritionist.first_name
         last_name = nutritionist.last_name
         name= first_name + " " + last_name
+        id= nutritionist.id
+        get_body_session= Session.query.filter_by(id_nutritionist=id).all()
+
     if nutritionist is None:
         first_name= client.first_name
         last_name = client.last_name
         name= first_name + " " + last_name
+        id= client.id
+        get_body_session= Session.query.filter_by(id_client=id).all()
 
     response_body = {
         'get_body_session': []
