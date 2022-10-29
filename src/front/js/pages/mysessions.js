@@ -7,7 +7,6 @@ const api = process.env.BACKEND_URL + "/api/session";
 export const Mysessions = () => {
   const { store, actions } = useContext(Context);
   const [sessions, setSessions] = useState([]);
-  const [name, setName] = useState([]);
 
   useEffect(() => {
     const getSessions = async () => {
@@ -20,10 +19,8 @@ export const Mysessions = () => {
         });
         const data = await response.json();
         const sessionFromBackend = data.response_body;
-        const nameFromBackend = data.name;
         console.log(data);
         setSessions(sessionFromBackend.get_body_session);
-        setName(nameFromBackend);
         // don't forget to return something, that is how the async resolves
         return data;
       } catch (error) {
