@@ -1,11 +1,27 @@
+
 #jumb {
-  background: grey;
   margin: auto;
   width: flex;
   height: flex;
+  background-image: url(https://as2.ftcdn.net/v2/jpg/01/05/59/03/1000_F_105590311_cAD04gw6SOQ7WSVgau0uvrql76ThgbQ9.jpg);
+
+}
+
+#profileForm {
+  background-image: url(https://as2.ftcdn.net/v2/jpg/01/05/59/01/1000_F_105590150_pC6cz3f14xzLFaP3A4qk5B8WXrpSAI3q.jpg);
+}
+
+#login {
+
+  background-image: url(https://w7.pngwing.com/pngs/284/268/png-transparent-junk-food-jerky-child-nutrition-eating-natural-foods-child-food-thumbnail.png);
+}
+
+#signup {
+  background-image: url(https://weresmartworld.com/sites/default/files/styles/full_screen/public/2021-12/tomato-vegetable-of-the-year-2022-5.jpg?itok=5xvY5vlz);
 }
 
 .footer {
+  text-decoration: linen;
   left: 0;
   bottom: 0;
   width: 100%;

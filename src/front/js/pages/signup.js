@@ -62,7 +62,7 @@ export const Signup = () => {
   };
 
   return (
-    <div>
+    <div id="signup">
       <h2 className="mx-auto w-50 mt-5">Sign Up</h2>
       {/* 
                                 TABS TO CHANGE THE VIEWS BETWEEN CLIENT AND NUTRITIONIST 

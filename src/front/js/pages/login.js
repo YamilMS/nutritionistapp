@@ -16,7 +16,7 @@ export const Login = () => {
     navigate("/");
 
   return (
-    <div>
+    <div id="login">
       <h2 className="mx-auto w-50 mt-5">Login</h2>
       <form className="mx-auto w-50">
         <div className="form-group">
