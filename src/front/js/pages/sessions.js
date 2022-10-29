@@ -63,7 +63,9 @@ export const Sessions = () => {
   }, [store.id]);
 
   const handleSession = () => {
+    
     if ((startDate != null, startTime != null)) {
+      console.log("inside");
       fetch(process.env.BACKEND_URL + "/api/session", {
         method: "POST",
         body: JSON.stringify({
@@ -82,7 +84,7 @@ export const Sessions = () => {
           console.log(resp.ok); // will be true if the response is successfull
           console.log(resp.status); // the status code = 200 or code = 400 etc.
           console.log(resp.text()); // will try return the exact result as string
-          return resp; // (returns promise) will try to parse the result as json as return a promise that you can .then for results
+          return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
         })
         .catch((error) => {
           //error handling
@@ -90,6 +92,14 @@ export const Sessions = () => {
         });
     }
   };
+
+  function removeElementsByClass(className){
+    const elements = document.getElementsByClassName(className);
+    while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+    }
+}
+
 
   console.log(store.id);
   console.log(clientName);
@@ -227,7 +237,8 @@ export const Sessions = () => {
                             className="btn btn-primary"
                             data-bs-target={`#exampleModalToggle2${i}`}
                             data-bs-toggle="modal"
-                            onClick={handleSession}
+                            onClick={() => { handleSession();
+                            }}
                           >
                             Schedule
                           </button>
@@ -266,6 +277,7 @@ export const Sessions = () => {
                             type="button"
                             className="btn btn-secondary"
                             data-bs-dismiss="modal"
+                            onClick={removeElementsByClass("modal-backdrop")}
                           >
                             Close
                           </button>
@@ -276,7 +288,7 @@ export const Sessions = () => {
                   <button
                     className="btn btn-primary"
                     data-bs-toggle="modal"
-                    href={`#exampleModalToggle${i}`}
+                    data-bs-target={`#exampleModalToggle${i}`}
                     role="button"
                     onClick={() => {
                       setNutriId(singleNutri.id);
