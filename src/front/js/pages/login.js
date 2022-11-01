@@ -15,6 +15,8 @@ export const Login = () => {
   if (store.token !== "" && store.token !== undefined && store.token !== null)
     navigate("/");
 
+    console.log(store.id)
+
   return (
     <div id="login">
       <h2 className="mx-auto w-50 mt-5">Login</h2>
