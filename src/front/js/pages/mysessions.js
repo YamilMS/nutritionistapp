@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
-const api = process.env.BACKEND_URL + "/api/session";
+const api = process.env.BACKEND_URL + "/api/session/";
 
 export const Mysessions = () => {
   const { store, actions } = useContext(Context);
@@ -33,13 +33,40 @@ export const Mysessions = () => {
     }
   }, [store.token]);
 
+  const handleDeleteSession = async (id) => {
+    try {
+      const response = await fetch(api + id, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.staus !== 200) {
+        console.log("There has been an error on the response.status");
+        return false;
+      }
+      const data = await response.json();
+      console.log("data from the backend ", data);
+      return true;
+    } catch (error) {
+      console.error("There has been an error login in ", error);
+    }
+  };
+
   return (
-    <table className="table">
-      <thead>
+    <table className="table mx-3">
+      <thead className="col-3 ">
         <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Date</th>
-          <th scope="col">Time</th>
+          <th className="col-3" scope="col">
+            Name
+          </th>
+          <th className="col-3" scope="col">
+            Date
+          </th>
+          <th className="col-3" scope="col">
+            Time
+          </th>
+          <th className="col-3" scope="col"></th>
         </tr>
       </thead>
       {sessions.map((singleSess, i) => {
@@ -48,6 +75,8 @@ export const Mysessions = () => {
         const dateArr = date.split("T");
         const timeArr = time.split("T");
         const timeSplited = timeArr[1].split(":");
+        const id = singleSess.id;
+
         return (
           <tbody key={i}>
             {store.rol === "true" ? (
@@ -61,6 +90,17 @@ export const Mysessions = () => {
                 <td>{singleSess.name_nutritionist}</td>
                 <td>{dateArr[0]}</td>
                 <td>{timeSplited[0].concat(":", timeSplited[1])}</td>
+                <td>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => {
+                      setSessions(sessions.filter((item) => item.id !== id));
+                      handleDeleteSession(id);
+                    }}
+                  >
+                    Delete session
+                  </button>
+                </td>
               </tr>
             )}
           </tbody>
