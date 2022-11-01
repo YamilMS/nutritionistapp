@@ -5,6 +5,7 @@ import "../../styles/home.css";
 
 export const Clientprofile = () => {
   const { store, actions } = useContext(Context);
+  const [id, setId] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -28,6 +29,7 @@ export const Clientprofile = () => {
         setClient(data.test);
         const arr = data.test;
         arr.map((item) => {
+          setId(item.id);
           setFirstName(item.first_name);
           setLastName(item.last_name);
           setEmail(item.client_email);
@@ -210,7 +212,12 @@ export const Clientprofile = () => {
               >
                 GO BACK
               </button>
-              <button className="m-2" onClick={editClientPorfile}>
+              <button
+                className="m-2"
+                onClick={() => {
+                  editClientPorfile();
+                }}
+              >
                 SAVE CHANGES
               </button>
             </div>
@@ -218,130 +225,122 @@ export const Clientprofile = () => {
         </div>
       ) : (
         <div>
-          {client.map((singleClient) => {
-            return (
-              <div key={singleClient.id}>
-                <div className="my-5">
-                  <div
-                    id="portraitProfilePicture"
-                    className="mx-auto w-50 py-4"
-                  >
-                    <img
-                      id="profilePic"
-                      src="//www.html.am/images/image-codes/milford_sound_t.jpg"
-                      width="225"
-                      height="151"
-                      alt="Photo of Milford Sound in New Zealand"
-                    />
-                  </div>
+          return (
+          <div key={id}>
+            <div className="my-5">
+              <div id="portraitProfilePicture" className="mx-auto w-50 py-4">
+                <img
+                  id="profilePic"
+                  src="//www.html.am/images/image-codes/milford_sound_t.jpg"
+                  width="225"
+                  height="151"
+                  alt="Photo of Milford Sound in New Zealand"
+                />
+              </div>
+            </div>
+            <div className="row g-3 my-2 justify-content-center align-items-center">
+              <div className="col-2">
+                <label htmlFor="inputFirstName" className="col-form-label">
+                  First Name
+                </label>
+              </div>
+              <div className="col-4">
+                <input
+                  type="text"
+                  id="inputFirstName"
+                  className="form-control"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  aria-describedby="firstNameHelpInline"
+                />
+              </div>
+            </div>
+            <div className="row g-3 my-2 justify-content-center align-items-center">
+              <div className="col-2">
+                <label htmlFor="inputLastName" className="col-form-label">
+                  Last Name
+                </label>
+              </div>
+              <div className="col-4">
+                <input
+                  type="text"
+                  id="inputLastName"
+                  className="form-control"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  aria-describedby="lastNameHelpInline"
+                />
+              </div>
+            </div>
+            <div className="row g-3 my-2 justify-content-center align-items-center">
+              <div className="col-2">
+                <label htmlFor="inputEmail" className="col-form-label">
+                  Email
+                </label>
+              </div>
+              <div className="col-4">
+                <input
+                  type="text"
+                  id="inputEmail"
+                  className="form-control"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  aria-describedby="emailHelpInline"
+                />
+              </div>
+            </div>
+            <div className="row g-3 my-2 justify-content-center align-items-center">
+              <div className="col-2">
+                <label htmlFor="inputPassword" className="col-form-label">
+                  Password
+                </label>
+              </div>
+              <div className="col-4">
+                <input
+                  type="password"
+                  id="inputPassword"
+                  className="form-control"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  aria-describedby="passwordHelpInline"
+                />
+                <span id="passwordHelpInline" className="form-text">
+                  Must be 8-20 characters long.
+                </span>
+              </div>
+              <div className="row g-3 my-2 justify-content-center align-items-center">
+                <div className="col-2">
+                  <label htmlFor="inputdescription" className="col-form-label">
+                    Description
+                  </label>
                 </div>
-                <div className="row g-3 my-2 justify-content-center align-items-center">
-                  <div className="col-2">
-                    <label htmlFor="inputFirstName" className="col-form-label">
-                      First Name
-                    </label>
-                  </div>
-                  <div className="col-4">
-                    <input
-                      type="text"
-                      id="inputFirstName"
-                      className="form-control"
-                      value={singleClient.first_name}
-                      onChange={(e) => setFirstName(e.target.value)}
-                      aria-describedby="firstNameHelpInline"
-                    />
-                  </div>
-                </div>
-                <div className="row g-3 my-2 justify-content-center align-items-center">
-                  <div className="col-2">
-                    <label htmlFor="inputLastName" className="col-form-label">
-                      Last Name
-                    </label>
-                  </div>
-                  <div className="col-4">
-                    <input
-                      type="text"
-                      id="inputLastName"
-                      className="form-control"
-                      value={singleClient.last_name}
-                      onChange={(e) => setLastName(e.target.value)}
-                      aria-describedby="lastNameHelpInline"
-                    />
-                  </div>
-                </div>
-                <div className="row g-3 my-2 justify-content-center align-items-center">
-                  <div className="col-2">
-                    <label htmlFor="inputEmail" className="col-form-label">
-                      Email
-                    </label>
-                  </div>
-                  <div className="col-4">
-                    <input
-                      type="text"
-                      id="inputEmail"
-                      className="form-control"
-                      value={singleClient.client_email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      aria-describedby="emailHelpInline"
-                    />
-                  </div>
-                </div>
-                <div className="row g-3 my-2 justify-content-center align-items-center">
-                  <div className="col-2">
-                    <label htmlFor="inputPassword" className="col-form-label">
-                      Password
-                    </label>
-                  </div>
-                  <div className="col-4">
-                    <input
-                      type="password"
-                      id="inputPassword"
-                      className="form-control"
-                      value={singleClient.password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      aria-describedby="passwordHelpInline"
-                    />
-                    <span id="passwordHelpInline" className="form-text">
-                      Must be 8-20 characters long.
-                    </span>
-                  </div>
-                  <div className="row g-3 my-2 justify-content-center align-items-center">
-                    <div className="col-2">
-                      <label
-                        htmlFor="inputdescription"
-                        className="col-form-label"
-                      >
-                        Description
-                      </label>
-                    </div>
-                    <div className="col-4">
-                      <input
-                        type="text"
-                        id="inputDescription"
-                        className="form-control"
-                        value={singleClient.description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        aria-describedby="descriptionHelpInline"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <button
-                    className="m-2"
-                    onClick={() => {
-                      setEdit(true);
-                    }}
-                  >
-                    EDIT
-                  </button>
-                  <button className="m-2" onClick={deleteClientProfile}>
-                    DELETE
-                  </button>
+                <div className="col-4">
+                  <input
+                    type="text"
+                    id="inputDescription"
+                    className="form-control"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    aria-describedby="descriptionHelpInline"
+                  />
                 </div>
               </div>
-            );
-          })}
+            </div>
+            <div>
+              <button
+                className="m-2"
+                onClick={() => {
+                  setEdit(true);
+                }}
+              >
+                EDIT
+              </button>
+              <button className="m-2" onClick={deleteClientProfile}>
+                DELETE
+              </button>
+            </div>
+          </div>
+          );
         </div>
       )}
     </div>
