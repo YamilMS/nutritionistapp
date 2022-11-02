@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
-import img from "../../img/tomato-vegetable-of-the-year-2022-5.jpg"
+import img from "../../img/Cuvelier-Fruit-header1-3.png"
 
 
 export const Signup = () => {
@@ -64,11 +64,14 @@ export const Signup = () => {
   };
 
   return (
-    <div  style={{backgroundImage: "url("+ img +")", backgroundRepeat: "no-repeat", margin: "auto"}}>
-        <h2 className="mx-auto w-50 mt-5">Sign Up</h2>
+    <div className="opacity-100" style={{backgroundImage: "url("+ img +")", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>
+        <div className="opacity-100">
+        <h2 className="mx-auto w-50 mt-5 text-white">Sign Up</h2>  
+
+        </div>
         {/* 
-                                  TABS TO CHANGE THE VIEWS BETWEEN CLIENT AND NUTRITIONIST 
-          */}
+        TABS TO CHANGE THE VIEWS BETWEEN CLIENT AND NUTRITIONIST 
+      */}
         <div className="row">
           <div className="d-flex justify-content-center bg-ligth pt-1">
             <ul className="nav nav-tabs" id="myTab" role="tablist">
@@ -114,10 +117,10 @@ export const Signup = () => {
         <div className="tab-content" id="myTabContent">
           {/*
                                           CLIENT VIEW OF SIGN UP 
-          */}
+                                        */}
 
           <div
-            className="tab-pane fade show active"
+            className="tab-pane fade show active p-4" 
             id="client"
             role="tabpanel"
             aria-labelledby="client-tab"
@@ -127,7 +130,7 @@ export const Signup = () => {
                 <label htmlFor="exampleInputEmail1">First Name</label>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control text-dark bg-opacity-10 shadow-lg p-3 mb-3 bg-body rounded"
                   id="clientInputFirstName"
                   placeholder="Enter your first name"
                   value={firstName}
@@ -138,7 +141,7 @@ export const Signup = () => {
                 <label htmlFor="exampleInputEmail1">Last Name</label>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control text-dark bg-opacity-10 shadow-lg p-3 mb-3 bg-body rounded"
                   id="clientInputLastName"
                   placeholder="Enter your last name"
                   value={lastName}
@@ -149,22 +152,22 @@ export const Signup = () => {
                 <label htmlFor="exampleInputEmail1">Client Email address</label>
                 <input
                   type="email"
-                  className="form-control"
+                  className="form-control text-dark bg-opacity-10 shadow-lg p-3 bg-body rounded"
                   id="clientInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                <small id="clientEmailHelp" className="form-text text-muted">
+                <small id="clientEmailHelp" className="form-text text-muted mb-3">
                   We'll never share your email with anyone else.
                 </small>
               </div>
               <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Client Password</label>
+                <label htmlFor="exampleInputPassword1 p-3 mb-2 bg-light text-dark">Client Password</label>
                 <input
                   type="password"
-                  className="form-control"
+                  className="form-control text-dark bg-opacity-10 shadow-lg p-3 mb-3 bg-body rounded"
                   id="clientInputPassword1"
                   placeholder="Password"
                   value={password}
@@ -174,7 +177,7 @@ export const Signup = () => {
               <div className="form-group mb-2">
                 <label htmlFor="exampleFormControlTextarea1">Description</label>
                 <textarea
-                  className="form-control"
+                  className="form-control text-dark bg-opacity-10 shadow-lg p-3 mb-3 bg-body rounded"
                   id="clientFormControlTextarea1"
                   rows="5"
                   value={description}
@@ -205,7 +208,7 @@ export const Signup = () => {
               */}
           </div>
           <div
-            className="tab-pane fade"
+            className="tab-pane p-4"
             id="nutritionist"
             role="tabpanel"
             aria-labelledby="nutritionist-tab"
@@ -215,7 +218,7 @@ export const Signup = () => {
                 <label htmlFor="exampleInputEmail1">First Name</label>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control text-dark bg-opacity-10 shadow-lg p-3 mb-3 bg-body rounded"
                   id="nutritionistInputFirstName"
                   placeholder="Enter your first name"
                   value={firstName}
@@ -226,7 +229,7 @@ export const Signup = () => {
                 <label htmlFor="exampleInputEmail1">Last Name</label>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control text-dark bg-opacity-10 shadow-lg p-3 mb-3 bg-body rounded"
                   id="nutritionistInputLastName"
                   placeholder="Enter your last name"
                   value={lastName}
@@ -234,12 +237,12 @@ export const Signup = () => {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="exampleInputEmail1">
+                <label htmlFor="exampleInputEmail1 text-dark bg-opacity-10 shadow-lg bg-body rounded">
                   Nutritionist Email address
                 </label>
                 <input
                   type="email"
-                  className="form-control"
+                  className="form-control text-dark bg-opacity-10 shadow-lg bg-body rounded"
                   id="nutritionistInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
@@ -253,13 +256,13 @@ export const Signup = () => {
                   We'll never share your email with anyone else.
                 </small>
               </div>
-              <div className="form-group">
+              <div className="form-group mt-3">
                 <label htmlFor="exampleInputPassword1">
                   Nutritionist Password
                 </label>
                 <input
                   type="password"
-                  className="form-control mb-2"
+                  className="form-control mb-2 text-dark bg-opacity-10 shadow-lg p-3 mb-3 bg-body rounded"
                   id="nutritionistInputPassword1"
                   placeholder="Password"
                   value={password}
@@ -269,7 +272,7 @@ export const Signup = () => {
               <div className="mt-2">
                 <p className="mb-1">Select Time avalaible</p>
                 <div className="d-flex">
-                  <div className="form-group form-check mr-3">
+                  <div className="form-group form-check">
                     <input
                       type="checkbox"
                       className="form-check-input"
@@ -486,7 +489,7 @@ export const Signup = () => {
               <div className="form-group mb-2">
                 <label htmlFor="exampleFormControlTextarea1">Description</label>
                 <textarea
-                  className="form-control"
+                  className="form-control text-dark bg-opacity-10 shadow-lg p-3 mb-3 bg-body rounded"
                   id="nutritionistFormControlTextarea1"
                   rows="5"
                   value={description}

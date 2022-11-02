@@ -3,12 +3,13 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import Apples from "../../img/Cuvelier-Fruit-header1-3.png"
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <div id="home" className="container-fluid" >
+    <div  className="container-fluid"  style={{backgroundImage: "url("+ Apples +")", backgroundRepeat: "no-repeat", backgroundPosition: "center"}} >
      <div  className="text-center container">
       <div id="jumb"  className="jumbotron">
         <h1 className="display-4">NUTRITIONIST APP </h1>
