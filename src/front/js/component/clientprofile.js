@@ -174,7 +174,7 @@ export const Clientprofile = () => {
               </div>
               <div className="col-4">
                 <input
-                  type="password"
+                  type="text"
                   id="inputPassword"
                   className="form-control"
                   value={password}
@@ -216,6 +216,7 @@ export const Clientprofile = () => {
                 className="m-2"
                 onClick={() => {
                   editClientPorfile();
+                  setEdit(false);
                 }}
               >
                 SAVE CHANGES
@@ -225,7 +226,6 @@ export const Clientprofile = () => {
         </div>
       ) : (
         <div>
-          return (
           <div key={id}>
             <div className="my-5">
               <div id="portraitProfilePicture" className="mx-auto w-50 py-4">
@@ -290,24 +290,6 @@ export const Clientprofile = () => {
               </div>
             </div>
             <div className="row g-3 my-2 justify-content-center align-items-center">
-              <div className="col-2">
-                <label htmlFor="inputPassword" className="col-form-label">
-                  Password
-                </label>
-              </div>
-              <div className="col-4">
-                <input
-                  type="password"
-                  id="inputPassword"
-                  className="form-control"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  aria-describedby="passwordHelpInline"
-                />
-                <span id="passwordHelpInline" className="form-text">
-                  Must be 8-20 characters long.
-                </span>
-              </div>
               <div className="row g-3 my-2 justify-content-center align-items-center">
                 <div className="col-2">
                   <label htmlFor="inputdescription" className="col-form-label">

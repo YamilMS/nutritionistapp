@@ -54,58 +54,71 @@ export const Mysessions = () => {
   };
 
   return (
-    <table className="table mx-3">
-      <thead className="col-3 ">
-        <tr>
-          <th className="col-3" scope="col">
-            Name
-          </th>
-          <th className="col-3" scope="col">
-            Date
-          </th>
-          <th className="col-3" scope="col">
-            Time
-          </th>
-          <th className="col-3" scope="col"></th>
-        </tr>
-      </thead>
-      {sessions.map((singleSess, i) => {
-        const date = singleSess.date;
-        const time = singleSess.time;
-        const dateArr = date.split("T");
-        const timeArr = time.split("T");
-        const timeSplited = timeArr[1].split(":");
-        const id = singleSess.id;
+    <div>
+      {sessions.length > 0 ? (
+        <table className="table mx-3">
+          <thead className="col-3 ">
+            <tr>
+              <th className="col-3" scope="col">
+                Name
+              </th>
+              <th className="col-3" scope="col">
+                Date
+              </th>
+              <th className="col-3" scope="col">
+                Time
+              </th>
+              <th className="col-3" scope="col"></th>
+            </tr>
+          </thead>
+          {sessions.map((singleSess, i) => {
+            const date = singleSess.date;
+            const time = singleSess.time;
+            const dateArr = date.split("T");
+            const timeArr = time.split("T");
+            const timeSplited = timeArr[1].split(":");
+            const id = singleSess.id;
 
-        return (
-          <tbody key={i}>
-            {store.rol === "true" ? (
-              <tr key={i}>
-                <td>{singleSess.name_client}</td>
-                <td>{dateArr[0]}</td>
-                <td>{timeSplited[0].concat(":", timeSplited[1])}</td>
-              </tr>
-            ) : (
-              <tr key={i}>
-                <td>{singleSess.name_nutritionist}</td>
-                <td>{dateArr[0]}</td>
-                <td>{timeSplited[0].concat(":", timeSplited[1])}</td>
-                <td>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => {
-                      setSessions(sessions.filter((item) => item.id !== id));
-                      handleDeleteSession(id);
-                    }}
-                  >
-                    Delete session
-                  </button>
-                </td>
-              </tr>
-            )}
-          </tbody>
-        );
-      })}
-    </table>
+            return (
+              <tbody key={i}>
+                {store.rol === "true" ? (
+                  <tr key={i}>
+                    <td>{singleSess.name_client}</td>
+                    <td>{dateArr[0]}</td>
+                    <td>{timeSplited[0].concat(":", timeSplited[1])}</td>
+                  </tr>
+                ) : (
+                  <tr key={i}>
+                    <td>{singleSess.name_nutritionist}</td>
+                    <td>{dateArr[0]}</td>
+                    <td>{timeSplited[0].concat(":", timeSplited[1])}</td>
+                    <td>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => {
+                          setSessions(
+                            sessions.filter((item) => item.id !== id)
+                          );
+                          handleDeleteSession(id);
+                        }}
+                      >
+                        Delete session
+                      </button>
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            );
+          })}
+        </table>
+      ) : (
+        <div className="text-center container">
+          <h5>Loading your sessions</h5>
+          <div className="d-flex justify-content-center">
+            <div className="spinner"></div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
