@@ -5,6 +5,7 @@ import "../../styles/home.css";
 
 export const Nutritionistprofile = () => {
   const { store, actions } = useContext(Context);
+  const [id, setId] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -39,6 +40,7 @@ export const Nutritionistprofile = () => {
         const nutriData = data.test;
         setNutri(data.test);
         nutriData.map((item) => {
+          setEdit(item.id);
           setFirstName(item.first_name);
           setLastName(item.last_name);
           setEmail(item.nutritionist_email);
@@ -115,10 +117,354 @@ export const Nutritionistprofile = () => {
       </div>
       {edit === true ? (
         <div>
+          return (
+          <div key={`${id}Edit`}>
+            <div className="my-5">
+              <div id="portraitProfilePicture" className="mx-auto w-50 py-4">
+                <img
+                  id="profilePic"
+                  src="//www.html.am/images/image-codes/milford_sound_t.jpg"
+                  width="225"
+                  height="151"
+                  alt="Photo of Milford Sound in New Zealand"
+                />
+              </div>
+            </div>
+            <div className="row g-3 my-2 justify-content-center align-items-center">
+              <div className="col-2">
+                <label htmlFor="inputFirstName" className="col-form-label">
+                  First Name
+                </label>
+              </div>
+              <div className="col-4">
+                <input
+                  type="text"
+                  id="inputFirstName"
+                  className="form-control"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  aria-describedby="firstNameHelpInline"
+                />
+              </div>
+            </div>
+            <div className="row g-3 my-2 justify-content-center align-items-center">
+              <div className="col-2">
+                <label htmlFor="inputLastName" className="col-form-label">
+                  Last Name
+                </label>
+              </div>
+              <div className="col-4">
+                <input
+                  type="text"
+                  id="inputLastName"
+                  className="form-control"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  aria-describedby="lastNameHelpInline"
+                />
+              </div>
+            </div>
+            <div className="row g-3 my-2 justify-content-center align-items-center">
+              <div className="col-2">
+                <label htmlFor="inputEmail" className="col-form-label">
+                  Email
+                </label>
+              </div>
+              <div className="col-4">
+                <input
+                  type="text"
+                  id="inputEmail"
+                  className="form-control"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  aria-describedby="emailHelpInline"
+                />
+              </div>
+            </div>
+            <div className="row g-3 my-2 justify-content-center align-items-center">
+              <div className="col-2">
+                <label htmlFor="inputPassword" className="col-form-label">
+                  Password
+                </label>
+              </div>
+              <div className="col-4">
+                <input
+                  type="text"
+                  id="inputPassword"
+                  className="form-control"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  aria-describedby="passwordHelpInline"
+                />
+                <span id="passwordHelpInline" className="form-text">
+                  Must be 8-20 characters long.
+                </span>
+              </div>
+              <div className="row g-3 my-2 justify-content-center align-items-center">
+                <p className="mb-1">Select your new Times avalaible</p>
+                <div className="col-6 d-flex justify-content-center">
+                  <div className="form-group form-check mr-3">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="nutriCheckMonday"
+                      onChange={(event) => {
+                        if (event.target.checked) {
+                          setDays([...days, 1]);
+                        } else {
+                          setDays(days.filter((item) => item !== 1));
+                        }
+                      }}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="exampleCheckMonday"
+                    >
+                      Monday
+                    </label>
+                  </div>
+                  <div className="form-group form-check mx-3">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="nutriCheckTuesday"
+                      onChange={(event) => {
+                        if (event.target.checked) {
+                          setDays([...days, 2]);
+                        } else {
+                          setDays(days.filter((item) => item !== 2));
+                        }
+                      }}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="exampleCheckTuesday"
+                    >
+                      Tuesday
+                    </label>
+                  </div>
+                  <div className="form-group form-check mx-3">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="nutriCheckWednesday"
+                      onChange={(event) => {
+                        if (event.target.checked) {
+                          setDays([...days, 3]);
+                        } else {
+                          setDays(days.filter((item) => item !== 3));
+                        }
+                      }}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="exampleCheckWednesday"
+                    >
+                      Wednesday
+                    </label>
+                  </div>
+                  <div className="form-group form-check mx-3">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="nutriCheckThursday"
+                      onChange={(event) => {
+                        if (event.target.checked) {
+                          setDays([...days, 4]);
+                        } else {
+                          setDays(days.filter((item) => item !== 4));
+                        }
+                      }}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="exampleCheckThursday"
+                    >
+                      Thursday
+                    </label>
+                  </div>
+                  <div className="form-group form-check mx-3">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="nutriCheckFriday"
+                      onChange={(event) => {
+                        if (event.target.checked) {
+                          setDays([...days, 5]);
+                        } else {
+                          setDays(days.filter((item) => item !== 5));
+                        }
+                      }}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="exampleCheckFriday"
+                    >
+                      Friday
+                    </label>
+                  </div>
+                  <div className="form-group form-check mx-3">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="nutriCheckSaturday"
+                      onChange={(event) => {
+                        if (event.target.checked) {
+                          setDays([...days, 6]);
+                        } else {
+                          setDays(days.filter((item) => item !== 6));
+                        }
+                      }}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="exampleCheckSaturday"
+                    >
+                      Saturday
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div className="row g-3 my-2 justify-content-center align-items-center">
+                <p className="mb-1">Select Shift avalaible</p>
+                <div className="col-6 d-flex justify-content-center">
+                  <div className="form-group form-check mr-3">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="nutriCheckMorning"
+                      onChange={(event) => {
+                        if (event.target.checked) {
+                          setTime([...time, 8, 9, 10, 11, 12]);
+                        } else {
+                          setTime(
+                            time.filter(
+                              (item) =>
+                                item !== 8 &&
+                                item !== 9 &&
+                                item !== 10 &&
+                                item !== 11 &&
+                                item !== 12
+                            )
+                          );
+                        }
+                      }}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="exampleCheckMorning"
+                    >
+                      Morning (8am - 12pm)
+                    </label>
+                  </div>
+                  <div className="form-group form-check mx-3">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="nutriCheckAfternoon"
+                      onChange={(event) => {
+                        if (event.target.checked) {
+                          setTime([...time, 13, 14, 15, 16]);
+                        } else {
+                          setTime(
+                            time.filter(
+                              (item) =>
+                                item !== 13 &&
+                                item !== 14 &&
+                                item !== 15 &&
+                                item !== 16
+                            )
+                          );
+                        }
+                      }}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="exampleCheckAfternoon"
+                    >
+                      Afternoon (12pm - 4pm)
+                    </label>
+                  </div>
+                  <div className="form-group form-check mx-3">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="nutriCheckEvening"
+                      onChange={(event) => {
+                        if (event.target.checked) {
+                          setTime([...time, 17, 18, 19, 20, 21]);
+                        } else {
+                          setTime(
+                            time.filter(
+                              (item) =>
+                                item !== 17 &&
+                                item !== 18 &&
+                                item !== 19 &&
+                                item !== 20 &&
+                                item !== 21
+                            )
+                          );
+                        }
+                      }}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="exampleCheckEvening"
+                    >
+                      Evening (4pm - 9pm)
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div className="row g-3 my-2 justify-content-center align-items-center">
+                <div className="col-2">
+                  <label htmlFor="inputdescription" className="col-form-label">
+                    Description
+                  </label>
+                </div>
+                <div className="col-4">
+                  <input
+                    type="text"
+                    id="inputDescription"
+                    className="form-control"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    aria-describedby="descriptionHelpInline"
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <button
+                className="m-2"
+                onClick={() => {
+                  setEdit(false);
+                }}
+              >
+                GO BACK
+              </button>
+              <button
+                className="m-2"
+                onClick={() => {
+                  modifyNutriProfile();
+                  setEdit(false);
+                }}
+              >
+                SAVE CHANGES
+              </button>
+            </div>
+          </div>
+          );
+        </div>
+      ) : (
+        <div>
           {nutri.map((singleNutri) => {
-            console.log(firstName);
+            const getDays = singleNutri.days
+              .split("")
+              .map((day) => dayMap[parseInt(day)]);
+
             return (
-              <div key={`${singleNutri}Edit`}>
+              <div key={singleNutri.id}>
                 <div className="my-5">
                   <div
                     id="portraitProfilePicture"
@@ -169,359 +515,6 @@ export const Nutritionistprofile = () => {
                 </div>
                 <div className="row g-3 my-2 justify-content-center align-items-center">
                   <div className="col-2">
-                    <label htmlFor="inputEmail" className="col-form-label">
-                      Email
-                    </label>
-                  </div>
-                  <div className="col-4">
-                    <input
-                      type="text"
-                      id="inputEmail"
-                      className="form-control"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      aria-describedby="emailHelpInline"
-                    />
-                  </div>
-                </div>
-                <div className="row g-3 my-2 justify-content-center align-items-center">
-                  <div className="col-2">
-                    <label htmlFor="inputPassword" className="col-form-label">
-                      Password
-                    </label>
-                  </div>
-                  <div className="col-4">
-                    <input
-                      type="password"
-                      id="inputPassword"
-                      className="form-control"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      aria-describedby="passwordHelpInline"
-                    />
-                    <span id="passwordHelpInline" className="form-text">
-                      Must be 8-20 characters long.
-                    </span>
-                  </div>
-                  <div className="row g-3 my-2 justify-content-center align-items-center">
-                    <p className="mb-1">Select your new Times avalaible</p>
-                    <div className="col-6 d-flex justify-content-center">
-                      <div className="form-group form-check mr-3">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                          id="nutriCheckMonday"
-                          onChange={(event) => {
-                            if (event.target.checked) {
-                              setDays([...days, 1]);
-                            } else {
-                              setDays(days.filter((item) => item !== 1));
-                            }
-                          }}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="exampleCheckMonday"
-                        >
-                          Monday
-                        </label>
-                      </div>
-                      <div className="form-group form-check mx-3">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                          id="nutriCheckTuesday"
-                          onChange={(event) => {
-                            if (event.target.checked) {
-                              setDays([...days, 2]);
-                            } else {
-                              setDays(days.filter((item) => item !== 2));
-                            }
-                          }}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="exampleCheckTuesday"
-                        >
-                          Tuesday
-                        </label>
-                      </div>
-                      <div className="form-group form-check mx-3">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                          id="nutriCheckWednesday"
-                          onChange={(event) => {
-                            if (event.target.checked) {
-                              setDays([...days, 3]);
-                            } else {
-                              setDays(days.filter((item) => item !== 3));
-                            }
-                          }}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="exampleCheckWednesday"
-                        >
-                          Wednesday
-                        </label>
-                      </div>
-                      <div className="form-group form-check mx-3">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                          id="nutriCheckThursday"
-                          onChange={(event) => {
-                            if (event.target.checked) {
-                              setDays([...days, 4]);
-                            } else {
-                              setDays(days.filter((item) => item !== 4));
-                            }
-                          }}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="exampleCheckThursday"
-                        >
-                          Thursday
-                        </label>
-                      </div>
-                      <div className="form-group form-check mx-3">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                          id="nutriCheckFriday"
-                          onChange={(event) => {
-                            if (event.target.checked) {
-                              setDays([...days, 5]);
-                            } else {
-                              setDays(days.filter((item) => item !== 5));
-                            }
-                          }}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="exampleCheckFriday"
-                        >
-                          Friday
-                        </label>
-                      </div>
-                      <div className="form-group form-check mx-3">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                          id="nutriCheckSaturday"
-                          onChange={(event) => {
-                            if (event.target.checked) {
-                              setDays([...days, 6]);
-                            } else {
-                              setDays(days.filter((item) => item !== 6));
-                            }
-                          }}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="exampleCheckSaturday"
-                        >
-                          Saturday
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row g-3 my-2 justify-content-center align-items-center">
-                    <p className="mb-1">Select Shift avalaible</p>
-                    <div className="col-6 d-flex justify-content-center">
-                      <div className="form-group form-check mr-3">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                          id="nutriCheckMorning"
-                          onChange={(event) => {
-                            if (event.target.checked) {
-                              setTime([...time, 8, 9, 10, 11, 12]);
-                            } else {
-                              setTime(
-                                time.filter(
-                                  (item) =>
-                                    item !== 8 &&
-                                    item !== 9 &&
-                                    item !== 10 &&
-                                    item !== 11 &&
-                                    item !== 12
-                                )
-                              );
-                            }
-                          }}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="exampleCheckMorning"
-                        >
-                          Morning (8am - 12pm)
-                        </label>
-                      </div>
-                      <div className="form-group form-check mx-3">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                          id="nutriCheckAfternoon"
-                          onChange={(event) => {
-                            if (event.target.checked) {
-                              setTime([...time, 13, 14, 15, 16]);
-                            } else {
-                              setTime(
-                                time.filter(
-                                  (item) =>
-                                    item !== 13 &&
-                                    item !== 14 &&
-                                    item !== 15 &&
-                                    item !== 16
-                                )
-                              );
-                            }
-                          }}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="exampleCheckAfternoon"
-                        >
-                          Afternoon (12pm - 4pm)
-                        </label>
-                      </div>
-                      <div className="form-group form-check mx-3">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                          id="nutriCheckEvening"
-                          onChange={(event) => {
-                            if (event.target.checked) {
-                              setTime([...time, 17, 18, 19, 20, 21]);
-                            } else {
-                              setTime(
-                                time.filter(
-                                  (item) =>
-                                    item !== 17 &&
-                                    item !== 18 &&
-                                    item !== 19 &&
-                                    item !== 20 &&
-                                    item !== 21
-                                )
-                              );
-                            }
-                          }}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="exampleCheckEvening"
-                        >
-                          Evening (4pm - 9pm)
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row g-3 my-2 justify-content-center align-items-center">
-                    <div className="col-2">
-                      <label
-                        htmlFor="inputdescription"
-                        className="col-form-label"
-                      >
-                        Description
-                      </label>
-                    </div>
-                    <div className="col-4">
-                      <input
-                        type="text"
-                        id="inputDescription"
-                        className="form-control"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        aria-describedby="descriptionHelpInline"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <button
-                    className="m-2"
-                    onClick={() => {
-                      setEdit(false);
-                    }}
-                  >
-                    GO BACK
-                  </button>
-                  <button
-                    className="m-2"
-                    onClick={() => {
-                      modifyNutriProfile();
-                      setEdit(false);
-                    }}
-                  >
-                    SAVE CHANGES
-                  </button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      ) : (
-        <div>
-          {nutri.map((singleNutri) => {
-            const getDays = singleNutri.days
-              .split("")
-              .map((day) => dayMap[parseInt(day)]);
-
-            return (
-              <div key={singleNutri.id}>
-                <div className="my-5">
-                  <div
-                    id="portraitProfilePicture"
-                    className="mx-auto w-50 py-4"
-                  >
-                    <img
-                      id="profilePic"
-                      src="//www.html.am/images/image-codes/milford_sound_t.jpg"
-                      width="225"
-                      height="151"
-                      alt="Photo of Milford Sound in New Zealand"
-                    />
-                  </div>
-                </div>
-                <div className="row g-3 my-2 justify-content-center align-items-center">
-                  <div className="col-2">
-                    <label htmlFor="inputFirstName" className="col-form-label">
-                      First Name
-                    </label>
-                  </div>
-                  <div className="col-4">
-                    <input
-                      type="text"
-                      id="inputFirstName"
-                      className="form-control"
-                      value={singleNutri.first_name}
-                      onChange={(e) => setFirstName(e.target.value)}
-                      aria-describedby="firstNameHelpInline"
-                    />
-                  </div>
-                </div>
-                <div className="row g-3 my-2 justify-content-center align-items-center">
-                  <div className="col-2">
-                    <label htmlFor="inputLastName" className="col-form-label">
-                      Last Name
-                    </label>
-                  </div>
-                  <div className="col-4">
-                    <input
-                      type="text"
-                      id="inputLastName"
-                      className="form-control"
-                      value={singleNutri.last_name}
-                      onChange={(e) => setLastName(e.target.value)}
-                      aria-describedby="lastNameHelpInline"
-                    />
-                  </div>
-                </div>
-                <div className="row g-3 my-2 justify-content-center align-items-center">
-                  <div className="col-2">
                     <label htmlFor="inputEmailEdit" className="col-form-label">
                       Email
                     </label>
@@ -531,7 +524,7 @@ export const Nutritionistprofile = () => {
                       type="text"
                       id="inputEmailEdit"
                       className="form-control"
-                      value={singleNutri.nutritionist_email}
+                      value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       aria-describedby="emailHelpInline"
                     />
@@ -565,7 +558,7 @@ export const Nutritionistprofile = () => {
                       type="password"
                       id="inputPassword"
                       className="form-control"
-                      value={singleNutri.password}
+                      value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       aria-describedby="passwordHelpInline"
                     />
@@ -587,7 +580,7 @@ export const Nutritionistprofile = () => {
                         type="text"
                         id="inputDescription"
                         className="form-control"
-                        value={singleNutri.description}
+                        value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         aria-describedby="descriptionHelpInline"
                       />

@@ -17,6 +17,9 @@ export const Profile = () => {
       ) : (
         <div className="text-center container">
           <h5> Loading Profile </h5>
+          <div className="d-flex justify-content-center">
+            <div className="spinner"></div>
+          </div>
         </div>
       )}
     </div>
