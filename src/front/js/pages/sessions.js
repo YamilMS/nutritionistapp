@@ -176,7 +176,7 @@ export const Sessions = () => {
             <div className="card m-2" style={{ width: "20rem" }}>
               <img
                 className="card-img-top"
-                src="https://images.unsplash.com/photo-1568316674077-d72ee56de61c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
+                src={singleNutri.photo}
                 alt="Card image cap"
                 width="50"
                 height="350"
