@@ -98,13 +98,6 @@ export const Sessions = () => {
     }
   };
 
-  //   function removeElementsByClass(className){
-  //     const elements = document.getElementsByClassName(className);
-  //     while(elements.length > 0){
-  //         elements[0].parentNode.removeChild(elements[0]);
-  //     }
-  // }
-
   function onCloseAlert() {
     setAlert({
       type: "",
@@ -134,8 +127,8 @@ export const Sessions = () => {
           show={alert.show}
           onClosePress={onCloseAlert}
           pressCloseOnOutsideClick={true}
-          headerStyles={{}}
-          textStyles={{}}
+          showBorderBottom={false}
+          buttonStyles={{display: "flex", justifyContent: "center", marginTop: 50, background: "none",}}
         />
       </div>
       {/**
