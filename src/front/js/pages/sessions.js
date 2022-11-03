@@ -7,6 +7,7 @@ import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
 import "react-datepicker/dist/react-datepicker.css";
 import { Context } from "../store/appContext";
+
 const api = process.env.BACKEND_URL + "/api/nutritionist";
 
 export const Sessions = () => {
@@ -178,7 +179,7 @@ export const Sessions = () => {
         };
 
         return (
-          <div className="d-inline-flex p-5" key={singleNutri.id}>
+          <div className="d-inline-flex p-5">
             <div className="card m-2" style={{ width: "20rem" }}>
               <img
                 className="card-img-top"

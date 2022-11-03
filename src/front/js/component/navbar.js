@@ -14,8 +14,8 @@ export const Navbar = () => {
             <img
               src="https://dcassetcdn.com/design_img/1588933/543535/543535_8440573_1588933_401cc4a9_image.jpg"
               alt="Logo"
-              width="50"
-              height="50"
+              width="70"
+              height="70"
               className="d-inline-block align-top"
             />
           </span>
