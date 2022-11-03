@@ -13,6 +13,8 @@ export const Nutritionistprofile = () => {
   const [days, setDays] = useState([]);
   const [time, setTime] = useState([]);
   const [description, setDescription] = useState("");
+  const [picInput, setPicInput] = useState(false);
+  const [photo, setPhoto] = useState("");
   const [nutri, setNutri] = useState([]);
   const [edit, setEdit] = useState(false);
   const navigate = useNavigate();
@@ -46,6 +48,7 @@ export const Nutritionistprofile = () => {
           setEmail(item.nutritionist_email);
           setPassword(item.password);
           setDescription(item.description);
+          setPhoto(item.photo);
         });
         return true;
       } catch (error) {
@@ -93,6 +96,7 @@ export const Nutritionistprofile = () => {
           days: days.join(""),
           times: time.join(","),
           description: description,
+          photo: photo,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -117,19 +121,43 @@ export const Nutritionistprofile = () => {
       </div>
       {edit === true ? (
         <div>
-          return (
           <div key={`${id}Edit`}>
-            <div className="my-5">
-              <div id="portraitProfilePicture" className="mx-auto w-50 py-4">
-                <img
-                  id="profilePic"
-                  src="//www.html.am/images/image-codes/milford_sound_t.jpg"
-                  width="225"
-                  height="151"
-                  alt="Photo of Milford Sound in New Zealand"
-                />
+            {picInput == false ? (
+              <button type="submit" className="btn btn-primary">
+                <a
+                  href="https://postimages.org/"
+                  target="_blank"
+                  style={{ color: "white" }}
+                  onClick={() => setPicInput(true)}
+                >
+                  {" "}
+                  Click here to convert your photo to a URL
+                </a>
+              </button>
+            ) : (
+              <div className="row g-3 my-2 justify-content-center align-items-center">
+                <div className="col-2">
+                  <label htmlFor="exampleInputEmail1">Direct link:</label>
+                </div>
+                <div className="col-4 d-flex">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="clientInputFirstName"
+                    placeholder="Something like this:    https://i.postimg.cc/c1pL93zQ/your_file_name.jpg"
+                    value={photo}
+                    onChange={(e) => setPhoto(e.target.value)}
+                  />
+                  <button
+                    type="button"
+                    className="btn btn-danger mx-2"
+                    onClick={() => setPicInput(false)}
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
             <div className="row g-3 my-2 justify-content-center align-items-center">
               <div className="col-2">
                 <label htmlFor="inputFirstName" className="col-form-label">
@@ -454,7 +482,6 @@ export const Nutritionistprofile = () => {
               </button>
             </div>
           </div>
-          );
         </div>
       ) : (
         <div>
@@ -472,10 +499,10 @@ export const Nutritionistprofile = () => {
                   >
                     <img
                       id="profilePic"
-                      src="//www.html.am/images/image-codes/milford_sound_t.jpg"
+                      src={photo}
                       width="225"
                       height="151"
-                      alt="Photo of Milford Sound in New Zealand"
+                      alt="Profile picture"
                     />
                   </div>
                 </div>

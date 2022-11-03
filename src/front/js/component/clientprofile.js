@@ -11,6 +11,8 @@ export const Clientprofile = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [description, setDescription] = useState("");
+  const [picInput, setPicInput] = useState(false);
+  const [photo, setPhoto] = useState("");
   const [client, setClient] = useState([]);
   const [edit, setEdit] = useState("");
   const navigate = useNavigate();
@@ -35,6 +37,7 @@ export const Clientprofile = () => {
           setEmail(item.client_email);
           setPassword(item.password);
           setDescription(item.description);
+          setPhoto(item.photo);
         });
         return true;
       } catch (error) {
@@ -79,6 +82,7 @@ export const Clientprofile = () => {
           nutritionist_email: email,
           password: password,
           description: description,
+          photo: photo,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -104,17 +108,42 @@ export const Clientprofile = () => {
       {edit === true ? (
         <div>
           <div>
-            <div className="my-5">
-              <div id="portraitProfilePicture" className="mx-auto w-50 py-4">
-                <img
-                  id="profilePic"
-                  src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-                  width="225"
-                  height="151"
-                  alt="Profile img example"
-                />
+            {picInput == false ? (
+              <button type="submit" className="btn btn-primary">
+                <a
+                  href="https://postimages.org/"
+                  target="_blank"
+                  style={{ color: "white" }}
+                  onClick={() => setPicInput(true)}
+                >
+                  {" "}
+                  Click here to convert your photo to a URL
+                </a>
+              </button>
+            ) : (
+              <div className="row g-3 my-2 justify-content-center align-items-center">
+                <div className="col-2">
+                  <label htmlFor="exampleInputEmail1">Direct link:</label>
+                </div>
+                <div className="col-4 d-flex">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="clientInputFirstName"
+                    placeholder="Something like this:    https://i.postimg.cc/c1pL93zQ/your_file_name.jpg"
+                    value={photo}
+                    onChange={(e) => setPhoto(e.target.value)}
+                  />
+                  <button
+                    type="button"
+                    className="btn btn-danger mx-2"
+                    onClick={() => setPicInput(false)}
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
             <div className="row g-3 my-2 justify-content-center align-items-center">
               <div className="col-2">
                 <label htmlFor="inputFirstName" className="col-form-label">
@@ -231,10 +260,10 @@ export const Clientprofile = () => {
               <div id="portraitProfilePicture" className="mx-auto w-50 py-4">
                 <img
                   id="profilePic"
-                  src="//www.html.am/images/image-codes/milford_sound_t.jpg"
+                  src={photo}
                   width="225"
                   height="151"
-                  alt="Photo of Milford Sound in New Zealand"
+                  alt="Profile Picture"
                 />
               </div>
             </div>
@@ -322,7 +351,6 @@ export const Clientprofile = () => {
               </button>
             </div>
           </div>
-          );
         </div>
       )}
     </div>
