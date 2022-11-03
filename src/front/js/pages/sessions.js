@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import Alert from "react-popup-alert";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
@@ -19,6 +20,11 @@ export const Sessions = () => {
   const [nutritionists, setNutritionists] = useState([]);
   const [cutTime, setCutTime] = useState([]);
   const navigate = useNavigate();
+  const [alert, setAlert] = useState({
+    type: "error",
+    text: "This is a alert message",
+    show: false,
+  });
 
   if (store.rol === "true") navigate("/");
 
@@ -65,6 +71,7 @@ export const Sessions = () => {
 
   const handleSession = () => {
     if ((startDate != null, startTime != null)) {
+      console.log("inside");
       fetch(process.env.BACKEND_URL + "/api/session", {
         method: "POST",
         body: JSON.stringify({
@@ -83,7 +90,7 @@ export const Sessions = () => {
           console.log(resp.ok); // will be true if the response is successfull
           console.log(resp.status); // the status code = 200 or code = 400 etc.
           console.log(resp.text()); // will try return the exact result as string
-          return resp; // (returns promise) will try to parse the result as json as return a promise that you can .then for results
+          return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
         })
         .catch((error) => {
           //error handling
@@ -92,10 +99,46 @@ export const Sessions = () => {
     }
   };
 
+  //   function removeElementsByClass(className){
+  //     const elements = document.getElementsByClassName(className);
+  //     while(elements.length > 0){
+  //         elements[0].parentNode.removeChild(elements[0]);
+  //     }
+  // }
+
+  function onCloseAlert() {
+    setAlert({
+      type: "",
+      text: "",
+      show: false,
+    });
+  }
+
+  function onShowAlert(type) {
+    setAlert({
+      type: type,
+      text:"You've done one step foward on being healthier",
+      show: true,
+    });
+  }
+
   console.log(store.id);
   console.log(clientName);
   return (
     <div className="container">
+      <div style={{ display: "flex", justifyContent: "center", marginTop: 50 }}>
+        <Alert
+          header={"Your session has been succesfully scheduled!"}
+          btnText={"Close this message"}
+          text={alert.text}
+          type={alert.type}
+          show={alert.show}
+          onClosePress={onCloseAlert}
+          pressCloseOnOutsideClick={true}
+          headerStyles={{}}
+          textStyles={{}}
+        />
+      </div>
       {/**
        * This map renders the nutritionists data into cards
        */}
@@ -226,49 +269,13 @@ export const Sessions = () => {
                           </button>
                           <button
                             className="btn btn-primary"
-                            data-bs-target={`#exampleModalToggle2${i}`}
-                            data-bs-toggle="modal"
-                            onClick={handleSession}
+                            data-bs-dismiss="modal"
+                            onClick={() => {
+                              handleSession();
+                              onShowAlert();
+                            }}
                           >
                             Schedule
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className="modal fade"
-                    id={`exampleModalToggle2${i}`}
-                    aria-hidden="true"
-                    aria-labelledby="exampleModalToggleLabel2"
-                    tabIndex="-1"
-                  >
-                    <div className="modal-dialog">
-                      <div className="modal-content">
-                        <div className="modal-header">
-                          <h1
-                            className="modal-title fs-5"
-                            id="exampleModalToggleLabel2"
-                          >
-                            You've done a step forward on being healthier
-                          </h1>
-                          <button
-                            type="button"
-                            className="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          ></button>
-                        </div>
-                        <div className="modal-body">
-                          Your session has been scheduled!
-                        </div>
-                        <div className="modal-footer">
-                          <button
-                            type="button"
-                            className="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                          >
-                            Close
                           </button>
                         </div>
                       </div>
@@ -277,7 +284,7 @@ export const Sessions = () => {
                   <button
                     className="btn btn-primary"
                     data-bs-toggle="modal"
-                    href={`#exampleModalToggle${i}`}
+                    data-bs-target={`#exampleModalToggle${i}`}
                     role="button"
                     onClick={() => {
                       setNutriId(singleNutri.id);

@@ -78,6 +78,7 @@
 		"react-datepicker": "^4.8.0",
 		"react-dom": "^16.8.4",
 		"react-polyfills": "0.0.1",
+		"react-popup-alert": "^2.0.0",
 		"react-router-dom": "^6.3.0"
 	}
 }

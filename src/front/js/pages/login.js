@@ -16,6 +16,8 @@ export const Login = () => {
   if (store.token !== "" && store.token !== undefined && store.token !== null)
     navigate("/");
 
+    console.log(store.id)
+
   return (
     <div style={{backgroundImage: "url("+ loginImg +")", backgroundRepeat: "no-repeat", backgroundPosition: "center",}}>
       <h2 className="mx-auto w-50 mt-5 text-white">Login</h2>
