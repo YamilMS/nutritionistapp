@@ -12,6 +12,7 @@ class Client(db.Model):
     days = db.Column(db.String(120), unique=False, nullable=False)
     times = db.Column(db.String(120), unique=False, nullable=False)
     description= db.Column(db.String(500), unique=False, nullable=False)
+    photo= db.Column(db.String(500), unique=False, nullable=False)
 
     def __repr__(self):
         return f'{self.id}'
@@ -25,7 +26,8 @@ class Client(db.Model):
             "professional": self.professional,
             "days": self.days,
             "times": self.times,
-            "description": self.description
+            "description": self.description,
+            "photo": self.photo
             # do not serialize the password, its a security breach
         }
 
@@ -39,6 +41,7 @@ class Nutritionist(db.Model):
     days = db.Column(db.String(120), unique=False, nullable=False)
     times = db.Column(db.String(120), unique=False, nullable=False)
     description= db.Column(db.String(500), unique=False, nullable=False)
+    photo= db.Column(db.String(500), unique=False, nullable=False)
 
     def __repr__(self):
         return f'{self.id}'
@@ -52,7 +55,8 @@ class Nutritionist(db.Model):
             "professional": self.professional,
             "days": self.days,
             "times": self.times,
-            "description": self.description
+            "description": self.description,
+            "photo": self.photo
 
             # do not serialize the password, its a security breach
         }

@@ -72,6 +72,7 @@ def signUp_client():
     days_request = request.json.get("days", None)
     times_request = request.json.get("times", None)
     description_request = request.json.get("description", None)
+    photo_request = request.json.get("photo", None)
 
     new_client = Client(
         first_name= first_name_request,
@@ -81,7 +82,8 @@ def signUp_client():
         professional= professional_request,
         days= days_request,
         times= times_request,
-        description= description_request
+        description= description_request,
+        photo= photo_request,
     )
 
     db.session.add(new_client)
@@ -108,6 +110,8 @@ def update_client(client_id):
         client1.password =  request_body_client["password"]
     if "description" in request_body_client:
         client1.description =  request_body_client["description"]
+    if "photo" in request_body_client:
+        client1.photo =  request_body_client["photo"]
     db.session.commit()
 
     return 'client updated', 200
@@ -145,6 +149,7 @@ def signUp_nutritionist():
     days_request = request.json.get("days", None)
     times_request = request.json.get("times", None)
     description_request = request.json.get("description", None)
+    photo_request = request.json.get("photo", None)
 
     new_nutritionist = Nutritionist(
         first_name= first_name_request,
@@ -154,7 +159,8 @@ def signUp_nutritionist():
         professional= professional_request,
         days= days_request,
         times= times_request,
-        description= description_request
+        description= description_request,
+        photo= photo_request,
     )
 
     db.session.add(new_nutritionist)
@@ -188,10 +194,12 @@ def modify_nutritionist(nutritionist_id):
         nutritionist_mod.times= request_body_nutritionist["times"]
     if "description" in request_body_nutritionist:
         nutritionist_mod.description= request_body_nutritionist["description"]
+    if "photo" in request_body_nutritionist:
+        nutritionist_mod.photo= request_body_nutritionist["photo"]    
 
     db.session.commit()
 
-    return 'nutritionist added', 200
+    return 'nutritionist updated', 200
 
 
 @api.route("/nutritionist/", methods=["GET"])
