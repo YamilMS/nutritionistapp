@@ -9,7 +9,7 @@ export const Profile = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <div style={{backgroundImage: "url("+ imgProfile +")", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>
+    <div className="container-fluid" style={{backgroundImage: "url("+ imgProfile +")", backgroundRepeat: "no-repeat", backgroundPosition: "center", padding: "1.5rem", backgroundSize: "100% 100%",}}>
       {store.id ? (
         <div className="text-center container">
           {store.rol === "true" ? <Nutritionistprofile /> : <Clientprofile />}

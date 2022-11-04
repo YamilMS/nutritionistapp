@@ -269,7 +269,7 @@ export const Clientprofile = () => {
             </div>
             <div className="row g-3 my-2 justify-content-center align-items-center">
               <div className="col-2">
-                <label htmlFor="inputFirstName" className="col-form-label">
+                <label htmlFor="inputFirstName" className="form-control-plaintext">
                   First Name
                 </label>
               </div>
@@ -277,7 +277,7 @@ export const Clientprofile = () => {
                 <input
                   type="text"
                   id="inputFirstName"
-                  className="form-control"
+                  className="form-control-plaintext"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                   aria-describedby="firstNameHelpInline"
@@ -286,7 +286,7 @@ export const Clientprofile = () => {
             </div>
             <div className="row g-3 my-2 justify-content-center align-items-center">
               <div className="col-2">
-                <label htmlFor="inputLastName" className="col-form-label">
+                <label htmlFor="inputLastName" className="form-control-plaintext">
                   Last Name
                 </label>
               </div>
@@ -294,7 +294,7 @@ export const Clientprofile = () => {
                 <input
                   type="text"
                   id="inputLastName"
-                  className="form-control"
+                  className="form-control-plaintext"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                   aria-describedby="lastNameHelpInline"
@@ -303,7 +303,7 @@ export const Clientprofile = () => {
             </div>
             <div className="row g-3 my-2 justify-content-center align-items-center">
               <div className="col-2">
-                <label htmlFor="inputEmail" className="col-form-label">
+                <label htmlFor="inputEmail" className="form-control-plaintext">
                   Email
                 </label>
               </div>
@@ -311,7 +311,7 @@ export const Clientprofile = () => {
                 <input
                   type="text"
                   id="inputEmail"
-                  className="form-control"
+                  className="form-control-plaintext"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   aria-describedby="emailHelpInline"
@@ -329,7 +329,7 @@ export const Clientprofile = () => {
                   <input
                     type="text"
                     id="inputDescription"
-                    className="form-control"
+                    className="form-control-plaintext"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     aria-describedby="descriptionHelpInline"
