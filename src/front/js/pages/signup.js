@@ -74,7 +74,8 @@ export const Signup = () => {
       style={{
         backgroundImage: "url(" + img + ")",
         backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
+        padding: "1rem",
+        backgroundSize: "100% 100%",
       }}
     >
       <div className="opacity-100">
@@ -88,7 +89,7 @@ export const Signup = () => {
           <ul className="nav nav-tabs" id="myTab" role="tablist">
             <li className="nav-item" role="presentation">
               <button
-                className="nav-link active"
+                className="nav-link active btn bg-danger bg-opacity-10"
                 id="client-tab"
                 data-bs-toggle="tab"
                 data-bs-target="#client"
@@ -106,7 +107,7 @@ export const Signup = () => {
             </li>
             <li className="nav-item" role="presentation">
               <button
-                className="nav-link"
+                className="nav-link btn bg-danger bg-opacity-10"
                 id="nutritionist-tab"
                 data-bs-toggle="tab"
                 data-bs-target="#nutritionist"

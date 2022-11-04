@@ -516,7 +516,7 @@ export const Nutritionistprofile = () => {
                     <input
                       type="text"
                       id="inputFirstName"
-                      className="form-control"
+                      className="form-control-plaintext"
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
                       aria-describedby="firstNameHelpInline"
@@ -533,7 +533,7 @@ export const Nutritionistprofile = () => {
                     <input
                       type="text"
                       id="inputLastName"
-                      className="form-control"
+                      className="form-control-plaintext"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
                       aria-describedby="lastNameHelpInline"
@@ -550,7 +550,7 @@ export const Nutritionistprofile = () => {
                     <input
                       type="text"
                       id="inputEmailEdit"
-                      className="form-control"
+                      className="form-control-plaintext"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       aria-describedby="emailHelpInline"
@@ -567,7 +567,7 @@ export const Nutritionistprofile = () => {
                     <input
                       type="text"
                       id="inputEmail"
-                      className="form-control"
+                      className="form-control-plaintext"
                       value={getDays.join(", ")}
                       onChange={(e) => setDays(e.target.value)}
                       aria-describedby="emailHelpInline"
@@ -584,7 +584,7 @@ export const Nutritionistprofile = () => {
                     <input
                       type="password"
                       id="inputPassword"
-                      className="form-control"
+                      className="form-control-plaintext"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       aria-describedby="passwordHelpInline"
@@ -606,7 +606,7 @@ export const Nutritionistprofile = () => {
                       <input
                         type="text"
                         id="inputDescription"
-                        className="form-control"
+                        className="form-control-plaintext"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         aria-describedby="descriptionHelpInline"
