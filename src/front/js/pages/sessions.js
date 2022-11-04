@@ -141,7 +141,7 @@ export const Sessions = () => {
        * This map renders the nutritionists data into cards
        */}
       <div>
-        {nutriName.length == 0 ? (
+        {nutritionists.length == 0 ? (
           <div className="text-center container">
             <h5>Loading your sessions</h5>
             <div className="d-flex justify-content-center">

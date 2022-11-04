@@ -86,6 +86,19 @@ export const Mysessions = () => {
                     <td>{singleSess.name_client}</td>
                     <td>{dateArr[0]}</td>
                     <td>{timeSplited[0].concat(":", timeSplited[1])}</td>
+                    <td>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => {
+                          setSessions(
+                            sessions.filter((item) => item.id !== id)
+                          );
+                          handleDeleteSession(id);
+                        }}
+                      >
+                        Delete session
+                      </button>
+                    </td>
                   </tr>
                 ) : (
                   <tr key={i}>
