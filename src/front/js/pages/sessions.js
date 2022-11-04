@@ -110,7 +110,7 @@ export const Sessions = () => {
   function onShowAlert(type) {
     setAlert({
       type: type,
-      text:"You've done one step foward on being healthier",
+      text: "You've done one step foward on being healthier",
       show: true,
     });
   }
@@ -129,170 +129,190 @@ export const Sessions = () => {
           onClosePress={onCloseAlert}
           pressCloseOnOutsideClick={true}
           showBorderBottom={false}
-          buttonStyles={{display: "flex", justifyContent: "center", marginTop: 50, background: "none",}}
+          buttonStyles={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: 50,
+            background: "none",
+          }}
         />
       </div>
       {/**
        * This map renders the nutritionists data into cards
        */}
-      {nutritionists.map((singleNutri, i) => {
-        const NutriName = singleNutri.first_name + " " + singleNutri.last_name;
-        const daysAvailable = singleNutri.days.split("");
-        const timesAvailable = singleNutri.times.split(",");
-        const minTimeAvailable = Math.min(...timesAvailable);
-        const maxTimeAvailable = Math.max(...timesAvailable);
+      <div>
+        {nutriName.length == 0 ? (
+          <div className="text-center container">
+            <h5>Loading your sessions</h5>
+            <div className="d-flex justify-content-center">
+              <div className="spinner"></div>
+            </div>
+          </div>
+        ) : (
+          <div>
+            {nutritionists.map((singleNutri, i) => {
+              const NutriName =
+                singleNutri.first_name + " " + singleNutri.last_name;
+              const daysAvailable = singleNutri.days.split("");
+              const timesAvailable = singleNutri.times.split(",");
+              const minTimeAvailable = Math.min(...timesAvailable);
+              const maxTimeAvailable = Math.max(...timesAvailable);
 
-        {
-          /**
-           * This map renders the nutritionists data into cards
-           */
-        }
+              {
+                /**
+                 * This map renders the nutritionists data into cards
+                 */
+              }
 
-        const cutTimeFunction = () => {
-          if (
-            timesAvailable.includes("8") &&
-            !timesAvailable.includes("13") &&
-            timesAvailable.includes("20")
-          ) {
-            return setCutTime([
-              setHours(setMinutes(new Date(), 0), 13),
-              setHours(setMinutes(new Date(), 0), 14),
-              setHours(setMinutes(new Date(), 0), 15),
-              setHours(setMinutes(new Date(), 0), 16),
-            ]);
-          } else {
-            return setCutTime([]);
-          }
-        };
+              const cutTimeFunction = () => {
+                if (
+                  timesAvailable.includes("8") &&
+                  !timesAvailable.includes("13") &&
+                  timesAvailable.includes("20")
+                ) {
+                  return setCutTime([
+                    setHours(setMinutes(new Date(), 0), 13),
+                    setHours(setMinutes(new Date(), 0), 14),
+                    setHours(setMinutes(new Date(), 0), 15),
+                    setHours(setMinutes(new Date(), 0), 16),
+                  ]);
+                } else {
+                  return setCutTime([]);
+                }
+              };
 
-        const isAvailable = (date) => {
-          const day = date.getDay(date);
-          const daysAvailableInNumber = daysAvailable.map(Number);
-          return daysAvailableInNumber.includes(day);
-        };
+              const isAvailable = (date) => {
+                const day = date.getDay(date);
+                const daysAvailableInNumber = daysAvailable.map(Number);
+                return daysAvailableInNumber.includes(day);
+              };
 
-        return (
-          <div className="d-inline-flex p-5">
-            <div className="card m-2" style={{ width: "20rem" }}>
-              <img
-                className="card-img-top"
-                src={singleNutri.photo}
-                alt="Card image cap"
-                width="50"
-                height="350"
-              ></img>
-              <div className="card-body" id={singleNutri.id}>
-                <h5 className="card-title">{singleNutri.first_name}</h5>
-                <p className="card-text">{singleNutri.description}</p>
-                <div className="d-flex flex-row">
-                  {/**
+              return (
+                <div className="d-inline-flex p-5">
+                  <div className="card m-2" style={{ width: "20rem" }}>
+                    <img
+                      className="card-img-top"
+                      src={singleNutri.photo}
+                      alt="Card image cap"
+                      width="50"
+                      height="350"
+                    ></img>
+                    <div className="card-body" id={singleNutri.id}>
+                      <h5 className="card-title">{singleNutri.first_name}</h5>
+                      <p className="card-text">{singleNutri.description}</p>
+                      <div className="d-flex flex-row">
+                        {/**
 						This Button must redirect the user to the nutritionist profile page
 							*/}
-                  <a href="#" className="btn btn-link m-2">
-                    Learn More
-                  </a>
-                  {/**
+                        <a href="#" className="btn btn-link m-2">
+                          Learn More
+                        </a>
+                        {/**
 					 This Button must open the modal to schedule a session
 							*/}
-                  <div
-                    className="modal fade"
-                    id={`exampleModalToggle${i}`}
-                    aria-hidden="true"
-                    aria-labelledby="exampleModalToggleLabel"
-                    tabIndex="-1"
-                  >
-                    <div className="modal-dialog">
-                      <div className="modal-content">
-                        <div className="modal-header">
-                          <h1
-                            className="modal-title fs-5"
-                            id="exampleModalToggleLabel"
-                          >
-                            Schedule a Session with {singleNutri.first_name}
-                          </h1>
-                          <button
-                            type="button"
-                            className="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          ></button>
+                        <div
+                          className="modal fade"
+                          id={`exampleModalToggle${i}`}
+                          aria-hidden="true"
+                          aria-labelledby="exampleModalToggleLabel"
+                          tabIndex="-1"
+                        >
+                          <div className="modal-dialog">
+                            <div className="modal-content">
+                              <div className="modal-header">
+                                <h1
+                                  className="modal-title fs-5"
+                                  id="exampleModalToggleLabel"
+                                >
+                                  Schedule a Session with{" "}
+                                  {singleNutri.first_name}
+                                </h1>
+                                <button
+                                  type="button"
+                                  className="btn-close"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"
+                                ></button>
+                              </div>
+                              <div className="modal-body">
+                                <br />
+                                <p>Pick a Date:</p>
+                                <DatePicker
+                                  selected={startDate}
+                                  onChange={(date) => setStartDate(date)}
+                                  filterDate={isAvailable}
+                                  dateFormat="MMMM d, yyyy"
+                                  isClearable
+                                  placeholderText="Pick a Date"
+                                />
+                                <br />
+                                <br />
+                                <p>Pick a Time:</p>
+                                <DatePicker
+                                  selected={startTime}
+                                  onChange={(date) => setStartTime(date)}
+                                  showTimeSelect
+                                  showTimeSelectOnly
+                                  timeIntervals={60}
+                                  minTime={setHours(
+                                    setMinutes(new Date(), 0),
+                                    minTimeAvailable
+                                  )}
+                                  maxTime={setHours(
+                                    setMinutes(new Date(), 0),
+                                    maxTimeAvailable
+                                  )}
+                                  excludeTimes={cutTime}
+                                  timeCaption="Time"
+                                  dateFormat="h:mm aa"
+                                  isClearable
+                                  placeholderText="Pick a Time"
+                                />
+                              </div>
+                              <div className="modal-footer">
+                                <button
+                                  type="button"
+                                  className="btn btn-secondary"
+                                  data-bs-dismiss="modal"
+                                >
+                                  Close
+                                </button>
+                                <button
+                                  className="btn btn-primary"
+                                  data-bs-dismiss="modal"
+                                  onClick={() => {
+                                    handleSession();
+                                    onShowAlert();
+                                  }}
+                                >
+                                  Schedule
+                                </button>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <div className="modal-body">
-                          <br />
-                          <p>Pick a Date:</p>
-                          <DatePicker
-                            selected={startDate}
-                            onChange={(date) => setStartDate(date)}
-                            filterDate={isAvailable}
-                            dateFormat="MMMM d, yyyy"
-                            isClearable
-                            placeholderText="Pick a Date"
-                          />
-                          <br />
-                          <br />
-                          <p>Pick a Time:</p>
-                          <DatePicker
-                            selected={startTime}
-                            onChange={(date) => setStartTime(date)}
-                            showTimeSelect
-                            showTimeSelectOnly
-                            timeIntervals={60}
-                            minTime={setHours(
-                              setMinutes(new Date(), 0),
-                              minTimeAvailable
-                            )}
-                            maxTime={setHours(
-                              setMinutes(new Date(), 0),
-                              maxTimeAvailable
-                            )}
-                            excludeTimes={cutTime}
-                            timeCaption="Time"
-                            dateFormat="h:mm aa"
-                            isClearable
-                            placeholderText="Pick a Time"
-                          />
-                        </div>
-                        <div className="modal-footer">
-                          <button
-                            type="button"
-                            className="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                          >
-                            Close
-                          </button>
-                          <button
-                            className="btn btn-primary"
-                            data-bs-dismiss="modal"
-                            onClick={() => {
-                              handleSession();
-                              onShowAlert();
-                            }}
-                          >
-                            Schedule
-                          </button>
-                        </div>
+                        <button
+                          className="btn btn-primary"
+                          data-bs-toggle="modal"
+                          data-bs-target={`#exampleModalToggle${i}`}
+                          role="button"
+                          onClick={() => {
+                            setNutriId(singleNutri.id);
+                            setNutriName(NutriName);
+                            cutTimeFunction();
+                          }}
+                        >
+                          Schedule a session
+                        </button>
                       </div>
                     </div>
                   </div>
-                  <button
-                    className="btn btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target={`#exampleModalToggle${i}`}
-                    role="button"
-                    onClick={() => {
-                      setNutriId(singleNutri.id);
-                      setNutriName(NutriName);
-                      cutTimeFunction();
-                    }}
-                  >
-                    Schedule a session
-                  </button>
                 </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
-        );
-      })}
+        )}
+      </div>
       <br />
       <br />
       <br />
