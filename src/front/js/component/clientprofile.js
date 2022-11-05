@@ -260,9 +260,8 @@ export const Clientprofile = () => {
               <div id="portraitProfilePicture" className="mx-auto w-50 py-4">
                 <img
                   id="profilePic"
+                  className="userphoto"
                   src={photo}
-                  width="225"
-                  height="151"
                   alt="Profile Picture"
                 />
               </div>

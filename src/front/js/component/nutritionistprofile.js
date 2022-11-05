@@ -499,9 +499,8 @@ export const Nutritionistprofile = () => {
                   >
                     <img
                       id="profilePic"
+                      className="userphoto"
                       src={photo}
-                      width="225"
-                      height="151"
                       alt="Profile picture"
                     />
                   </div>

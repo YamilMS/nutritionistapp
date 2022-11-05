@@ -24,3 +24,30 @@
     transform: rotate(360deg);
   }
 }
+
+.userphoto {
+  object-fit: cover;
+  height: 21.875rem;
+  width: 19.900rem;
+}
+
+body {
+  background: #DEEFDF;
+}
+
+/* Sessions styling */
+
+.schedulebutton {
+  background: #ff9c5a ;
+  border: none;
+}
+
+.schedulebutton:hover {
+  background: #ff812d ;
+  border: none;
+}
+
+.schedulebutton:active {
+  background: #fd6c0b!important ;
+  border: none;
+}
