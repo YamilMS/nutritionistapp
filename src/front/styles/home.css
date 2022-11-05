@@ -28,26 +28,31 @@
 .userphoto {
   object-fit: cover;
   height: 21.875rem;
-  width: 19.900rem;
+  width: 19.9rem;
 }
 
 body {
-  background: #DEEFDF;
+  background: #deefdf;
 }
 
 /* Sessions styling */
 
 .schedulebutton {
-  background: #ff9c5a ;
+  background: #ff9c5a;
   border: none;
 }
 
 .schedulebutton:hover {
-  background: #ff812d ;
+  background: #ff812d;
   border: none;
 }
 
 .schedulebutton:active {
-  background: #fd6c0b!important ;
+  background: #fd6c0b !important ;
   border: none;
+}
+
+.navLink {
+  text-decoration: none;
+  color: black;
 }
