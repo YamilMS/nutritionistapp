@@ -191,11 +191,9 @@ export const Sessions = () => {
                 <div className="d-inline-flex p-5">
                   <div className="card m-2" style={{ width: "20rem" }}>
                     <img
-                      className="card-img-top"
+                      className="userphoto card-img-top"
                       src={singleNutri.photo}
                       alt="Card image cap"
-                      width="50"
-                      height="350"
                     ></img>
                     <div className="card-body" id={singleNutri.id}>
                       <h5 className="card-title">{singleNutri.first_name}</h5>
@@ -278,7 +276,7 @@ export const Sessions = () => {
                                   Close
                                 </button>
                                 <button
-                                  className="btn btn-primary"
+                                  className="schedulebutton btn btn-primary"
                                   data-bs-dismiss="modal"
                                   onClick={() => {
                                     handleSession();
@@ -292,7 +290,7 @@ export const Sessions = () => {
                           </div>
                         </div>
                         <button
-                          className="btn btn-primary"
+                          className="schedulebutton btn btn-primary"
                           data-bs-toggle="modal"
                           data-bs-target={`#exampleModalToggle${i}`}
                           role="button"
