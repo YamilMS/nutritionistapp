@@ -123,17 +123,20 @@ export const Nutritionistprofile = () => {
         <div>
           <div key={`${id}Edit`}>
             {picInput == false ? (
-              <button type="submit" className="btn btn-primary">
-                <a
-                  href="https://postimages.org/"
-                  target="_blank"
-                  style={{ color: "white" }}
-                  onClick={() => setPicInput(true)}
+              <a
+                href="https://postimages.org/"
+                target="_blank"
+                style={{ color: "white" }}
+                onClick={() => setPicInput(true)}
+              >
+                <button
+                  type="submit"
+                  className="outButton btn btn-outline-primary m-2"
                 >
                   {" "}
                   Click here to convert your photo to a URL
-                </a>
-              </button>
+                </button>
+              </a>
             ) : (
               <div className="row g-3 my-2 justify-content-center align-items-center">
                 <div className="col-2">
@@ -464,7 +467,7 @@ export const Nutritionistprofile = () => {
             </div>
             <div>
               <button
-                className="m-2"
+                className="outButton btn btn-outline-primary m-2"
                 onClick={() => {
                   setEdit(false);
                 }}
@@ -472,7 +475,7 @@ export const Nutritionistprofile = () => {
                 GO BACK
               </button>
               <button
-                className="m-2"
+                className="schedulebutton btn btn-primary m-2"
                 onClick={() => {
                   modifyNutriProfile();
                   setEdit(false);
@@ -574,7 +577,7 @@ export const Nutritionistprofile = () => {
                   </div>
                 </div>
                 <div className="row g-3 my-2 justify-content-center align-items-center">
-                  <div className="col-2">
+                  {/* <div className="col-2">
                     <label htmlFor="inputPassword" className="col-form-label">
                       Password
                     </label>
@@ -591,7 +594,7 @@ export const Nutritionistprofile = () => {
                     <span id="passwordHelpInline" className="form-text">
                       Must be 8-20 characters long.
                     </span>
-                  </div>
+                  </div> */}
                   <div className="row g-3 my-2 justify-content-center align-items-center">
                     <div className="col-2">
                       <label
@@ -615,15 +618,18 @@ export const Nutritionistprofile = () => {
                 </div>
                 <div>
                   <button
-                    className="m-2"
+                    className="outButton btn btn-outline-primary m-2"
+                    onClick={deleteNutri}
+                  >
+                    DELETE
+                  </button>
+                  <button
+                    className="schedulebutton btn btn-primary m-2"
                     onClick={() => {
                       setEdit(true);
                     }}
                   >
                     EDIT
-                  </button>
-                  <button className="m-2" onClick={deleteNutri}>
-                    DELETE
                   </button>
                 </div>
               </div>
