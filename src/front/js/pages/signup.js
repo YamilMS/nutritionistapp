@@ -79,19 +79,19 @@ export const Signup = () => {
       }}
     >
       <div className="opacity-100">
-        <h2 className="mx-auto w-50 mt-5 text-white">Sign Up</h2>
+        <h2 className="mx-auto w-50 mt-5 text-dark">Sign Up</h2>
       </div>
       {/* 
         TABS TO CHANGE THE VIEWS BETWEEN CLIENT AND NUTRITIONIST 
       */}
       <div className="row">
         <div className="d-flex justify-content-center bg-ligth pt-1">
-          <ul className="nav nav-tabs" id="myTab" role="tablist">
+          <ul className="nav nav-pills" id="myTab" role="tablist">
             <li className="nav-item" role="presentation">
               <button
-                className="nav-link active btn bg-danger bg-opacity-10"
+                className="nav-link active"
                 id="client-tab"
-                data-bs-toggle="tab"
+                data-bs-toggle="pill"
                 data-bs-target="#client"
                 type="button"
                 role="tab"
@@ -107,9 +107,9 @@ export const Signup = () => {
             </li>
             <li className="nav-item" role="presentation">
               <button
-                className="nav-link btn bg-danger bg-opacity-10"
+                className="nav-link"
                 id="nutritionist-tab"
-                data-bs-toggle="tab"
+                data-bs-toggle="pill"
                 data-bs-target="#nutritionist"
                 type="button"
                 role="tab"
@@ -188,29 +188,21 @@ export const Signup = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div className="form-group mb-2">
-              <label htmlFor="exampleFormControlTextarea1">Description</label>
-              <textarea
-                className="form-control text-dark bg-opacity-10 shadow-lg p-3 mb-3 bg-body rounded"
-                id="clientFormControlTextarea1"
-                rows="5"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              ></textarea>
-            </div>
             <div className="form-group d-flex flex-column my-2">
               {picInput == false ? (
-                <button type="submit" className="btn btn-primary">
-                  <a
-                    href="https://postimages.org/"
-                    target="_blank"
-                    style={{ color: "white" }}
-                    onClick={() => setPicInput(true)}
+                <a
+                  href="https://postimages.org/"
+                  target="_blank"
+                  style={{ color: "white" }}
+                  onClick={() => setPicInput(true)}
+                >
+                  <button
+                    type="submit"
+                    className="outButton btn btn-outline-primary"
                   >
-                    {" "}
-                    Click here to convert your photo to a URL
-                  </a>
-                </button>
+                    Click here to convert your photo to a URL{" "}
+                  </button>
+                </a>
               ) : (
                 <div className="form-group mb-2">
                   <label htmlFor="exampleInputEmail1">
@@ -237,9 +229,19 @@ export const Signup = () => {
                 </div>
               )}
             </div>
+            <div className="form-group mb-2">
+              <label htmlFor="exampleFormControlTextarea1">Description</label>
+              <textarea
+                className="form-control text-dark bg-opacity-10 shadow-lg p-3 mb-3 bg-body rounded"
+                id="clientFormControlTextarea1"
+                rows="5"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              ></textarea>
+            </div>
             <button
               type="submit"
-              className="btn btn-primary"
+              className="schedulebutton btn btn-primary"
               onClick={handleSignUp}
             >
               Submit
@@ -529,29 +531,21 @@ export const Signup = () => {
                 <div className="form-group form-check mx-3"></div>
               </div>
             </div>
-            <div className="form-group mb-2">
-              <label htmlFor="exampleFormControlTextarea1">Description</label>
-              <textarea
-                className="form-control text-dark bg-opacity-10 shadow-lg p-3 mb-3 bg-body rounded"
-                id="nutritionistFormControlTextarea1"
-                rows="5"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              ></textarea>
-            </div>
             <div className="form-group d-flex flex-column my-2">
               {picInput == false ? (
-                <button type="submit" className="btn btn-primary">
-                  <a
-                    href="https://postimages.org/"
-                    target="_blank"
-                    style={{ color: "white" }}
-                    onClick={() => setPicInput(true)}
+                <a
+                  href="https://postimages.org/"
+                  target="_blank"
+                  style={{ color: "white" }}
+                  onClick={() => setPicInput(true)}
+                >
+                  <button
+                    type="submit"
+                    className="outButton btn btn-outline-primary"
                   >
-                    {" "}
                     Click here to convert your photo to a URL
-                  </a>
-                </button>
+                  </button>
+                </a>
               ) : (
                 <div className="form-group mb-2">
                   <label htmlFor="exampleInputEmail1">
@@ -578,9 +572,19 @@ export const Signup = () => {
                 </div>
               )}
             </div>
+            <div className="form-group mb-2">
+              <label htmlFor="exampleFormControlTextarea1">Description</label>
+              <textarea
+                className="form-control text-dark bg-opacity-10 shadow-lg p-3 mb-3 bg-body rounded"
+                id="nutritionistFormControlTextarea1"
+                rows="5"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              ></textarea>
+            </div>
             <button
               type="submit"
-              className="btn btn-primary"
+              className="schedulebutton btn btn-primary"
               onClick={handleSignUp}
             >
               Submit

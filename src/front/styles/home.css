@@ -46,6 +46,7 @@ body {
 .schedulebutton:hover {
   background: #ff812d;
   border: none;
+  color: white;
 }
 
 .schedulebutton:active {
@@ -82,4 +83,12 @@ body {
 
 .tableheader {
   background: #6fc675 !important ;
+}
+
+.nav-link {
+  color: rgb(0, 0, 0);
+}
+
+.nav-link.active {
+  background: #ff812d !important;
 }
