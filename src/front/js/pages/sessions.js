@@ -315,7 +315,7 @@ export const Sessions = () => {
       <br />
       <br />
       <Link to="/">
-        <button className="btn btn-primary">Back home</button>
+        <button className="outButton btn btn-outline-primary">❮ Back Home</button>
       </Link>
     </div>
   );
