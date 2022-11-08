@@ -54,10 +54,10 @@ export const Mysessions = () => {
   };
 
   return (
-    <div>
+    <div className="d-flex justify-content-lg-center">
       {sessions.length > 0 ? (
-        <table className="table mx-3">
-          <thead className="col-3 ">
+        <table className="table mx-3 table-hover">
+          <thead className="table-dark col-3 ">
             <tr>
               <th className="col-3" scope="col">
                 Name
@@ -88,7 +88,7 @@ export const Mysessions = () => {
                     <td>{timeSplited[0].concat(":", timeSplited[1])}</td>
                     <td>
                       <button
-                        className="btn btn-danger"
+                        className="outButton btn btn-outline-primary"
                         onClick={() => {
                           setSessions(
                             sessions.filter((item) => item.id !== id)
@@ -96,8 +96,16 @@ export const Mysessions = () => {
                           handleDeleteSession(id);
                         }}
                       >
-                        Delete session
+                        Cancel this session                
                       </button>
+                      <button className="schedulebutton btn btn-danger mx-2 justify-content-end" onClick={() => {
+                          setSessions(
+                            sessions.filter((item) => item.id !== id)
+                          );
+                          handleDeleteSession(id);
+                        }}>
+                          ✖
+                        </button>
                     </td>
                   </tr>
                 ) : (
@@ -107,7 +115,7 @@ export const Mysessions = () => {
                     <td>{timeSplited[0].concat(":", timeSplited[1])}</td>
                     <td>
                       <button
-                        className="btn btn-danger"
+                        className="outButton btn btn-outline-primary"
                         onClick={() => {
                           setSessions(
                             sessions.filter((item) => item.id !== id)
@@ -115,8 +123,16 @@ export const Mysessions = () => {
                           handleDeleteSession(id);
                         }}
                       >
-                        Delete session
+                        Cancel this session
                       </button>
+                      <button className="schedulebutton btn btn-danger mx-2 justify-content-end" onClick={() => {
+                          setSessions(
+                            sessions.filter((item) => item.id !== id)
+                          );
+                          handleDeleteSession(id);
+                        }}>
+                          ✖
+                        </button>
                     </td>
                   </tr>
                 )}
