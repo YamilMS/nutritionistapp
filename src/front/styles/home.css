@@ -40,6 +40,7 @@ body {
 .schedulebutton {
   background: #ff9c5a;
   border: none;
+  color: black;
 }
 
 .schedulebutton:hover {
@@ -52,7 +53,29 @@ body {
   border: none;
 }
 
+.outButton {
+  color: black;
+  border: none;
+  -webkit-box-shadow: inset 0px 0px 0px 2px #fd6c0b;
+  -moz-box-shadow: inset 0px 0px 0px 2px #fd6c0b;
+  box-shadow: inset 0px 0px 0px 2px #fd6c0b;
+}
+
+.outButton:hover {
+  background: #fd6c0b;
+  border: none;
+}
+
+.outButton:active {
+  background: #fd6c0b !important ;
+  border: none;
+}
+
 .navLink {
   text-decoration: none;
   color: black;
+}
+
+#sessionLink:hover {
+  color: white;
 }

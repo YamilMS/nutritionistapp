@@ -1,4 +1,8 @@
 #nav {
-    background: rgb(212,233,213);
-    background: linear-gradient(360deg, rgba(212,233,213,1) 15%, rgba(166,212,169,1) 100%);
+  background: rgb(212, 233, 213);
+  background: linear-gradient(
+    360deg,
+    rgba(212, 233, 213, 1) 15%,
+    rgba(166, 212, 169, 1) 100%
+  );
 }
