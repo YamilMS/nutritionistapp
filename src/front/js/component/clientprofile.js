@@ -109,17 +109,20 @@ export const Clientprofile = () => {
         <div>
           <div>
             {picInput == false ? (
-              <button type="submit" className="btn btn-primary">
-                <a
-                  href="https://postimages.org/"
-                  target="_blank"
-                  style={{ color: "white" }}
-                  onClick={() => setPicInput(true)}
+              <a
+                href="https://postimages.org/"
+                target="_blank"
+                style={{ color: "black" }}
+                onClick={() => setPicInput(true)}
+              >
+                <button
+                  type="submit"
+                  className="outButton btn btn-outline-primary"
                 >
                   {" "}
                   Click here to convert your photo to a URL
-                </a>
-              </button>
+                </button>
+              </a>
             ) : (
               <div className="row g-3 my-2 justify-content-center align-items-center">
                 <div className="col-2">
@@ -234,7 +237,7 @@ export const Clientprofile = () => {
             </div>
             <div>
               <button
-                className="m-2"
+                className="outButton btn btn-outline-primary m-2"
                 onClick={() => {
                   setEdit(false);
                 }}
@@ -242,7 +245,7 @@ export const Clientprofile = () => {
                 GO BACK
               </button>
               <button
-                className="m-2"
+                className="schedulebutton btn btn-primary m-2"
                 onClick={() => {
                   editClientPorfile();
                   setEdit(false);
@@ -268,7 +271,10 @@ export const Clientprofile = () => {
             </div>
             <div className="row g-3 my-2 justify-content-center align-items-center">
               <div className="col-2">
-                <label htmlFor="inputFirstName" className="form-control-plaintext">
+                <label
+                  htmlFor="inputFirstName"
+                  className="form-control-plaintext"
+                >
                   First Name
                 </label>
               </div>
@@ -285,7 +291,10 @@ export const Clientprofile = () => {
             </div>
             <div className="row g-3 my-2 justify-content-center align-items-center">
               <div className="col-2">
-                <label htmlFor="inputLastName" className="form-control-plaintext">
+                <label
+                  htmlFor="inputLastName"
+                  className="form-control-plaintext"
+                >
                   Last Name
                 </label>
               </div>
@@ -338,15 +347,18 @@ export const Clientprofile = () => {
             </div>
             <div>
               <button
-                className="m-2"
+                className="outButton btn btn-outline-primary m-2"
+                onClick={deleteClientProfile}
+              >
+                DELETE
+              </button>
+              <button
+                className="schedulebutton btn btn-primary m-2"
                 onClick={() => {
                   setEdit(true);
                 }}
               >
                 EDIT
-              </button>
-              <button className="m-2" onClick={deleteClientProfile}>
-                DELETE
               </button>
             </div>
           </div>
