@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
-import loginImg from "../../img/personalnutrition.jpg"
+import loginImg from "../../img/personalnutrition.jpg";
 
 export const Login = () => {
   const { store, actions } = useContext(Context);
@@ -16,13 +16,18 @@ export const Login = () => {
   if (store.token !== "" && store.token !== undefined && store.token !== null)
     navigate("/");
 
-    console.log(store.id)
+  console.log(store.id);
 
   return (
-    <div className="container rounded" style={{backgroundImage: "url("+ loginImg +")", 
-                  backgroundRepeat: "no-repeat", 
-                  backgroundPosition: "center", 
-                  padding:"1.5rem",}}>
+    <div
+      className="container rounded"
+      style={{
+        backgroundImage: "url(" + loginImg + ")",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        padding: "1.5rem",
+      }}
+    >
       <h2 className="mx-auto w-50 mt-5 text-dark">Login</h2>
       <form className="mx-auto w-50">
         <div className="form-group bg-success text-dark bg-opacity-10 bg-body">
@@ -51,19 +56,9 @@ export const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="form-group form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="exampleCheck1"
-          />
-          <label className="form-check-label" htmlFor="exampleCheck1">
-            Check me out
-          </label>
-        </div>
         <button
           type="submit"
-          className="btn btn-primary"
+          className="schedulebutton btn btn-primary my-2 sm"
           onClick={handleClickLogin}
         >
           Submit
