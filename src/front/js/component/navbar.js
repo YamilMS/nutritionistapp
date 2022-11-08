@@ -28,11 +28,11 @@ export const Navbar = () => {
                 <button className="schedulebutton btn btn-primary mx-2">
                   Sign Up
                 </button>
-                <Link className="navLink mx-2" to="/login">
-                  <button className="outButton btn btn-outline-primary mx-2">
-                    Login
-                  </button>
-                </Link>
+              </Link>
+              <Link className="navLink mx-2" to="/login">
+                <button className="outButton btn btn-outline-primary mx-2">
+                  Login
+                </button>
               </Link>
             </div>
           ) : (
@@ -49,17 +49,13 @@ export const Navbar = () => {
                 </a>
                 <ul className="dropdown-menu">
                   <li>
-                    <Link className="navLink" to="/sessions">
-                      <a className="dropdown-item" href="#">
-                        Schedule a Session
-                      </a>
+                    <Link className="navLink dropdown-item" to="/sessions">
+                      Schedule a Session
                     </Link>
                   </li>
                   <li>
-                    <Link className="navLink" to="/mysessions">
-                      <a className="dropdown-item" href="#">
-                        My Sessions
-                      </a>
+                    <Link className="navLink dropdown-item" to="/mysessions">
+                      My Sessions
                     </Link>
                   </li>
                 </ul>
