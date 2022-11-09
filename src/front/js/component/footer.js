@@ -2,11 +2,15 @@ import React, { Component } from "react";
 import "../../styles/footer.css";
 
 export const Footer = () => (
-  <footer className="footer mt-auto py-3 text-center">
-
-    <p>
-      Made with <i className="fa fa-heart text-danger" /> by
-      {" a group of brave and stressed developers"}
-    </p>
+  <footer className="text-center text-lg-start bg-light text-muted">
+    <div
+      class="text-center p-4"
+      style={{
+        backgroundColor: "rgba(0, 0, 0, 0.05)",
+        color: "black",
+      }}
+    >
+      Made by Yamil Melian, Tomás Hernan and Gerson Ferreira.
+    </div>
   </footer>
 );
