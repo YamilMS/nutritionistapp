@@ -6,7 +6,7 @@ export const Footer = () => (
     <div
       class="text-center p-4"
       style={{
-        backgroundColor: "rgba(0, 0, 0, 0.08)",
+        backgroundColor: "rgba(0, 0, 0, 0.04)",
         color: "black",
       }}
     >
