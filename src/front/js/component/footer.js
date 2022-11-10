@@ -10,7 +10,7 @@ export const Footer = () => (
         color: "black",
       }}
     >
-      Made by Yamil Melian, Tomás Hernan and Gerson Ferreira.
+      Made by Yamil Melian
     </div>
   </footer>
 );
