@@ -16,7 +16,7 @@ export const Clientprofile = () => {
   const [client, setClient] = useState([]);
   const [edit, setEdit] = useState("");
   const navigate = useNavigate();
-  const apiURL = process.env.BACKEND_URL + "/api/client/" + "1";
+  const apiURL = process.env.BACKEND_URL + "/api/client/" + store.id;
 
   useEffect(() => {
     const getClientProfile = async () => {
