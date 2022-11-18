@@ -4,6 +4,9 @@
 # track this file .gitignore (i.e. do NOT ignore it)
 !.gitignore
 !.github
+!Dockerfile.render
+!render.yml
+!.render-buildpacks.json
 php_errorlog
 .log
 
@@ -58,7 +61,8 @@ node_modules/
 
 # webpack output
 dist/*
-public/
+!public/
+!public/*
 
 # ignore the dist directory were our bundle files are going to be
 !.gitkeep
