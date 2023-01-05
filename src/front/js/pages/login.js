@@ -16,8 +16,6 @@ export const Login = () => {
   if (store.token !== "" && store.token !== undefined && store.token !== null)
     navigate("/");
 
-  console.log(store.id);
-
   return (
     <div className="h-100">
       <div
